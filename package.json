@@ -1,0 +1,42 @@
+{
+  "name": "freactal-incubus",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "neutrino build",
+    "start": "neutrino start",
+    "lint": "neutrino lint",
+    "test": "neutrino test"
+  },
+  "dependencies": {
+    "bottlejs": "^1.7.1",
+    "class-propper": "^1.0.1",
+    "dotenv": "^6.0.0",
+    "freactal": "^2.0.3",
+    "freactal-seed": "^0.0.6",
+    "lodash": "^4.17.11",
+    "lorem-ipsum": "^1.0.6",
+    "normalize.css": "^8.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-hot-loader": "^4.3.7",
+    "react-md": "^1.6.1",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@neutrinojs/airbnb": "^8.3.0",
+    "@neutrinojs/jest": "^8.3.0",
+    "@neutrinojs/react": "^8.3.0",
+    "eslint-plugin-react": "^7.11.1",
+    "gulp": "^3.9.1",
+    "gulp-modify-file": "^1.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0",
+    "minimist": "^1.2.0",
+    "neutrino": "^8.3.0",
+    "sass": "^1.13.4",
+    "scss": "^0.2.4"
+  }
+}

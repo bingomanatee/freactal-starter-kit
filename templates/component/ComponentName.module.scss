@@ -1,0 +1,105 @@
+$ComponentNameSmall: 500px;
+$ComponentNameRegular: 800px;
+$ComponentNameLarge: 1200px;
+
+.ComponentName {
+  color: black;
+
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+    color: green;
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
+    color: orange;
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
+    color: orange;
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameLarge) {
+    color: red;
+  }
+}
+
+.ComponentName-head {
+  font-weight: bold;
+  color: black;
+  font-size: 3rem;
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+    font-size: 2.5rem;
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
+    font-size: 2.25rem
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
+    font-size: 3rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameLarge) {
+    font-size: 4rem;
+  }
+}
+
+
+.ComponentName-body {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+    font-size: 0.8rem;
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
+    font-size: 0.9rem
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
+    font-size: 1rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameLarge) {
+    font-size: 1.5rem;
+  }
+}
+
+.ComponentName-button {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  padding: 0.5rem 0.25rem;
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+    font-size: 0.8rem;
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
+    font-size: 0.9rem
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
+    font-size: 1rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameLarge) {
+    font-size: 1.5rem;
+  }
+}
+

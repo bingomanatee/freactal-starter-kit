@@ -1,0 +1,49 @@
+$ContentSmall: 500px;
+$ContentRegular: 800px;
+
+
+$ContentLarge: 1200px;
+
+.Content {
+  flex-grow: 1;
+  margin-top: 64px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 3rem;
+}
+
+.Content-head {
+  font-weight: bold;
+  color: black;
+}
+
+.Content-body {
+
+}
+
+.Content-button {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  padding: 0.5rem 0.25rem;
+  // tiny
+  @media screen and (max-width: $ContentSmall) {
+    font-size: 0.8rem;
+  }
+
+  // small
+  @media screen and (min-width: $ContentSmall) and(max-width: ($ContentRegular - 1px)) {
+    font-size: 0.9rem
+  }
+
+  // regular
+  @media screen and (min-width: $ContentRegular) and(max-width: ($ContentLarge - 1px)) {
+    font-size: 1rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $ContentLarge) {
+    font-size: 1.5rem;
+  }
+}
+

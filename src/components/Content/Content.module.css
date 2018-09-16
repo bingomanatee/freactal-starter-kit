@@ -1,0 +1,41 @@
+.Content {
+  flex-grow: 1;
+  margin-top: 64px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 3rem;
+}
+
+.Content-head {
+  font-weight: bold;
+  color: black;
+}
+
+.Content-button {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  padding: 0.5rem 0.25rem;
+}
+@media screen and (max-width: 500px) {
+  .Content-button {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 799px) {
+  .Content-button {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1199px) {
+  .Content-button {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .Content-button {
+    font-size: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=Content.module.css.map */

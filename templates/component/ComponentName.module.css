@@ -1,0 +1,104 @@
+.ComponentName {
+  color: black;
+}
+@media screen and (max-width: 500px) {
+  .ComponentName {
+    color: green;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 799px) {
+  .ComponentName {
+    color: orange;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1199px) {
+  .ComponentName {
+    color: orange;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .ComponentName {
+    color: red;
+  }
+}
+
+.ComponentName-head {
+  font-weight: bold;
+  color: black;
+  font-size: 3rem;
+}
+@media screen and (max-width: 500px) {
+  .ComponentName-head {
+    font-size: 2.5rem;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 799px) {
+  .ComponentName-head {
+    font-size: 2.25rem;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1199px) {
+  .ComponentName-head {
+    font-size: 3rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .ComponentName-head {
+    font-size: 4rem;
+  }
+}
+
+.ComponentName-body {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+}
+@media screen and (max-width: 500px) {
+  .ComponentName-body {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 799px) {
+  .ComponentName-body {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1199px) {
+  .ComponentName-body {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .ComponentName-body {
+    font-size: 1.5rem;
+  }
+}
+
+.ComponentName-button {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  padding: 0.5rem 0.25rem;
+}
+@media screen and (max-width: 500px) {
+  .ComponentName-button {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 799px) {
+  .ComponentName-button {
+    font-size: 0.9rem;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 1199px) {
+  .ComponentName-button {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .ComponentName-button {
+    font-size: 1.5rem;
+  }
+}
+
+/*# sourceMappingURL=ComponentName.module.css.map */
