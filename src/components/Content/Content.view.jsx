@@ -1,15 +1,21 @@
 import { injectState } from 'freactal';
+import { Route, withRouter, BrowserRouter } from 'react-router-dom';
+
 import styles from './Content.module.css';
 
+import Home from './../Home';
+import PageOne from './../PageOne';
+import PageTwo from './../PageTwo';
+
 // eslint-disable-next-line no-unused-vars
-export default injectState(({ state, effects, text }) => (
-  <div className={styles.Content}>
-    <h2 className={styles['Content-head']}>Content Head (user = {state.user.name})</h2>
-    <h3>Component Name body: Count = {state.contentCount}</h3>
-    <div className="md-cont">
-      <p className={`md-block-centered ${styles['Content-body']}`}>
-        {text}
-      </p>
+export default withRouter(injectState(({
+  state, effects, text, history,
+}) => (
+  <BrowserRouter>
+    <div className={styles.Content}>
+      <Route path="/" exact component={Home} />
+      <Route path="/page-one" component={PageOne} />
+      <Route path="/page-two" component={PageTwo} />
     </div>
-  </div>
-));
+  </BrowserRouter>
+)));

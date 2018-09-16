@@ -1,10 +1,50 @@
 @import './../node_modules/normalize.css/normalize.css';
 @import './../node_modules/react-md/src/scss/react-md';
 
-$md-primary-color: $md-teal-500;
+$md-primary-color: $md-indigo-500;
 $md-secondary-color: $md-lime-a-400;
 
+$md-font-size-base: 18;
+$md-body-desktop-font-size: 20px;
+$md-body-mobile-font-size: 18px;
+
+$md-line-height: 125% !default;
+$md-body-1-line-height: 125%;
+$md-body-2-line-height: 125%;
+
 @include react-md-everything;
+
+@include react-md-theme-everything(
+                $md-primary-color,
+                $md-secondary-color,
+                false,
+                null,
+                $md-error-color,
+                $md-linear-progress-swatch
+);
+
+
+// @param {Color} primary-color - The primary color to use.
+// @param {Color} secondary-color - The secondary color to use.
+// @param {Boolean} light-theme [$md-light-theme] - Boolean if using the light theme.
+// @param {String} html-class-name [null] - The html className to nest every component
+//     in. This should really be used if switching from the light or dark theme.
+// @param {Color} error-color [$md-error-color] - The error color to use.
+// @param {Number} progress-swatch [$md-linear-progress-swatch] - The color for the linear progress
+//     swatch color.
+// @param {Number} primary-opacity [$md-primary-hover-opacity] - The opacity to apply to the primary color.
+// @param {Color} primary-background-text-color [$md-primary-background-text-color] - The text color for any text
+//     that appears inside the `md-background--primary` class name.
+// @param {Number} secondary-opacity [$md-secondary-hover-opacity] - The opacity to apply to the secondary color.
+// @param {Color} secondary-background-text-color [$md-secondary-background-text-color] - The text color for any text
+//     that appears inside the `md-background--secondary` class name.
+// @param {Color} data-table-contextual-fallback-color [$md-data-table-contextual-fallback-color] - An optional fallback
+//     color for the data table's contextual header when the `$primary-color` is not material design color.
+// @param {Color} linear-progress-fallback-color [$md-linear-progress-fallback-color] - An optional fallback color for
+//     the linear progress when the `$secondary-color` is not a material design color.
+// @param {Color} switch-ball-fallback-color [$md-switch-ball-fallback-color] - An optional color to use for the switch's ball thumb
+//     when the `$secondary-color` is not a material design color.
+// @group base, themes
 
 html, body, #root {
   font-size: 16px;

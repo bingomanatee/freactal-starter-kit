@@ -26,6 +26,9 @@ and automatic backup of store values to local storage.
 
 Like Redux, Freactal lets you define stores at the component level.
 
+https://github.com/FormidableLabs/freactal
+https://github.com/bingomanatee/freactal-seed
+
 ## Bottle.js for the lib
 
 Bottle gives you injection; for those used to injection from Angular
@@ -52,7 +55,9 @@ This will spawn a component with:
 
 React Router is available; working on a Gulp task to create a route.
 The Dom version is included in the root index file. Right now there 
-is no automagic about adding routes etc; @TODO. 
+is no automagic about adding routes etc;
+
+https://reacttraining.com/react-router/core/guides/philosophy
 
 ## A basic head and scrolling content layout with nav
 
@@ -68,7 +73,9 @@ social login for free (subject to their user agreement). @TODO
 
 I use the React Material Design(MD) system for quick and pretty 
 UI widgets. Its not a 360 degree solution for everything but it saves
-a lot of time for basic dropdowns buttons and inputs. @TODO
+a lot of time for basic dropdowns buttons and inputs.
+
+https://react-md.mlaursen.com/
 
 # Why?
 

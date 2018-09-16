@@ -268,7 +268,7 @@ h6 {
 
   .md-body-2,
 .md-body-1 {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   h5,
@@ -278,7 +278,7 @@ h4 {
 
   h6,
 p {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 @media screen and (min-width: 1025px) {
@@ -289,7 +289,7 @@ p {
 
   .md-body-2,
 .md-body-1 {
-    font-size: 13px;
+    font-size: 20px;
   }
 
   h5,
@@ -299,7 +299,7 @@ h4 {
 
   h6,
 p {
-    font-size: 13px;
+    font-size: 20px;
   }
 }
 *,
@@ -312,7 +312,7 @@ p {
 
 html {
   background: #fafafa;
-  font-size: 14px;
+  font-size: 18px;
   min-width: 100%;
 }
 
@@ -1477,7 +1477,7 @@ a.md-btn {
 }
 
 .md-btn--color-primary-active {
-  background: rgba(0, 150, 136, 0.12);
+  background: rgba(63, 81, 181, 0.12);
 }
 
 .md-btn--color-secondary-active {
@@ -3021,7 +3021,7 @@ svg.md-icon {
 }
 
 .md-picker-header {
-  background: #009688;
+  background: #3f51b5;
   padding: 24px;
 }
 
@@ -3171,7 +3171,7 @@ svg.md-icon {
 }
 
 .md-calendar-date--btn::after {
-  background: #009688;
+  background: #3f51b5;
   border-radius: 50%;
   content: "";
   display: block;
@@ -3212,7 +3212,7 @@ svg.md-icon {
 }
 
 .md-time-period {
-  font-size: 1.1428571429em;
+  font-size: 0.8888888889em;
   font-weight: 500;
   margin: 0;
   padding: 0;
@@ -3236,7 +3236,7 @@ svg.md-icon {
   transition-property: transform, width;
 }
 .md-clock-hand::before, .md-clock-hand::after {
-  background: #009688;
+  background: #3f51b5;
   border-radius: 50%;
   content: "";
   position: absolute;
@@ -3575,7 +3575,7 @@ svg.md-icon {
 }
 
 .md-slider-track-fill {
-  background: #009688;
+  background: #3f51b5;
   border: 0;
   height: 2px;
   left: 0;
@@ -3607,7 +3607,7 @@ svg.md-icon {
 }
 
 .md-slider-thumb--on {
-  background: #009688;
+  background: #3f51b5;
 }
 
 .md-slider-thumb--active {
@@ -3636,7 +3636,7 @@ svg.md-icon {
 }
 
 .md-slider-thumb--mask-inked {
-  background: rgba(0, 150, 136, 0.15);
+  background: rgba(63, 81, 181, 0.15);
   transform: scale(3.5);
   z-index: 4;
 }
@@ -3668,7 +3668,7 @@ svg.md-icon {
   transform: scale(2) translate3d(0, -18px, 0);
 }
 .md-slider-thumb--discrete-on::after {
-  border-top-color: #009688;
+  border-top-color: #3f51b5;
 }
 .md-slider-thumb--discrete-off {
   background: #000;
@@ -3684,7 +3684,7 @@ svg.md-icon {
   transition-duration: 0.3s;
 }
 .md-slider-thumb--discrete-mask-leaving {
-  background: rgba(0, 150, 136, 0.3);
+  background: rgba(63, 81, 181, 0.3);
   transition-duration: 0.3s;
   z-index: 4;
 }
@@ -4172,7 +4172,7 @@ svg.md-icon {
   overflow: visible;
 }
 .md-divider--text-field::after {
-  background: #009688;
+  background: #3f51b5;
   content: "";
   display: block;
   height: 2px;
@@ -4803,7 +4803,7 @@ svg.md-icon {
   color: rgba(0, 0, 0, 0.38);
 }
 .md-text--theme-primary {
-  color: #009688;
+  color: #3f51b5;
 }
 .md-text--theme-secondary {
   color: #c6ff00;
@@ -4816,7 +4816,7 @@ svg.md-icon {
 }
 
 .md-ink--primary .md-ink {
-  background: rgba(0, 150, 136, 0.26);
+  background: rgba(63, 81, 181, 0.26);
 }
 
 .md-ink--secondary .md-ink {
@@ -4830,7 +4830,7 @@ svg.md-icon {
   background: #fff;
 }
 .md-background--primary {
-  background: #009688;
+  background: #3f51b5;
   color: #fff;
 }
 .md-background--secondary {
@@ -4840,13 +4840,171 @@ svg.md-icon {
 
 @media screen and (min-width: 1025px) {
   .md-background--primary-hover:hover {
-    background: rgba(0, 150, 136, 0.9);
+    background: rgba(63, 81, 181, 0.9);
   }
 
   .md-background--secondary-hover:hover {
     background: rgba(198, 255, 0, 0.9);
   }
 }
+.md-badge--default {
+  background: #303030;
+}
+
+.md-btn--raised-disabled {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.md-btn--icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.md-chip {
+  background: #757575;
+}
+
+.md-chip-text {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+thead .md-table-row,
+tbody .md-table-row:not(:last-child) {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (min-device-width: 1025px) {
+  .md-table-row--hover {
+    background: #424242;
+  }
+}
+.md-table-row--active {
+  background: #616161;
+}
+
+.md-divider {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.md-divider-border {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.md-expansion-panel {
+  background: #424242;
+}
+
+.md-panel-secondary-label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.md-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.md-ink {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.md-list {
+  background: #424242;
+}
+
+.md-list-tile--active {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.md-picker-content-container {
+  background: #303030;
+}
+
+.md-calendar-date {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-calendar-date .md-picker-text--active {
+  color: #303030;
+}
+
+.md-clock-face {
+  background: #424242;
+}
+
+.md-background--card .md-slider-thumb--mask-disabled {
+  background: #424242;
+}
+
+.md-slider-track,
+.md-slider-thumb--disabled {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.md-slider-thumb--continuous-off,
+.md-slider-thumb--disabled-mask {
+  background: #303030;
+}
+
+.md-slider-thumb--off {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.md-slider-discrete-tick {
+  background: #fff;
+}
+
+.md-text-field:placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-text-field:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-text-field::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-text-field:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-text-field::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-text-field[disabled]:placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.md-text-field[disabled]:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.md-text-field[disabled]::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.md-text-field[disabled]:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+.md-text-field[disabled]::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.md-toolbar--themed {
+  background: #212121;
+}
+.md-toolbar--themed .md-title {
+  color: #fff;
+}
+
+.md-text {
+  color: #fff;
+}
+.md-text--secondary {
+  color: rgba(255, 255, 255, 0.7);
+}
+.md-text--disabled {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.md-background {
+  background: #303030;
+}
+.md-background--card {
+  background: #424242;
+}
+
 html, body, #root {
   font-size: 16px;
   padding: 0;

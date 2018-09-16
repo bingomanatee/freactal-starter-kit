@@ -9,6 +9,8 @@ function anonUser() {
 const mySeed = new Seed();
 mySeed.addStateString('appTitle', 'Freactal Starter Kit');
 mySeed.addObjectAndSetEffect('user', anonUser());
+mySeed.addObjectAndSetEffect('routerLocation', {});
 mySeed.addEffect('logout', update(state => ({ user: anonUser() })));
 
-export default provideState(mySeed.toHash());
+const state = mySeed.toHash();
+export default provideState(state);
