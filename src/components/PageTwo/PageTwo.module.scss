@@ -1,0 +1,105 @@
+$PageTwoSmall: 500px;
+$PageTwoRegular: 800px;
+$PageTwoLarge: 1200px;
+
+.PageTwo {
+  color: black;
+
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+    color: green;
+  }
+
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoRegular - 1px)) {
+    color: orange;
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoRegular) and(max-width: ($PageTwoLarge - 1px)) {
+    color: orange;
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoLarge) {
+    color: red;
+  }
+}
+
+.PageTwo-head {
+  font-weight: bold;
+  color: black;
+  font-size: 3rem;
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+    font-size: 2.5rem;
+  }
+
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoRegular - 1px)) {
+    font-size: 2.25rem
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoRegular) and(max-width: ($PageTwoLarge - 1px)) {
+    font-size: 3rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoLarge) {
+    font-size: 4rem;
+  }
+}
+
+
+.PageTwo-body {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+    font-size: 0.8rem;
+  }
+
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoRegular - 1px)) {
+    font-size: 0.9rem
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoRegular) and(max-width: ($PageTwoLarge - 1px)) {
+    font-size: 1rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoLarge) {
+    font-size: 1.5rem;
+  }
+}
+
+.PageTwo-button {
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+  padding: 0.5rem 0.25rem;
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+    font-size: 0.8rem;
+  }
+
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoRegular - 1px)) {
+    font-size: 0.9rem
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoRegular) and(max-width: ($PageTwoLarge - 1px)) {
+    font-size: 1rem;
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoLarge) {
+    font-size: 1.5rem;
+  }
+}
+

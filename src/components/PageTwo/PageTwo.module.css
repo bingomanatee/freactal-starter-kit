@@ -1,104 +1,104 @@
-.App {
+.PageTwo {
   color: black;
 }
 @media screen and (max-width: 500px) {
-  .App {
+  .PageTwo {
     color: green;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App {
+  .PageTwo {
     color: orange;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App {
+  .PageTwo {
     color: orange;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App {
+  .PageTwo {
     color: red;
   }
 }
 
-.App-head {
+.PageTwo-head {
   font-weight: bold;
   color: black;
   font-size: 3rem;
 }
 @media screen and (max-width: 500px) {
-  .App-head {
+  .PageTwo-head {
     font-size: 2.5rem;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App-head {
+  .PageTwo-head {
     font-size: 2.25rem;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App-head {
+  .PageTwo-head {
     font-size: 3rem;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App-head {
+  .PageTwo-head {
     font-size: 4rem;
   }
 }
 
-.App-body {
+.PageTwo-body {
   font-weight: bold;
   color: black;
   font-size: 1rem;
 }
 @media screen and (max-width: 500px) {
-  .App-body {
+  .PageTwo-body {
     font-size: 0.8rem;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App-body {
+  .PageTwo-body {
     font-size: 0.9rem;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App-body {
+  .PageTwo-body {
     font-size: 1rem;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App-body {
+  .PageTwo-body {
     font-size: 1.5rem;
   }
 }
 
-.App-button {
+.PageTwo-button {
   font-weight: bold;
   color: black;
   font-size: 1rem;
   padding: 0.5rem 0.25rem;
 }
 @media screen and (max-width: 500px) {
-  .App-button {
+  .PageTwo-button {
     font-size: 0.8rem;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App-button {
+  .PageTwo-button {
     font-size: 0.9rem;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App-button {
+  .PageTwo-button {
     font-size: 1rem;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App-button {
+  .PageTwo-button {
     font-size: 1.5rem;
   }
 }
 
-/*# sourceMappingURL=App.module.css.map */
+/*# sourceMappingURL=PageTwo.module.css.map */

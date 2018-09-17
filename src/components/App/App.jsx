@@ -1,24 +1,25 @@
-import { withRouter } from 'react-router-dom';
 import { injectState } from 'freactal';
 import { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import AppView from './App.view.jsx';
+import appState from './App.state';
 
-
-// eslint-disable-next-line react/prefer-stateless-function
-export default injectState(withRouter(class App extends Component {
+export default withRouter(appState(injectState(class App extends Component {
   componentDidMount() {
     this.props.effects.setRouterLocation(this.props.location);
     this.unlisten = this.props.history.listen((location) => {
       console.log('setting location to ', location);
       return this.props.setRouterLocation(location);
     });
-    this.listenTime = setInterval(() => {
+
+    // there are circumstances where the location lags - this is a failsafe.
+    this._locInterval = setInterval(() => {
       if (window.location.pathname !== this.props.state.routerLocation.pathname) {
-        console.log('--- location changed---', window.location.pathname, this.props.state.routerLocation.pathname);
         const locationData = Object.assign({}, window.location);
         this.props.effects.setRouterLocation(locationData);
       }
-    }, 500);
+    }, 2000);
   }
 
   componentDidUpdate() {
@@ -27,12 +28,12 @@ export default injectState(withRouter(class App extends Component {
 
   componentWillUnmount() {
     this.unlisten();
+    if (this._locInterval) clearInterval(this._locInterval);
   }
 
   render() {
-    console.log('rendering app');
     return (
       <AppView />
     );
   }
-}));
+})));

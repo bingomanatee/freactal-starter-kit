@@ -5,3 +5,15 @@ padding: 0;
   flex-shrink: 0;
   overflow: hidden;
 }
+
+.Header-link {
+  color: inherit;
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
+  &:hover {
+    color: inherit;
+    text-decoration: underline;
+  }
+}

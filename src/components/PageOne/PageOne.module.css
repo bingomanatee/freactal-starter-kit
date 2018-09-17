@@ -1,104 +1,104 @@
-.App {
+.PageOne {
   color: black;
 }
 @media screen and (max-width: 500px) {
-  .App {
+  .PageOne {
     color: green;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App {
+  .PageOne {
     color: orange;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App {
+  .PageOne {
     color: orange;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App {
+  .PageOne {
     color: red;
   }
 }
 
-.App-head {
+.PageOne-head {
   font-weight: bold;
   color: black;
   font-size: 3rem;
 }
 @media screen and (max-width: 500px) {
-  .App-head {
+  .PageOne-head {
     font-size: 2.5rem;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App-head {
+  .PageOne-head {
     font-size: 2.25rem;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App-head {
+  .PageOne-head {
     font-size: 3rem;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App-head {
+  .PageOne-head {
     font-size: 4rem;
   }
 }
 
-.App-body {
+.PageOne-body {
   font-weight: bold;
   color: black;
   font-size: 1rem;
 }
 @media screen and (max-width: 500px) {
-  .App-body {
+  .PageOne-body {
     font-size: 0.8rem;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App-body {
+  .PageOne-body {
     font-size: 0.9rem;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App-body {
+  .PageOne-body {
     font-size: 1rem;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App-body {
+  .PageOne-body {
     font-size: 1.5rem;
   }
 }
 
-.App-button {
+.PageOne-button {
   font-weight: bold;
   color: black;
   font-size: 1rem;
   padding: 0.5rem 0.25rem;
 }
 @media screen and (max-width: 500px) {
-  .App-button {
+  .PageOne-button {
     font-size: 0.8rem;
   }
 }
 @media screen and (min-width: 500px) and (max-width: 799px) {
-  .App-button {
+  .PageOne-button {
     font-size: 0.9rem;
   }
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
-  .App-button {
+  .PageOne-button {
     font-size: 1rem;
   }
 }
 @media screen and (min-width: 1200px) {
-  .App-button {
+  .PageOne-button {
     font-size: 1.5rem;
   }
 }
 
-/*# sourceMappingURL=App.module.css.map */
+/*# sourceMappingURL=PageOne.module.css.map */

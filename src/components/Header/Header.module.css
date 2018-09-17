@@ -6,4 +6,16 @@
   overflow: hidden;
 }
 
+.Header-link {
+  color: inherit;
+  text-decoration: none;
+}
+.Header-link:visited {
+  color: inherit;
+}
+.Header-link:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=Header.module.css.map */

@@ -1,19 +1,21 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { injectState } from 'freactal';
 import { Toolbar, Button } from 'react-md';
+import { Link } from 'react-router-dom';
 
+// import headerState from './Header.state';
 
-import headerState from './Header.state';
 import styles from './Header.module.css';
 import lib from '../../lib';
 
-function title(state) {
+function statePath(state) {
   let location = '';
   if (state.routerLocation && state.routerLocation.pathname) {
-    location = state.routerLocation.pathname.replace(/\/g, ':'/);
+    location = state.routerLocation.pathname.replace(/\//g, ':');
   } else {
     console.log('no path for location');
   }
-  return lib.SITE_NAME + location;
+  return location;
 }
 
 const searching = false;
@@ -40,7 +42,7 @@ export default injectState(({ state, effects }) => (
           {searching ? 'close' : 'search'}
         </Button>
       )}
-      title={title(state) + ' ' + JSON.stringify(state.routerLocation)}
+      title={<span><Link className={styles['Header-link']} to="/">{lib.SITE_NAME}</Link> {statePath(state)}</span>}
       titleId={lib.SITE_NAME.toLowerCase().replace(/[\W]+/g, '-')}
       className={styles.Toolbar}
     />
