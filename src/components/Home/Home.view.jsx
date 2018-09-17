@@ -1,6 +1,6 @@
 import { injectState } from 'freactal';
 import { Button } from 'react-md';
-import { withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import styles from './Home.module.css';
 import lib from '../../lib';

@@ -10,7 +10,7 @@ const load = () => render(
   (
     <AppContainer>
       <BrowserRouter>
-      <App />
+        <App />
       </BrowserRouter>
     </AppContainer>
   ), root,

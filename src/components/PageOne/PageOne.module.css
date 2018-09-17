@@ -1,103 +1,36 @@
-.PageOne {
-  color: black;
-}
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
   .PageOne {
-    color: green;
+    padding: 0.5rem 1rem;
   }
 }
-@media screen and (min-width: 500px) and (max-width: 799px) {
+@media screen and (max-width: 320px) and (min-aspect-ratio: 13/9) {
   .PageOne {
-    color: orange;
+    padding: 1rem 0.5rem;
   }
 }
-@media screen and (min-width: 800px) and (max-width: 1199px) {
+@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13/9) {
   .PageOne {
-    color: orange;
+    padding: 1rem 2rem;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13/9) {
   .PageOne {
-    color: red;
+    padding: 1.5rem 1.5rem;
   }
 }
-
-.PageOne-head {
-  font-weight: bold;
-  color: black;
-  font-size: 3rem;
-}
-@media screen and (max-width: 500px) {
-  .PageOne-head {
-    font-size: 2.5rem;
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13/9) {
+  .PageOne {
+    padding: 1.5rem 3rem;
   }
 }
-@media screen and (min-width: 500px) and (max-width: 799px) {
-  .PageOne-head {
-    font-size: 2.25rem;
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13/9) {
+  .PageOne {
+    padding: 2rem 2rem;
   }
 }
-@media screen and (min-width: 800px) and (max-width: 1199px) {
-  .PageOne-head {
-    font-size: 3rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .PageOne-head {
-    font-size: 4rem;
-  }
-}
-
-.PageOne-body {
-  font-weight: bold;
-  color: black;
-  font-size: 1rem;
-}
-@media screen and (max-width: 500px) {
-  .PageOne-body {
-    font-size: 0.8rem;
-  }
-}
-@media screen and (min-width: 500px) and (max-width: 799px) {
-  .PageOne-body {
-    font-size: 0.9rem;
-  }
-}
-@media screen and (min-width: 800px) and (max-width: 1199px) {
-  .PageOne-body {
-    font-size: 1rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .PageOne-body {
-    font-size: 1.5rem;
-  }
-}
-
-.PageOne-button {
-  font-weight: bold;
-  color: black;
-  font-size: 1rem;
-  padding: 0.5rem 0.25rem;
-}
-@media screen and (max-width: 500px) {
-  .PageOne-button {
-    font-size: 0.8rem;
-  }
-}
-@media screen and (min-width: 500px) and (max-width: 799px) {
-  .PageOne-button {
-    font-size: 0.9rem;
-  }
-}
-@media screen and (min-width: 800px) and (max-width: 1199px) {
-  .PageOne-button {
-    font-size: 1rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .PageOne-button {
-    font-size: 1.5rem;
+@media screen and (min-width: 1332.5px) {
+  .PageOne {
+    padding: 2rem 4rem;
   }
 }
 

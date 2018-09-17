@@ -1,103 +1,39 @@
 .PageTwo {
-  color: black;
+  color: red;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
   .PageTwo {
-    color: green;
+    padding: 0.5rem 1rem;
   }
 }
-@media screen and (min-width: 500px) and (max-width: 799px) {
+@media screen and (max-width: 320px) and (min-aspect-ratio: 13/9) {
   .PageTwo {
-    color: orange;
+    padding: 1rem 0.5rem;
   }
 }
-@media screen and (min-width: 800px) and (max-width: 1199px) {
+@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13/9) {
   .PageTwo {
-    color: orange;
+    padding: 1rem 2rem;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13/9) {
   .PageTwo {
-    color: red;
+    padding: 1.5rem 1.5rem;
   }
 }
-
-.PageTwo-head {
-  font-weight: bold;
-  color: black;
-  font-size: 3rem;
-}
-@media screen and (max-width: 500px) {
-  .PageTwo-head {
-    font-size: 2.5rem;
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13/9) {
+  .PageTwo {
+    padding: 1.5rem 3rem;
   }
 }
-@media screen and (min-width: 500px) and (max-width: 799px) {
-  .PageTwo-head {
-    font-size: 2.25rem;
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13/9) {
+  .PageTwo {
+    padding: 2rem 2rem;
   }
 }
-@media screen and (min-width: 800px) and (max-width: 1199px) {
-  .PageTwo-head {
-    font-size: 3rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .PageTwo-head {
-    font-size: 4rem;
-  }
-}
-
-.PageTwo-body {
-  font-weight: bold;
-  color: black;
-  font-size: 1rem;
-}
-@media screen and (max-width: 500px) {
-  .PageTwo-body {
-    font-size: 0.8rem;
-  }
-}
-@media screen and (min-width: 500px) and (max-width: 799px) {
-  .PageTwo-body {
-    font-size: 0.9rem;
-  }
-}
-@media screen and (min-width: 800px) and (max-width: 1199px) {
-  .PageTwo-body {
-    font-size: 1rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .PageTwo-body {
-    font-size: 1.5rem;
-  }
-}
-
-.PageTwo-button {
-  font-weight: bold;
-  color: black;
-  font-size: 1rem;
-  padding: 0.5rem 0.25rem;
-}
-@media screen and (max-width: 500px) {
-  .PageTwo-button {
-    font-size: 0.8rem;
-  }
-}
-@media screen and (min-width: 500px) and (max-width: 799px) {
-  .PageTwo-button {
-    font-size: 0.9rem;
-  }
-}
-@media screen and (min-width: 800px) and (max-width: 1199px) {
-  .PageTwo-button {
-    font-size: 1rem;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .PageTwo-button {
-    font-size: 1.5rem;
+@media screen and (min-width: 1332.5px) {
+  .PageTwo {
+    padding: 2rem 4rem;
   }
 }
 
