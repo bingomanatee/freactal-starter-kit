@@ -25,6 +25,12 @@ including a default value, expected type (integer, array, object, etc)
 and automatic backup of store values to local storage. 
 
 Like Redux, Freactal lets you define stores at the component level.
+These stores will override any state in the global state (the one defined
+in the App component) so should be namespaced accordingly.
+
+Also the App State is set to store state in Local Storage, and the 
+templated page states do NOT (by default). If your states don't conflict
+with global state you _can_ switch on local storage for them.
 
 https://github.com/FormidableLabs/freactal
 https://github.com/bingomanatee/freactal-seed
@@ -54,8 +60,9 @@ This will spawn a component with:
 ## React Router 
 
 React Router is available; working on a Gulp task to create a route.
-The Dom version is included in the root index file. Right now there 
-is no automagic about adding routes etc;
+The Dom version is included in the root index file. 
+The Route switch is in content, but as the guide outlines, 
+you can have sub-switches in other pages in your app as well. 
 
 https://reacttraining.com/react-router/core/guides/philosophy
 
