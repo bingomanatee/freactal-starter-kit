@@ -3,39 +3,53 @@
   * If you don't want to use react-md, set these to your preferred cutoffs.
  */
 @media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
-  .Home {
+  .PageThree {
     padding: 0.5rem 1rem;
   }
 }
 @media screen and (max-width: 320px) and (min-aspect-ratio: 13/9) {
-  .Home {
+  .PageThree {
     padding: 1rem 0.5rem;
   }
 }
 @media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13/9) {
-  .Home {
+  .PageThree {
     padding: 1rem 2rem;
   }
 }
 @media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13/9) {
-  .Home {
+  .PageThree {
     padding: 1.5rem 1.5rem;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13/9) {
-  .Home {
+  .PageThree {
     padding: 1.5rem 3rem;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13/9) {
-  .Home {
+  .PageThree {
     padding: 2rem 2rem;
   }
 }
 @media screen and (min-width: 1332.5px) {
-  .Home {
+  .PageThree {
     padding: 2rem 4rem;
   }
 }
+.PageThree-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: 1025px;
+}
 
-/*# sourceMappingURL=Home.module.css.map */
+.PageThree-dialog__main {
+  flex-grow: 1;
+}
+
+.PageThree-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+/*# sourceMappingURL=PageThree.module.css.map */

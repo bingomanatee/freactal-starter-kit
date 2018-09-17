@@ -12,8 +12,6 @@ function statePath(state) {
   let location = '';
   if (state.routerLocation && state.routerLocation.pathname) {
     location = state.routerLocation.pathname.replace(/\//g, ':');
-  } else {
-    console.log('no path for location');
   }
   return location;
 }

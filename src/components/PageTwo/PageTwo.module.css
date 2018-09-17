@@ -1,6 +1,7 @@
-.PageTwo {
-  color: red;
-}
+/**
+  * expose a set of global responsive brackets.
+  * If you don't want to use react-md, set these to your preferred cutoffs.
+ */
 @media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
   .PageTwo {
     padding: 0.5rem 1rem;
@@ -35,6 +36,20 @@
   .PageTwo {
     padding: 2rem 4rem;
   }
+}
+.PageTwo-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: 1025px;
+}
+
+.PageTwo-dialog__main {
+  flex-grow: 1;
+}
+
+.PageTwo-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 /*# sourceMappingURL=PageTwo.module.css.map */

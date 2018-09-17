@@ -13,6 +13,7 @@ export default withRouter(injectState(({ state, effects, history }) => (
       <li><Button flat style={({ color: '#999' })}>Home Page (You are here)</Button></li>
       <li><Button flat primary onClick={() => history.push('page-one')}>Page One</Button></li>
       <li><Button flat primary onClick={() => history.push('page-two')}>Page Two</Button></li>
+      <li><Button flat primary onClick={() => history.push('page-three')}>Page Three</Button></li>
     </ul>
   </div>
 )));

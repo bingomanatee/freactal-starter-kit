@@ -1,105 +1,93 @@
-$ComponentNameSmall: 500px;
-$ComponentNameRegular: 800px;
-$ComponentNameLarge: 1200px;
+@import '../../src/components/css/shared';
+
+$ComponentNameSmall: $ResponsiveSizeSmall;
+$ComponentNameMedium: $ResponsiveSizeMedium;
+$ComponentNameBig: $ResponsiveSizeBig;
 
 .ComponentName {
-  color: black;
-
   // tiny
   @media screen and (max-width: $ComponentNameSmall) {
-    color: green;
   }
 
   // small
-  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
-    color: orange;
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
   }
 
   // regular
-  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
-    color: orange;
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
   }
 
   // biggest
-  @media screen and (min-width: $ComponentNameLarge) {
-    color: red;
+  @media screen and (min-width: $ComponentNameBig) {
   }
 }
 
 .ComponentName-head {
-  font-weight: bold;
-  color: black;
-  font-size: 3rem;
   // tiny
   @media screen and (max-width: $ComponentNameSmall) {
-    font-size: 2.5rem;
   }
 
   // small
-  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
-    font-size: 2.25rem
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
   }
 
   // regular
-  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
-    font-size: 3rem;
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
   }
 
   // biggest
-  @media screen and (min-width: $ComponentNameLarge) {
-    font-size: 4rem;
+  @media screen and (min-width: $ComponentNameBig) {
   }
 }
 
-
 .ComponentName-body {
-  font-weight: bold;
-  color: black;
-  font-size: 1rem;
   // tiny
   @media screen and (max-width: $ComponentNameSmall) {
-    font-size: 0.8rem;
   }
 
   // small
-  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
-    font-size: 0.9rem
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
   }
 
   // regular
-  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
-    font-size: 1rem;
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
   }
 
   // biggest
-  @media screen and (min-width: $ComponentNameLarge) {
-    font-size: 1.5rem;
+  @media screen and (min-width: $ComponentNameBig) {
   }
 }
 
 .ComponentName-button {
-  font-weight: bold;
-  color: black;
-  font-size: 1rem;
-  padding: 0.5rem 0.25rem;
   // tiny
   @media screen and (max-width: $ComponentNameSmall) {
-    font-size: 0.8rem;
   }
 
   // small
-  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameRegular - 1px)) {
-    font-size: 0.9rem
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
   }
 
   // regular
-  @media screen and (min-width: $ComponentNameRegular) and(max-width: ($ComponentNameLarge - 1px)) {
-    font-size: 1rem;
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
   }
 
   // biggest
-  @media screen and (min-width: $ComponentNameLarge) {
-    font-size: 1.5rem;
+  @media screen and (min-width: $ComponentNameBig) {
   }
 }
 
+
+.ComponentName-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $ComponentNameBig;
+}
+
+.ComponentName-dialog__main {
+  flex-grow: 1;
+}
+
+.ComponentName-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
+}

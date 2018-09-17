@@ -6,6 +6,7 @@ import styles from './Content.module.css';
 import Home from './../Home';
 import PageOne from './../PageOne';
 import PageTwo from './../PageTwo';
+import PageThree from './../PageThree';
 
 // eslint-disable-next-line no-unused-vars
 export default withRouter(injectState(({
@@ -16,6 +17,7 @@ export default withRouter(injectState(({
       <Route path="/" exact component={Home} />
       <Route path="/page-one" component={PageOne} />
       <Route path="/page-two" component={PageTwo} />
+      <Route path="/page-three" component={PageThree} />
     </Switch>
   </div>
 )));

@@ -26,6 +26,8 @@ gulp.task('comp', () => {
       file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
       return file;
     }))
-    .pipe(modify(text => text.replace(/ComponentName/g, cName).replace(/componentName/g, lcName)))
+    .pipe(modify(text => text.replace(/ComponentName/g, cName)
+      .replace(/componentName/g, lcName)
+      .replace('../../src/components/css/shared', '../css/shared')))
     .pipe(gulp.dest(`./src/components/${cName}`));
 });

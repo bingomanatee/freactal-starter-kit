@@ -1,3 +1,7 @@
+/**
+  * expose a set of global responsive brackets.
+  * If you don't want to use react-md, set these to your preferred cutoffs.
+ */
 @media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
   .PageOne {
     padding: 0.5rem 1rem;
@@ -32,6 +36,20 @@
   .PageOne {
     padding: 2rem 4rem;
   }
+}
+.PageOne-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: 1025px;
+}
+
+.PageOne-dialog__main {
+  flex-grow: 1;
+}
+
+.PageOne-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 /*# sourceMappingURL=PageOne.module.css.map */

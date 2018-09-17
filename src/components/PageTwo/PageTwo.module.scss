@@ -1,19 +1,95 @@
 @import '../css/shared';
 
+$PageTwoSmall: $ResponsiveSizeSmall;
+$PageTwoMedium: $ResponsiveSizeMedium;
+$PageTwoBig: $ResponsiveSizeBig;
+
 .PageTwo {
-  color: red;
-  @include mainPagePadding();
+  @include mainPagePadding;
+
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoMedium) and(max-width: ($PageTwoBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoBig) {
+  }
 }
 
 .PageTwo-head {
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+  }
 
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoMedium) and(max-width: ($PageTwoBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoBig) {
+  }
 }
 
 .PageTwo-body {
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+  }
 
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoMedium) and(max-width: ($PageTwoBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoBig) {
+  }
 }
 
 .PageTwo-button {
+  // tiny
+  @media screen and (max-width: $PageTwoSmall) {
+  }
 
+  // small
+  @media screen and (min-width: $PageTwoSmall) and(max-width: ($PageTwoMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageTwoMedium) and(max-width: ($PageTwoBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageTwoBig) {
+  }
 }
 
+
+.PageTwo-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $PageTwoBig;
+}
+
+.PageTwo-dialog__main {
+  flex-grow: 1;
+}
+
+.PageTwo-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
+}

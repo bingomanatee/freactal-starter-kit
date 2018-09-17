@@ -1,9 +1,6 @@
-$HomeSmall: 500px;
-$HomeRegular: 800px;
-$HomeLarge: 1200px;
-
+@import '../css/shared';
 .Home {
-
+  @include mainPagePadding;
 }
 
 .Home-head {

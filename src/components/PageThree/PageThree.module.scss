@@ -1,0 +1,95 @@
+@import '../css/shared';
+
+$PageThreeSmall: $ResponsiveSizeSmall;
+$PageThreeMedium: $ResponsiveSizeMedium;
+$PageThreeBig: $ResponsiveSizeBig;
+
+.PageThree {
+  @include mainPagePadding;
+
+  // tiny
+  @media screen and (max-width: $PageThreeSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageThreeSmall) and(max-width: ($PageThreeMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageThreeMedium) and(max-width: ($PageThreeBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageThreeBig) {
+  }
+}
+
+.PageThree-head {
+  // tiny
+  @media screen and (max-width: $PageThreeSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageThreeSmall) and(max-width: ($PageThreeMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageThreeMedium) and(max-width: ($PageThreeBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageThreeBig) {
+  }
+}
+
+.PageThree-body {
+  // tiny
+  @media screen and (max-width: $PageThreeSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageThreeSmall) and(max-width: ($PageThreeMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageThreeMedium) and(max-width: ($PageThreeBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageThreeBig) {
+  }
+}
+
+.PageThree-button {
+  // tiny
+  @media screen and (max-width: $PageThreeSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageThreeSmall) and(max-width: ($PageThreeMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageThreeMedium) and(max-width: ($PageThreeBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageThreeBig) {
+  }
+}
+
+
+.PageThree-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $PageThreeBig;
+}
+
+.PageThree-dialog__main {
+  flex-grow: 1;
+}
+
+.PageThree-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
+}

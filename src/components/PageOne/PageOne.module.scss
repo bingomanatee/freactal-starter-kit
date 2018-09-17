@@ -1,18 +1,94 @@
 @import '../css/shared';
 
+$PageOneSmall: $ResponsiveSizeSmall;
+$PageOneMedium: $ResponsiveSizeMedium;
+$PageOneBig: $ResponsiveSizeBig;
+
 .PageOne {
-  @include mainPagePadding();
+  @include mainPagePadding;
+  // tiny
+  @media screen and (max-width: $PageOneSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageOneSmall) and(max-width: ($PageOneMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageOneMedium) and(max-width: ($PageOneBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageOneBig) {
+  }
 }
 
 .PageOne-head {
+  // tiny
+  @media screen and (max-width: $PageOneSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $PageOneSmall) and(max-width: ($PageOneMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageOneMedium) and(max-width: ($PageOneBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageOneBig) {
+  }
 }
 
-
 .PageOne-body {
+  // tiny
+  @media screen and (max-width: $PageOneSmall) {
+  }
 
+  // small
+  @media screen and (min-width: $PageOneSmall) and(max-width: ($PageOneMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageOneMedium) and(max-width: ($PageOneBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageOneBig) {
+  }
 }
 
 .PageOne-button {
+  // tiny
+  @media screen and (max-width: $PageOneSmall) {
+  }
 
+  // small
+  @media screen and (min-width: $PageOneSmall) and(max-width: ($PageOneMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $PageOneMedium) and(max-width: ($PageOneBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $PageOneBig) {
+  }
 }
 
+
+.PageOne-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $PageOneBig;
+}
+
+.PageOne-dialog__main {
+  flex-grow: 1;
+}
+
+.PageOne-dialog__button {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
