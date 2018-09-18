@@ -38,4 +38,12 @@
   }
 }
 
+.Home-PageList {
+  max-width: 1025px;
+}
+
+.Home-PageList__item {
+  max-width: 1025px;
+}
+
 /*# sourceMappingURL=Home.module.css.map */

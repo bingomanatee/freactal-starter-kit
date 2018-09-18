@@ -5,6 +5,9 @@ $ComponentNameMedium: $ResponsiveSizeMedium;
 $ComponentNameBig: $ResponsiveSizeBig;
 
 .ComponentName {
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
+
   // tiny
   @media screen and (max-width: $ComponentNameSmall) {
   }
@@ -76,18 +79,27 @@ $ComponentNameBig: $ResponsiveSizeBig;
   }
 }
 
+@mixin vertCentered {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .ComponentName-dialog {
   display: flex;
   flex-direction: row;
   max-width: $ComponentNameBig;
+  height: 3rem;
 }
 
 .ComponentName-dialog__main {
+  @include vertCentered;
   flex-grow: 1;
 }
 
 .ComponentName-dialog__button {
+  @include vertCentered;
   flex-grow: 0;
   flex-shrink: 0;
 }

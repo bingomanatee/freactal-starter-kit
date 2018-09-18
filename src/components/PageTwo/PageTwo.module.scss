@@ -5,7 +5,8 @@ $PageTwoMedium: $ResponsiveSizeMedium;
 $PageTwoBig: $ResponsiveSizeBig;
 
 .PageTwo {
-  @include mainPagePadding;
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
 
   // tiny
   @media screen and (max-width: $PageTwoSmall) {
@@ -78,18 +79,27 @@ $PageTwoBig: $ResponsiveSizeBig;
   }
 }
 
+@mixin vertCentered {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .PageTwo-dialog {
   display: flex;
   flex-direction: row;
   max-width: $PageTwoBig;
+  height: 3rem;
 }
 
 .PageTwo-dialog__main {
+  @include vertCentered;
   flex-grow: 1;
 }
 
 .PageTwo-dialog__button {
+  @include vertCentered;
   flex-grow: 0;
   flex-shrink: 0;
 }

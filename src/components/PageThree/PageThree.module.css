@@ -41,13 +41,22 @@
   display: flex;
   flex-direction: row;
   max-width: 1025px;
+  height: 3rem;
 }
 
 .PageThree-dialog__main {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 1;
 }
 
 .PageThree-dialog__button {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 0;
   flex-shrink: 0;
 }

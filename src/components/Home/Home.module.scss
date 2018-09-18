@@ -1,4 +1,7 @@
 @import '../css/shared';
+@import '../../../node_modules/react-md/src/scss/globals';
+@import '../../../node_modules/react-md/src/scss/react-md';
+
 .Home {
   @include mainPagePadding;
 }
@@ -12,3 +15,11 @@
 
 }
 
+.Home-PageList {
+  max-width: $ResponsiveSizeBig;
+}
+
+
+.Home-PageList__item {
+  max-width: $ResponsiveSizeBig;
+}

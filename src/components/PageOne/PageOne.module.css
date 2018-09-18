@@ -41,13 +41,22 @@
   display: flex;
   flex-direction: row;
   max-width: 1025px;
+  height: 3rem;
 }
 
 .PageOne-dialog__main {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 1;
 }
 
 .PageOne-dialog__button {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 0;
   flex-shrink: 0;
 }
