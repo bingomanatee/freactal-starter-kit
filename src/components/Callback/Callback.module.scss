@@ -1,0 +1,105 @@
+@import '../css/shared';
+
+$CallbackSmall: $ResponsiveSizeSmall;
+$CallbackMedium: $ResponsiveSizeMedium;
+$CallbackBig: $ResponsiveSizeBig;
+
+.Callback {
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
+
+  // tiny
+  @media screen and (max-width: $CallbackSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $CallbackSmall) and(max-width: ($CallbackMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $CallbackMedium) and(max-width: ($CallbackBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $CallbackBig) {
+  }
+}
+
+.Callback-head {
+  // tiny
+  @media screen and (max-width: $CallbackSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $CallbackSmall) and(max-width: ($CallbackMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $CallbackMedium) and(max-width: ($CallbackBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $CallbackBig) {
+  }
+}
+
+.Callback-body {
+  // tiny
+  @media screen and (max-width: $CallbackSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $CallbackSmall) and(max-width: ($CallbackMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $CallbackMedium) and(max-width: ($CallbackBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $CallbackBig) {
+  }
+}
+
+.Callback-button {
+  // tiny
+  @media screen and (max-width: $CallbackSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $CallbackSmall) and(max-width: ($CallbackMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $CallbackMedium) and(max-width: ($CallbackBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $CallbackBig) {
+  }
+}
+
+@mixin vertCentered {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Callback-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $CallbackBig;
+  height: 3rem;
+}
+
+.Callback-dialog__main {
+  @include vertCentered;
+  flex-grow: 1;
+}
+
+.Callback-dialog__button {
+  @include vertCentered;
+  flex-grow: 0;
+  flex-shrink: 0;
+}

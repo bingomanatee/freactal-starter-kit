@@ -2,6 +2,7 @@
 import { injectState } from 'freactal';
 import { Toolbar, Button } from 'react-md';
 import { Link } from 'react-router-dom';
+import User from './User.view';
 
 // import headerState from './Header.state';
 
@@ -11,7 +12,9 @@ import lib from '../../lib';
 function statePath(state) {
   let location = '';
   if (state.routerLocation && state.routerLocation.pathname) {
-    location = state.routerLocation.pathname.replace(/\//g, ':');
+    location = state.routerLocation.pathname
+      .replace(/^\//, '')
+      .replace(/\//g, ':');
   }
   return location;
 }
@@ -33,15 +36,14 @@ export default injectState(({ state, effects }) => (
         </Button>
       )}
       actions={(
-        <Button
-          key="action"
-          icon
-        >
-          {searching ? 'close' : 'search'}
-        </Button>
+        <User />
       )}
-      title={<span><Link className={styles['Header-link']} to="/">{lib.SITE_NAME}</Link> {statePath(state)}</span>}
-      titleId={lib.SITE_NAME.toLowerCase().replace(/[\W]+/g, '-')}
+      title={<span>
+        <Link className={styles['Header-link']} to="/">{lib.SITE_NAME}</Link>
+        {statePath(state)}
+        ({lib.NODE_ENV})
+      </span>}
+      titleId={`${lib.SITE_NAME.toLowerCase().replace(/[\W]+/g, '-')}`}
       className={styles.Toolbar}
     />
   </div>

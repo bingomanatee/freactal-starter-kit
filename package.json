@@ -10,6 +10,8 @@
     "test": "neutrino test"
   },
   "dependencies": {
+    "@neutrinojs/env": "^8.3.0",
+    "auth0-js": "^9.7.3",
     "bottlejs": "^1.7.1",
     "class-propper": "^1.0.1",
     "dotenv": "^6.0.0",

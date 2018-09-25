@@ -18,4 +18,10 @@
   text-decoration: underline;
 }
 
+.header-user {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
 /*# sourceMappingURL=Header.module.css.map */
