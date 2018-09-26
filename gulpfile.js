@@ -14,10 +14,13 @@ const containerNameValidator = new Validator([
   new Validator(s => s.length < 1, 'name must be nonempty'),
 ]);
 
+const ensureEndingBackslash = str => `${(str || '').replace(/\/$/, '')}/`;
+
 gulp.task('comp', () => {
-  const { name } = minimist(process.argv.slice(2));
+  const { name, where } = minimist(process.argv.slice(2));
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
+  const cWhere = ensureEndingBackslash(where || 'components');
 
   containerNameValidator.try(name);
   const source = template('component');
@@ -29,5 +32,5 @@ gulp.task('comp', () => {
     .pipe(modify(text => text.replace(/ComponentName/g, cName)
       .replace(/componentName/g, lcName)
       .replace('../../src/components/css/shared', '../css/shared')))
-    .pipe(gulp.dest(`./src/components/${cName}`));
+    .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });

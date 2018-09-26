@@ -15,6 +15,7 @@
     "bottlejs": "^1.7.1",
     "class-propper": "^1.0.1",
     "dotenv": "^6.0.0",
+    "eventemitter3": "^3.1.0",
     "freactal": "^2.0.3",
     "freactal-seed": "^0.0.6",
     "lodash": "^4.17.11",
@@ -31,6 +32,8 @@
     "@neutrinojs/airbnb": "^8.3.0",
     "@neutrinojs/jest": "^8.3.0",
     "@neutrinojs/react": "^8.3.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "eslint-plugin-react": "^7.11.1",
     "gulp": "^3.9.1",
     "gulp-modify-file": "^1.0.1",
@@ -38,6 +41,8 @@
     "gulp-replace": "^1.0.0",
     "minimist": "^1.2.0",
     "neutrino": "^8.3.0",
+    "raf": "^3.4.0",
+    "react-test-renderer": "^16.5.2",
     "sass": "^1.13.4",
     "scss": "^0.2.4"
   }

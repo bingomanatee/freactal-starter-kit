@@ -56,7 +56,8 @@ module.exports = {
         'AUTH0_DOMAIN',
         'UI_URL',
       ]
-    ], '@neutrinojs/jest'
+    ], ['@neutrinojs/jest',
+      {'setupFiles': ['raf/polyfill']}
+    ]
   ]
-}
-;
+};
