@@ -1,11 +1,6 @@
 /* eslint-disable react/jsx-indent */
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import Switch, { Case } from '../../../src/lib/logical/Switch';
-
-Enzyme.configure({ adapter: new Adapter() });
-
-const { mount, shallow } = Enzyme;
+import { mount } from '../../enzyme';
 
 describe('logical', () => {
   describe('Switch', () => {

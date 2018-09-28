@@ -2043,9 +2043,9 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-class-propper@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/class-propper/-/class-propper-1.0.1.tgz#eef84005ded0239ce0a4255d5205649c0077e2f5"
+class-propper@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/class-propper/-/class-propper-1.0.3.tgz#1fdc9199cb69b7dbc85a52817e842ed577b3d54b"
   dependencies:
     is "^3.2.1"
     lodash.compact "^3.0.1"

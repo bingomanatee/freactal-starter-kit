@@ -24,7 +24,7 @@ module.exports = {
             "import/extensions": 0,
             "react/prop-types": "off",
             "no-underscore-dangle": "off",
-            'no-param-reassign': 'warn',
+            'no-param-reassign': 'off',
             'class-methods-use-this': 'warn',
             "no-console": "warn",
             'no-plusplus': 'off',
