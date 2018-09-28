@@ -7,11 +7,16 @@ export default class WizardPanel extends Component {
     this.state = { panel };
   }
 
-  render () {
+  get classes() {
+    return this.state.panel.classes;
+  }
+
+  render() {
     return (
-      <div>
+      <div className={this.classes}>
         <h3>{this.state.panel.title}</h3>
+        {this.state.panel.children || ''}
       </div>
-    )
+    );
   }
 }

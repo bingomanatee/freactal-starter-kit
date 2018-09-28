@@ -1,7 +1,7 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import _ from 'lodash';
 import WizardController from './../../lib/wizard/WizardController';
-import Switch, {Case} from '../logical/Switch';
+import Switch, { Case } from '../logical/Switch';
 import WizardPanel from './Panel.js';
 
 function getChildren(props) {
@@ -15,22 +15,22 @@ function getChildren(props) {
 export default class Wizard extends Component {
   constructor(props) {
     super(props);
-    const {title, footer} = props;
+    const { title, footer } = props;
     const wizard = new WizardController(title);
     const children = getChildren(props);
 
     children.forEach((child) => {
-      const title = child.props.title;
-      const config = child.props.config || {};
-      wizard.addPanel(title, config);
+      const { title, config = {}, children: cChildren } = child.props;
+
+      wizard.addPanel(title, config, cChildren);
     });
     this.footerClass = footer;
     this.state = {
       wizard,
       index: 0,
     };
-    wizard.on('index changed', ({index}) => {
-      this.setState({index});
+    wizard.on('index changed', ({ index }) => {
+      this.setState({ index });
     });
   }
 
@@ -44,7 +44,7 @@ export default class Wizard extends Component {
       return '';
     }
 
-    return <FooterClass wizard={this.state.wizard}/>;
+    return <FooterClass wizard={this.state.wizard} />;
   }
 
   render() {
@@ -57,7 +57,7 @@ export default class Wizard extends Component {
             {
               panels.map((panel, i) => (
                 <Case is={panel.order} key={`case-${i}`}>
-                  <WizardPanel panel={panel}/>
+                  <WizardPanel panel={panel} />
                 </Case>
               ))
             }

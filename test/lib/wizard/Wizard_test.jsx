@@ -8,14 +8,18 @@ describe('wizard', () => {
       const Footer = ({ wizard }) => (
         <div>
           <button onClick={() => wizard.nextPage()}>
-          Next
+            Next
           </button>
         </div>
       );
       const content = (
         <Wizard title="Main Title" footer={Footer}>
-          <div title="First Panel" />
-          <div title="Second Panel" />
+          <div title="First Panel">
+            <p>First Panel content</p>
+          </div>
+          <div title="Second Panel">
+            <p>Second panel content</p>
+          </div>
           <div title="Third Panel" />
         </Wizard>
       );

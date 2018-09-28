@@ -55,6 +55,9 @@ propper.addProp('panels', {
       this.emit('index changed', { index, old });
     },
   })
+  .addProp('panelClass', {
+    defaultValue: 'wizardPanel',
+  })
   .addProp('mainClass', {
     defaultValue: 'wizard',
   });
