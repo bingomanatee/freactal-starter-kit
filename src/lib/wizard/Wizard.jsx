@@ -20,9 +20,8 @@ export default class Wizard extends Component {
     const children = getChildren(props);
 
     children.forEach((child) => {
-      const { title, config = {}, children: cChildren } = child.props;
-
-      wizard.addPanel(title, config, cChildren);
+      let { title: cTitle, config = {}, children: cChildren } = child.props;
+      wizard.addPanel(cTitle, config, cChildren);
     });
     this.footerClass = footer;
     this.state = {
