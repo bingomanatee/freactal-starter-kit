@@ -1,17 +1,25 @@
+/* eslint-disable prefer-arrow-callback */
 const clusterModule = require('cluster');
-const EventEmitter = require('eventemitter3');
+const EventEmitterModule = require('eventemitter3');
 const { easyPropper } = require('class-propper');
 const Bottle = require('bottlejs');
 
-export default() => {
+module.exports = () => {
   const kitBottle = new Bottle();
 
+  kitBottle.constant('EventEmitter', EventEmitterModule);
   kitBottle.constant('STATE_START', 0);
   kitBottle.constant('STATE_WORKER_CREATED', 1);
   kitBottle.constant('STATE_WORKER_LISTENING', 2);
-  kitBottle.constant('process', process);
-  kitBottle.constant('cluster', clusterModule);
-  kitBottle.constant('log', (...args) => console.log(...args));
+  kitBottle.service('process', function () {
+    return process;
+  });
+  kitBottle.service('cluster', function () {
+    return clusterModule;
+  });
+  kitBottle.service('log', function () {
+    return (...args) => console.log(...args);
+  });
   kitBottle.factory('KitRunner', ({
     STATE_START,
     STATE_WORKER_CREATED,
@@ -19,6 +27,7 @@ export default() => {
     process,
     cluster,
     log,
+    EventEmitter,
   }) => {
     class KitRunner extends EventEmitter {
       constructor(start = true) {
@@ -69,6 +78,9 @@ export default() => {
       }
 
       messageFromMaster(message) {
+        if (!message) {
+          return;
+        }
         const [msg, ...args] = message.split('/t');
 
         switch (msg) {
@@ -104,5 +116,7 @@ export default() => {
 
     return KitRunner;
   });
+
+  return kitBottle;
 };
 
