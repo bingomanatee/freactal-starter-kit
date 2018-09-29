@@ -84,6 +84,16 @@ a lot of time for basic dropdowns buttons and inputs.
 
 https://react-md.mlaursen.com/
 
+## A web based runner
+
+In order to do things like create files in the webapp, I've added a small
+(hopefully) Koa stack. If you use this stack to launch the dev app, you can run
+admin tasks like creating files in the web app and reloading it on the fly. 
+
+Its not necessary for everyday use and development but for the activities in
+the admin area, its required. Note it is relevant only for desktop development,
+and shouldn't be used for deployed/runtime activity or an API server. 
+
 # Why?
 
 I'm doing a lot of smaller projects (ADD programmer) and I'm doing the same

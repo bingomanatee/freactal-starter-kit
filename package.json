@@ -3,11 +3,28 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": ">= 10.10.0"
+  },
   "scripts": {
     "build": "neutrino build",
     "start": "neutrino start",
     "lint": "neutrino lint",
-    "test": "neutrino test"
+    "test": "neutrino test",
+    "runner-start": "cd runner;node app",
+    "runner-dev": "cd runner;NODE_ENV=development nodemon --quiet | bunyan",
+    "runner-test": "cd runner;NODE_ENV=test jest --forceExit --verbose",
+    "runner-test:unit": "cd runner;npm test -- test/unit",
+    "runner-test:integration": "cd runner;npm test -- test/integration",
+    "runner-test:watch": "cd runner;npm test -- --watch",
+    "runner-test:watch:unit": "cd runner;npm run test:unit -- --watch",
+    "runner-test:watch:integration": "cd runner;npm run test:integration -- --watch",
+    "runner-test:coverage": "cd runner;npm test -- --coverage",
+    "runner-test:coverage:unit": "cd runner;npm run test:unit -- --coverage",
+    "runner-test:coverage:integration": "cd runner;npm run test:integration -- --coverage",
+    "runner-lint": "cd runner;eslint app test",
+    "runner-lint:app": "cd runner;eslint app",
+    "runner-lint:test": "cd runner;eslint test"
   },
   "dependencies": {
     "@neutrinojs/env": "^8.3.0",
@@ -26,7 +43,15 @@
     "react-dom": "^16.5.1",
     "react-hot-loader": "^4.3.7",
     "react-md": "^1.6.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "@koa/cors": "2",
+    "bunyan": "^1.8.12",
+    "elastic-apm-node": "^1.8.3",
+    "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "swagger-jsdoc": "^3.0.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@neutrinojs/airbnb": "^8.3.0",
@@ -44,6 +69,11 @@
     "raf": "^3.4.0",
     "react-test-renderer": "^16.5.2",
     "sass": "^1.13.4",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "coveralls": "^3.0.2",
+    "jest": "^23.4.2",
+    "jest-junit": "^5.1.0",
+    "nodemon": "^1.18.3",
+    "supertest": "^3.0.0"
   }
 }
