@@ -1,6 +1,9 @@
+/* eslint-disable prefer-arrow-callback */
 import EventEmitter from 'eventemitter3';
 
 const kitRunnerBottle = require('./../../../../runner/app/lib/kit_runner/bottle');
+
+const delay = (n = 100) => new Promise(resolve => setTimeout(resolve, n));
 
 describe('runner', () => {
   describe('lib', () => {
@@ -9,6 +12,62 @@ describe('runner', () => {
       let process;
       let bottle;
       let mockWorker;
+
+
+      describe('worker', () => {
+        beforeEach(() => {
+          bottle = kitRunnerBottle();
+          bottle.factory('cluster', () => {
+            const mockCluster = new EventEmitter();
+            mockCluster.isMaster = false;
+            return mockCluster;
+          });
+
+          class MockProcess extends EventEmitter {
+            constructor() {
+              super();
+              this.sent = [];
+            }
+            send(...args) {
+              this.sent.push(args);
+            }
+          }
+
+          class MockChildProcess {
+            constructor() {
+              this.execs = [];
+            }
+            exec(...args) {
+              this.execs.push(args);
+              return new Promise((resolve) => {
+                resolve({
+                  stdout: {},
+                  stderr: {},
+                });
+              });
+            }
+          }
+
+          bottle.factory('child_process', function () {
+            return new MockChildProcess();
+          });
+          bottle.factory('process', function () {
+            return new MockProcess();
+          });
+
+          process = bottle.container.process;
+        });
+
+        it('should call child_process when the start signal is received', async () => {
+          const kitRunner = new bottle.container.KitRunner();
+          process.emit('message', 'start');
+          await delay(100);
+          expect(bottle.container.child_process.execs).toEqual([
+            ['cd', [bottle.container.ROOT]],
+            ['neutrino', ['start']],
+          ]);
+        });
+      });
 
       describe('master', () => {
         beforeEach(() => {
@@ -60,8 +119,8 @@ describe('runner', () => {
         it('should send start to the fork', async () => {
           expect.assertions(1);
           const kitRunner = new bottle.container.KitRunner();
-          await new Promise(resolve => setTimeout(resolve, 100));
-          expect(kitRunner.worker.sent).toEqual([['start']]);
+          await delay(100);
+          expect(kitRunner.agent.worker.sent).toEqual([['start']]);
         });
       });
     });

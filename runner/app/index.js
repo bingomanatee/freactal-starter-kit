@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-'use strict';
 
 // Load APM on production environment
 const config = require('./config');
@@ -23,21 +22,17 @@ const app = new Koa();
 app.proxy = true;
 
 // Set middlewares
-app.use(
-  bodyParser({
-    enableTypes: ['json', 'form'],
-    formLimit: '10mb',
-    jsonLimit: '10mb'
-  })
-);
+app.use(bodyParser({
+  enableTypes: ['json', 'form'],
+  formLimit: '10mb',
+  jsonLimit: '10mb',
+}));
 app.use(requestId());
-app.use(
-  cors({
-    origin: '*',
-    allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH'],
-    exposeHeaders: ['X-Request-Id']
-  })
-);
+app.use(cors({
+  origin: '*',
+  allowMethods: ['GET', 'HEAD', 'PUT', 'POST', 'DELETE', 'PATCH'],
+  exposeHeaders: ['X-Request-Id'],
+}));
 app.use(responseHandler());
 app.use(errorHandler());
 app.use(logMiddleware({ logger }));
@@ -47,10 +42,8 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 function onError(err, ctx) {
-  if (apm.active)
-    apm.captureError(err);
-  if (ctx == null)
-    logger.error({ err, event: 'error' }, 'Unhandled exception occured');
+  if (apm.active) { apm.captureError(err); }
+  if (ctx == null) { logger.error({ err, event: 'error' }, 'Unhandled exception occured'); }
 }
 
 // Handle uncaught errors
