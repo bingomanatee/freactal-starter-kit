@@ -13,10 +13,33 @@ const env = process.env.NODE_ENV || 'development';
   });
 })(envs[env]);
 
+const uses = [
+  [
+    '@neutrinojs/react',
+    {
+      hot: !process.env.ADMIN_MODE,
+      html: {
+        title: 'freactal-loader',
+        links: [
+          'https://fonts.googleapis.com/icon?family=Material+Icons'
+          , "https://fonts.googleapis.com/css?family=Roboto"
+          , 'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
+        ]
+      }
+    }
+  ],
+  ['@neutrinojs/env',
+    [
+      'NODE_ENV',
+      'AUTH0_CLIENT_ID',
+      'AUTH0_DOMAIN',
+      'UI_URL',
+    ]
+  ]
+];
 
-module.exports = {
-  use: [
-
+if (!process.env.ADMIN_MODE) {
+  uses.unshift(
     ['@neutrinojs/airbnb',
       {
         eslint: {
@@ -35,29 +58,16 @@ module.exports = {
             'react/jsx-closing-tag-location': 'warn'
           }
         }
-      }],
-    [
-      '@neutrinojs/react',
-      {
-        html: {
-          title: 'freactal-loader',
-          links: [
-            'https://fonts.googleapis.com/icon?family=Material+Icons'
-            , "https://fonts.googleapis.com/css?family=Roboto"
-            , 'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
-          ]
-        }
       }
-    ],
-    ['@neutrinojs/env',
-      [
-        'NODE_ENV',
-        'AUTH0_CLIENT_ID',
-        'AUTH0_DOMAIN',
-        'UI_URL',
-      ]
-    ], ['@neutrinojs/jest',
-      {'setupFiles': ['raf/polyfill']}
     ]
-  ]
+  );
+  uses.push( ['@neutrinojs/jest',
+    {'setupFiles': ['raf/polyfill']}
+  ])
+} else {
+  console.log('ADMIN MODE');
+}
+
+module.exports = {
+  use: uses
 };

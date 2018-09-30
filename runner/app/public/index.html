@@ -1,0 +1,31 @@
+<html>
+<head>
+    <script language="JavaScript">
+      function restart(event) {
+        fetch(new Request('runner/reload'));
+        event.preventDefault();
+      }
+    </script>
+</head>
+<body>
+<article>
+    <h1>App Runner</h1>
+    <p>
+        The App Runner launches your dev server for developing code in the Freactal Starter Kit.
+        It allows running file-changing scripts from the admin layer of FSK to add to your site.
+    </p>
+    <p>
+        Note, when the App Runner serves a FSK site hot module loading is NOT enabled; you will
+        have to manually restart the UI App using the link below (and in some cases reload the browser page)
+        to reflect changes. note the &quot;UI App&quot; in this case refers to the FSK react app,
+        not the App Runner itself.
+    </p>
+</article>
+
+<nav>
+    <button type="button" onClick="restart()">Start or Restart UI App</button>
+    |
+    <a href="http://localhost:5000" target="webapp">View UI</a>
+</nav>
+</body>
+</html>

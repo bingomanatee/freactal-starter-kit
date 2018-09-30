@@ -5,6 +5,7 @@
 const config = require('./config');
 const apm = require('./apm');
 
+const koaStatic = require('koa-static');
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const cors = require('@koa/cors');
@@ -40,6 +41,7 @@ app.use(logMiddleware({ logger }));
 // Bootstrap application router
 app.use(router.routes());
 app.use(router.allowedMethods());
+app.use(koaStatic(`${__dirname}/public`));
 
 function onError(err, ctx) {
   if (apm.active) { apm.captureError(err); }

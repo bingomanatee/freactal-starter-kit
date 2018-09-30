@@ -9,9 +9,16 @@ export default injectState(({ state, effects }) => {
     if (state.profile) {
       user = (
         <div className={style['header-user']}>
-          <span className={style['header-user__item']}> Logged in as {state.profile.name}</span>
           <span className={style['header-user__item']}>
-            <Button flat onClick={() => effects.logout()} className={style.NavButton}>Log Out</Button>
+            Logged in as {state.profile.name}
+          </span>
+          <span className={style['header-user__item']}>
+            <Button
+              flat
+              onClick={() => effects.logout()}
+              className={style.NavButton}
+            >Log Out
+            </Button>
           </span>
         </div>
       );
@@ -19,7 +26,10 @@ export default injectState(({ state, effects }) => {
       user = <div>loading...</div>;
     }
   } else {
-    user = <Button flat onClick={effects.login} className={style.NavButton}>Log In</Button>;
+    user = (
+      <Button flat onClick={effects.login} className={style.NavButton}>Log In
+      </Button>
+    );
   }
   return user;
 });

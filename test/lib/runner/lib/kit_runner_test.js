@@ -37,13 +37,12 @@ describe('runner', () => {
             constructor() {
               this.execs = [];
             }
-            exec(...args) {
+
+            spawn(...args) {
               this.execs.push(args);
-              return new Promise((resolve) => {
-                resolve({
-                  stdout: {},
-                  stderr: {},
-                });
+              return Object.assign(new EventEmitter(), {
+                stdout: new EventEmitter(),
+                stderr: new EventEmitter(),
               });
             }
           }
@@ -63,8 +62,13 @@ describe('runner', () => {
           process.emit('message', 'start');
           await delay(100);
           expect(bottle.container.child_process.execs).toEqual([
-            ['cd', [bottle.container.ROOT]],
-            ['neutrino', ['start']],
+            ['yarn', ['start'], {
+              cwd: __dirname.replace(/.test.*/, ''),
+              env: {
+                ADMIN_MODE: 1,
+              },
+            },
+            ],
           ]);
         });
       });

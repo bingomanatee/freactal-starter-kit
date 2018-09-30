@@ -1,9 +1,13 @@
 /* eslint-disable prefer-arrow-callback,camelcase */
 const clusterModule = require('cluster');
 const EventEmitterModule = require('eventemitter3');
-const childProcessModule = require('child-process-promise');
+const childProcessModule = require('child_process');
 const { easyPropper } = require('class-propper');
 const Bottle = require('bottlejs');
+const workerRunner = require('./workerRunner');
+const masterRunner = require('./masterRunner');
+
+const processModule = process;
 
 module.exports = () => {
   const kitBottle = new Bottle();
@@ -16,10 +20,10 @@ module.exports = () => {
   kitBottle.constant('STATE_WORKING_STARTED', 101);
   kitBottle.constant('STATE_WORKING_APP_LAUNCHED', 102);
   kitBottle.constant('STATE_WORKING_ERROR', 199);
-  kitBottle.constant('ROOT', `${__dirname}`.replace(/runner.app.*/, ''));
+  kitBottle.constant('ROOT', `${__dirname}`.replace(/.runner.app.*/, ''));
 
   kitBottle.service('process', function () {
-    return process;
+    return processModule;
   });
   kitBottle.service('child_process', function () {
     return childProcessModule;
@@ -36,16 +40,19 @@ module.exports = () => {
     STATE_WORKER_CREATED,
     STATE_WORKER_LISTENING,
     cluster,
-    log,
     EventEmitter,
+    log,
   }) => {
     class KitRunnerMaster extends EventEmitter {
       constructor(start = true) {
         super();
-        if (start) this.createWorker();
+        if (start) {
+          this.createWorker();
+        }
       }
 
       createWorker() {
+        log('creating worker');
         this.state = STATE_WORKER_CREATED;
         this.worker = cluster.fork();
       }
@@ -54,8 +61,17 @@ module.exports = () => {
         this.messageToWorker('start');
       }
 
-      messageToWorker(message) {
-        this.worker.send(message);
+      askWorkerToStopWebAop() {
+        this.messageToWorker('stop');
+      }
+
+      messageToWorker(...args) {
+        log('master: sending ', args);
+        this.worker.send(...args);
+      }
+
+      messageFromWorker(message) {
+        log('master: recieved ', message, 'from worker');
       }
     }
 
@@ -74,7 +90,8 @@ module.exports = () => {
           this.messageFromWorker(message);
         });
       },
-    }).addInteger('state', { defaultValue: STATE_START, required: true });
+    })
+      .addInteger('state', { defaultValue: STATE_START, required: true });
 
     return KitRunnerMaster;
   });
@@ -117,100 +134,9 @@ module.exports = () => {
 
     return KitRunner;
   });
-  kitBottle.factory('KitRunnerWorker', ({
-    STATE_START,
-    STATE_WORKER_CREATED,
-    STATE_WORKER_LISTENING,
-    STATE_WORKING_STARTED,
-    STATE_WORKING_APP_LAUNCHED,
-    STATE_WORKING_ERROR,
-    ROOT,
-    process,
-    child_process,
-    EventEmitter,
-  }) => {
-    /**
-     * note - this class manages both the conversation from the parent cluster
-     * and the conversation from the child cluster; in effect two instances
-     * of it talk to each other over the wire.
-     */
-    class KitRunnerWorker extends EventEmitter {
-      constructor(start = true) {
-        super();
-        if (start) {
-          this.startWorker();
-        }
-      }
 
-      startWorker() {
-        this.state = STATE_WORKING_STARTED;
-        process.on('message', (msg) => {
-          this.messageFromMaster(msg);
-        });
-      }
-
-      workerStartApp() {
-        child_process.exec('cd', [ROOT])
-          .then(() => child_process.exec('neutrino', ['start']))
-          .then((result) => {
-            this.appProcess = result;
-            this.state = STATE_WORKING_APP_LAUNCHED;
-            this.messageToMaster('app started');
-          })
-          .catch((err) => {
-            this.state = STATE_WORKING_ERROR;
-            this.messageToMaster('error', {
-              message: 'cannot start app',
-              params: err,
-            });
-          });
-      }
-
-      messageFromMaster(message) {
-        if (!message) {
-          return;
-        }
-        const [msg, ...args] = message.split('/t');
-
-        switch (msg) {
-          case 'start':
-            this.workerStartApp(args);
-            break;
-
-          default:
-            this.messageToMaster('error', 'cannot understand message', message);
-        }
-      }
-
-      messageToMaster(...args) {
-        process.send(args.join('/t'));
-      }
-    }
-
-    const cp = easyPropper(KitRunnerWorker);
-
-    cp.addObject('worker', {
-      onChange(worker, old) {
-        const self = this;
-        if (old) {
-          old.removeAllListeners('listening');
-          old.removeAllListeners('message');
-        }
-        worker.on('listening', () => {
-          if (self.state === STATE_WORKER_CREATED) {
-            self.state = STATE_WORKER_LISTENING;
-            self.askWorkerToLaunchWebAop();
-          }
-        });
-        worker.on('message', (message) => {
-          this.messageFromWorker(message);
-        });
-      },
-    }).addInteger('state', { defaultValue: STATE_START, required: true })
-      .addObject('appProcess');
-
-    return KitRunnerWorker;
-  });
+  workerRunner(kitBottle);
+  masterRunner(kitBottle);
 
   return kitBottle;
 };
