@@ -17,7 +17,6 @@ const uses = [
   [
     '@neutrinojs/react',
     {
-      hot: !process.env.ADMIN_MODE,
       html: {
         title: 'freactal-loader',
         links: [
@@ -34,6 +33,8 @@ const uses = [
       'AUTH0_CLIENT_ID',
       'AUTH0_DOMAIN',
       'UI_URL',
+      'ADMIN_MODE',
+      'ADMIN_API_URL'
     ]
   ]
 ];
@@ -61,10 +62,11 @@ if (!process.env.ADMIN_MODE) {
       }
     ]
   );
-  uses.push( ['@neutrinojs/jest',
+  uses.push(['@neutrinojs/jest',
     {'setupFiles': ['raf/polyfill']}
   ])
-} else {
+}
+else {
   console.log('ADMIN MODE');
 }
 

@@ -53,6 +53,10 @@ module.exports = (kitBottle) => {
             this.askWorkerToLaunchWebAop();
             break;
 
+          case 'stopped UI':
+            this.emit('stopped UI');
+            break;
+
           default:
             console.log('unresponded message: ', message);
         }

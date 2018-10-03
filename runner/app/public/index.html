@@ -5,6 +5,10 @@
         fetch(new Request('runner/reload'));
         event.preventDefault();
       }
+      function stop(event) {
+        fetch(new Request('runner/stop'));
+        event.preventDefault();
+      }
     </script>
 </head>
 <body>
@@ -26,6 +30,8 @@
     <button type="button" onClick="restart()">Start or Restart UI App</button>
     |
     <a href="http://localhost:5000" target="webapp">View UI</a>
+    |
+    <button type="button" onClick="stop()">Stop</button>
 </nav>
 </body>
 </html>

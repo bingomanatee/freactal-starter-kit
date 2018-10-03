@@ -17,6 +17,10 @@ export default withRouter(appState(injectState(class App extends Component {
         this.props.effects.setRouterLocation(locationData);
       }
     }, 2000);
+    this.props.effects.resetPageState()
+      .then(() => {
+        this.props.effects.loadPages();
+      });
   }
 
   componentDidUpdate() {

@@ -10,3 +10,10 @@ exports.reload = (ctx) => {
   }, 2000);
   ctx.body = { status: 'app reloaded' };
 };
+
+exports.stop = (ctx) => {
+  console.log('stopping ');
+  kit.agent.askWorkerToStopWebAop();
+  kit.once('stopped UI', () => process.kill('SIGTERM'));
+  ctx.body = { status: 'app stopped' };
+};

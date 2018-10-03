@@ -10,10 +10,16 @@ export default withRouter(injectState(({ state, effects, history }) => (
   <div className={styles.Home}>
     <h1 className={styles['Home-head']}>Welcome to {lib.SITE_NAME}</h1>
     <List className={styles['Home-PageList']}>
-      <ListItem className={styles['Home-PageList__item']} style={({ color: '#CCC' })} primaryText="Home Page (You are here)" />
-      <ListItem className={styles['Home-PageList__item']} onClick={() => history.push('page-one')} primaryText="Page One" />
-      <ListItem className={styles['Home-PageList__item']} onClick={() => history.push('page-two')} primaryText="Page Two" />
-      <ListItem className={styles['Home-PageList__item']} onClick={() => history.push('page-three')} primaryText="Page Three" />
+      {state.pages.map((pageDef) => {
+        if (!pageDef.published) return '';
+        return (<ListItem
+          key={pageDef.id || pageDef.route}
+          className={styles['Home-PageList__item']}
+          style={({ color: pageDef.route === '/' ? '#CCC' : 'inherit' })}
+          primaryText={pageDef.navTitle + (pageDef.notes ? ` - ${pageDef.notes}` : '')}
+          onClick={() => history.push(pageDef.route)}
+        />);
+      }).sort((a, b) => a.order - b.order)}
     </List>
   </div>
 )));

@@ -9,5 +9,6 @@ const router = new Router();
 // //router.get('/spec', homeController.getSwaggerSpec);
 
 router.get('/runner/reload', runnerController.reload);
+router.get('/runner/stop', runnerController.stop);
 
 module.exports = router;

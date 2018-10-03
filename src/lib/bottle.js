@@ -1,6 +1,7 @@
 import Bottlejs from 'bottlejs';
 import config from './config';
 import state from './state';
+import model from './models';
 
 /**
  * this method exists to separate the singleton (in index.js) from a reusable bottle.
@@ -23,6 +24,7 @@ export default (getBottle = false) => {
   // pull resources from each library routine
   config(bottle);
   state(bottle);
+  model(bottle);
 
   return getBottle ? bottle : bottle.container;
 };
