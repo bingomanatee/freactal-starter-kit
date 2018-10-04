@@ -8,7 +8,7 @@ import appState from './App.state';
 export default withRouter(appState(injectState(class App extends Component {
   componentDidMount() {
     this.props.effects.setRouterLocation(this.props.location);
-    this.unlisten = this.props.history.listen(location => this.props.setRouterLocation(location));
+    this.unlisten = this.props.history.listen(location => this.props.effects.setRouterLocation(location));
 
     // there are circumstances where the location lags - this is a failsafe.
     this._locInterval = setInterval(() => {

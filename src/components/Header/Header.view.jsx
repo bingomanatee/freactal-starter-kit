@@ -24,7 +24,7 @@ const searching = false;
 export default injectState(({ state, effects }) => (
   <div className={styles.Header}>
     <Toolbar
-      id="fixed-toolbar-example"
+      id="main-header"
       fixed
       colored
       nav={(
@@ -45,7 +45,7 @@ export default injectState(({ state, effects }) => (
         {lib.ADMIN_MODE ? '(admin mode)' : ''}
       </span>}
       titleId={`${lib.SITE_NAME.toLowerCase().replace(/[\W]+/g, '-')}`}
-      className={styles.Toolbar}
+      className={styles['Header-toolbar']}
     />
   </div>
 ));

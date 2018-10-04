@@ -1,14 +1,19 @@
 import { injectState } from 'freactal';
 import { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 
 import AdminView from './Admin.view.jsx';
 import adminState from './Admin.state';
+import lib from '../../lib';
 
-export default withRouter(adminState(injectState(class Admin extends Component {
+export default adminState(injectState(class Admin extends Component {
+  componentDidMount() {
+    lib.pageProvider.forParent('admin home')
+      .then(pages => this.props.effects.setAdminPages(pages.pages));
+  }
+
   render() {
     return (
-      <AdminView />
+      <AdminView pages={this.props.state.adminPages} />
     );
   }
-})));
+}));

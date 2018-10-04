@@ -1,0 +1,105 @@
+@import '../../css/shared';
+
+$WizardSmall: $ResponsiveSizeSmall;
+$WizardMedium: $ResponsiveSizeMedium;
+$WizardBig: $ResponsiveSizeBig;
+
+.Wizard {
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
+
+  // tiny
+  @media screen and (max-width: $WizardSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $WizardBig) {
+  }
+}
+
+.Wizard-head {
+  // tiny
+  @media screen and (max-width: $WizardSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $WizardBig) {
+  }
+}
+
+.Wizard-body {
+  // tiny
+  @media screen and (max-width: $WizardSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $WizardBig) {
+  }
+}
+
+.Wizard-button {
+  // tiny
+  @media screen and (max-width: $WizardSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $WizardBig) {
+  }
+}
+
+@mixin vertCentered {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Wizard-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $WizardBig;
+  height: 3rem;
+}
+
+.Wizard-dialog__main {
+  @include vertCentered;
+  flex-grow: 1;
+}
+
+.Wizard-dialog__button {
+  @include vertCentered;
+  flex-grow: 0;
+  flex-shrink: 0;
+}

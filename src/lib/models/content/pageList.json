@@ -3,6 +3,7 @@
     {
       "id": 0,
       "component": "components/Home",
+      "name": "home",
       "navTitle": "Home",
       "order": -1,
       "published": true,
@@ -12,11 +13,12 @@
     {
       "id": 1,
       "component": "components/PageOne",
+      "name": "page one",
       "navTitle": "Page One",
       "order": 0,
       "published": true,
       "notes": "Page One Notes",
-      "route": "page-one",
+      "route": "/page-one",
       "access": {
         "env": "*"
       }
@@ -24,11 +26,12 @@
     {
       "id": 2,
       "component": "components/PageTwo",
+      "name": "page two",
       "navTitle": "Page Two",
       "order": 1,
       "published": true,
       "notes": "Page Two Notes",
-      "route": "page-two",
+      "route": "/page-two",
       "access": {
         "env": "*"
       }
@@ -36,11 +39,27 @@
     {
       "id": 3,
       "component": "components/Admin",
+      "name": "admin home",
       "navTitle": "Admin",
       "order": 1,
       "published": true,
       "notes": "This is the page administrative interface.",
-      "route": "page-admin",
+      "route": "/page-admin",
+      "exact": true,
+      "access": {
+        "env": "admin"
+      }
+    },
+    {
+      "id": 3,
+      "component": "components/Admin/Wizard",
+      "name": "wizard",
+      "parent": "admin home",
+      "navTitle": "Wizard Generator",
+      "order": 1,
+      "published": true,
+      "notes": "A tool for creating wizard pages.",
+      "route": "/page-admin/wizard",
       "exact": true,
       "access": {
         "env": "admin"
