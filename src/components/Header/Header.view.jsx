@@ -41,7 +41,8 @@ export default injectState(({ state, effects }) => (
       title={<span>
         <Link className={styles['Header-link']} to="/">{lib.SITE_NAME}</Link>
         {statePath(state)}
-        ({lib.NODE_ENV})
+        (env = {lib.NODE_ENV})
+        {lib.ADMIN_MODE ? '(admin mode)' : ''}
       </span>}
       titleId={`${lib.SITE_NAME.toLowerCase().replace(/[\W]+/g, '-')}`}
       className={styles.Toolbar}

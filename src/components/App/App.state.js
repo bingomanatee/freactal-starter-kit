@@ -26,7 +26,10 @@ appState.addStateSideEffect('loadPages', (
   if (!(pagesLoaded || pagesLoading)) {
     return pagesLoadingOn()
       .then(() => lib.pageProvider.all()
-        .then(pgs => setPages(pgs.pages)))
+        .then((pgs) => {
+          console.log('pages:', pgs);
+          return setPages(pgs.pages);
+        }))
       .then(pagesLoadingOff)
       .then(pagesLoadedOn)
       .catch(err => console.log('page load error: ', err));

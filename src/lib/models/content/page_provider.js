@@ -7,7 +7,8 @@ export default (bottle) => {
     all: () => {
       if (NODE_ENV === 'development') {
         if (ADMIN_MODE) {
-          return axios.get(`${ADMIN_API_URL}/api/pages`, { responseType: 'json' });
+          return axios.get(`${ADMIN_API_URL}/api/pages`, { responseType: 'json' })
+            .then(result => result.data);
         }
       }
       return Promise.resolve(pageList);

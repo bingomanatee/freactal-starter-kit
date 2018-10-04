@@ -39,7 +39,7 @@
       "navTitle": "Admin",
       "order": 1,
       "published": true,
-      "notes": "Page Two Notes",
+      "notes": "This is the page administrative interface.",
       "route": "page-admin",
       "exact": true,
       "access": {
