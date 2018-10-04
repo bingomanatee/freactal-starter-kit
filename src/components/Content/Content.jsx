@@ -1,5 +1,6 @@
 import { injectState } from 'freactal';
 import { Component } from 'react';
+
 import ContentView from './Content.view.jsx';
 import contentState from './Content.state';
 import Home from './../Home';
@@ -7,13 +8,15 @@ import PageOne from './../PageOne';
 import PageTwo from './../PageTwo';
 import PageThree from './../PageThree';
 import Callback from './../Callback';
+import Admin from './../Admin';
 
 const componentMap = new Map();
 componentMap.set('components/PageOne', PageOne);
-componentMap.set('components/PageTwo', PageOne);
-componentMap.set('components/PageThree', PageOne);
+componentMap.set('components/PageTwo', PageTwo);
+componentMap.set('components/PageThree', PageThree);
 componentMap.set('components/Home', Home);
 componentMap.set('components/Callback', Callback);
+componentMap.set('components/Admin', Admin);
 
 export default contentState(injectState(class Content extends Component {
   componentDidMount() {

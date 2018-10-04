@@ -3,16 +3,28 @@ import pageList from './pageList.json';
 export default (bottle) => {
   bottle.factory('pageProvider', ({
     NODE_ENV, ADMIN_API_URL, ADMIN_MODE, axios,
-  }) => ({
-    all: () => {
-      if (NODE_ENV === 'development') {
-        if (ADMIN_MODE) {
-          return axios.get(`${ADMIN_API_URL}/api/pages`, { responseType: 'json' })
-            .then(result => result.data);
+  }) => {
+    const provider = {
+      all: () => {
+        if (NODE_ENV === 'development') {
+          if (ADMIN_MODE) {
+            return axios.get(`${ADMIN_API_URL}/api/pages`, {responseType: 'json'})
+              .then(result => result.data);
+          }
         }
-      }
-      return Promise.resolve(pageList);
-    },
+        return Promise.resolve(pageList);
+      },
 
-  }));
+      forParent: (parentName) => {
+        return provider.all()
+          .then((def) => {
+            let pages = def.pages.filter(p => p.parent === parentName);
+            return Object.assign(def, {pages});
+          });
+      }
+
+    };
+
+    return provider;
+  });
 };

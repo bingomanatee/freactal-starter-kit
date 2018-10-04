@@ -1,19 +1,29 @@
-import { Button } from 'react-md';
-import { injectState } from 'freactal';
+import { List, ListItem } from 'react-md';
+import { withRouter } from 'react-router-dom';
 import styles from './Admin.module.css';
 
 // eslint-disable-next-line no-unused-vars
-export default injectState(({ state, effects }) => (
+export default withRouter(({ pages, history }) => (
   <div className={styles.Admin}>
-    <h2 className={styles['Admin-head']}>Admin Head</h2>
-    <div className={styles['Admin-dialog']}>
-      <div className={styles['Admin-dialog__main']}>
-        <p className={styles['Admin-body']}>Admin body: Count = {state.adminCount}
-        </p>
-      </div>
-      <div className={styles['Admin-dialog__button']}>
-        <Button primary raised onClick={effects.incAdminCount}>Increment</Button>
-      </div>
-    </div>
+    <h1 className={styles['Admin-head']}>FSK Admin Page</h1>
+    <p>
+      This is a page for generative scripts to create other pages, manage
+      your site&apos;s structure, etc.
+    </p>
+    <List className={styles['Home-PageList']} >
+      {pages
+        .sort((a, b) => a.order = b.order)
+        .map(pageDef => (<ListItem
+          key={pageDef.id || pageDef.route}
+          className={styles['Home-PageList__item']}
+          style={({ color: pageDef.route === '/' ? '#CCC' : 'inherit' })}
+          primaryText={pageDef.navTitle + (pageDef.notes ? ` - ${pageDef.notes}` : '')}
+          onClick={() => history.push(pageDef.route)}
+        />))}
+    </List>
   </div>
 ));
+
+/*
+
+ */
