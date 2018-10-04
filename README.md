@@ -103,6 +103,17 @@ some of the economies I've found for quick jumpstarting of projects with others.
 Also, I think that Freactal and Bottle are two great solutions that have escaped
 notice, and I want to do what I can to promote them. 
 
+## Configuration
+
+This starter kit brings some environmental variables into the client. 
+Maybe its obvious but, since these will ultimately be exposed to public/client side code
+don't publish anything that exposes truly secret values!
+
+the dotenv config will respect your NODE_ENV; so you can have a single `.env` file 
+or `.env.development`, `.env.production` configurations. 
+
+see `lib/config.js` and the `.neutrinorc` file for how these are synchronized.
+
 ## Roadmap
 
 Some  of the things I want to do when this is all stable is:

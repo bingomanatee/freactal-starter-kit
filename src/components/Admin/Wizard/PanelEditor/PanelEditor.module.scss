@@ -5,9 +5,6 @@ $PanelEditorMedium: $ResponsiveSizeMedium;
 $PanelEditorBig: $ResponsiveSizeBig;
 
 .PanelEditor {
-  // should only be for primary pages (ones the route in content drives to); remove for sub-components
-  @include mainPagePadding();
-
   // tiny
   @media screen and (max-width: $PanelEditorSmall) {
   }
@@ -77,29 +74,4 @@ $PanelEditorBig: $ResponsiveSizeBig;
   // biggest
   @media screen and (min-width: $PanelEditorBig) {
   }
-}
-
-@mixin vertCentered {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.PanelEditor-dialog {
-  display: flex;
-  flex-direction: row;
-  max-width: $PanelEditorBig;
-  height: 3rem;
-}
-
-.PanelEditor-dialog__main {
-  @include vertCentered;
-  flex-grow: 1;
-}
-
-.PanelEditor-dialog__button {
-  @include vertCentered;
-  flex-grow: 0;
-  flex-shrink: 0;
 }

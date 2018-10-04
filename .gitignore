@@ -138,7 +138,7 @@ package-lock.json
 
 # dotenv environment variables file
 .env
-
+.env.development
 
 ### OSX ###
 *.DS_Store
@@ -185,3 +185,6 @@ Session.vim
 *~
 # auto-generated tag files
 tags
+
+### SCSS ###
+.scss_cache

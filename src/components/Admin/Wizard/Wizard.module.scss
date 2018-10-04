@@ -25,81 +25,46 @@ $WizardBig: $ResponsiveSizeBig;
   }
 }
 
-.Wizard-head {
-  // tiny
-  @media screen and (max-width: $WizardSmall) {
-  }
-
-  // small
-  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $WizardBig) {
-  }
-}
-
-.Wizard-body {
-  // tiny
-  @media screen and (max-width: $WizardSmall) {
-  }
-
-  // small
-  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $WizardBig) {
-  }
-}
-
-.Wizard-button {
-  // tiny
-  @media screen and (max-width: $WizardSmall) {
-  }
-
-  // small
-  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $WizardBig) {
-  }
-}
-
-@mixin vertCentered {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.Wizard-dialog {
-  display: flex;
-  flex-direction: row;
+.wizard-form {
   max-width: $WizardBig;
-  height: 3rem;
+  margin-bottom: 2rem;
 }
 
-.Wizard-dialog__main {
-  @include vertCentered;
-  flex-grow: 1;
+.wizard-form-panel {
+  border: 1px solid rgba(0,0,0,0.25);
+  padding: 0.5rem 1rem;
+  padding-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  margin:  1rem 0;
+  // biggest
+  @media screen and (min-width: $WizardBig) {
+    padding: 0.75rem 1.5rem;
+    padding-bottom:3rem;
+  }
 }
 
-.Wizard-dialog__button {
-  @include vertCentered;
-  flex-grow: 0;
-  flex-shrink: 0;
+.wizard-form-panel__title {
+  margin: 0;
+  padding: 0;
+  top: -0.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  // tiny
+  @media screen and (max-width: $WizardSmall) {
+    margin-bottom: 0.5rem;
+  }
+
+  // small
+  @media screen and (min-width: $WizardSmall) and(max-width: ($WizardMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $WizardMedium) and(max-width: ($WizardBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $WizardBig) {
+    margin-bottom: 1.5rem;
+  }
 }

@@ -10,7 +10,8 @@ class WizardControllerPanel extends EventEmitter {
   constructor(title, config = {}, children) {
     super();
     this.title = title;
-    this.children = typeof children === 'function' ? children(this) : children;
+    WizardControllerPanel.nextId += 1;
+    this.id = WizardControllerPanel.nextId;
     Object.assign(this, config);
   }
 
@@ -59,6 +60,8 @@ class WizardControllerPanel extends EventEmitter {
     return classes.join(' ');
   }
 }
+
+WizardControllerPanel.nextId = 0;
 
 const propper = cp(WizardControllerPanel);
 

@@ -51,7 +51,7 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-hot-loader": "^4.3.7",
-    "react-md": "^1.6.1",
+    "react-md": "^1.7.1",
     "react-router-dom": "^4.3.1",
     "swagger-jsdoc": "^3.0.2",
     "uuid": "^3.3.2"
@@ -76,8 +76,6 @@
     "nodemon": "^1.18.3",
     "raf": "^3.4.0",
     "react-test-renderer": "^16.5.2",
-    "sass": "^1.13.4",
-    "scss": "^0.2.4",
     "supertest": "^3.0.0"
   }
 }

@@ -2,63 +2,44 @@
   * expose a set of global responsive brackets.
   * If you don't want to use react-md, set these to your preferred cutoffs.
  */
-@media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
-  .Admin {
-    padding: 0.5rem 1rem;
-  }
-}
-@media screen and (max-width: 320px) and (min-aspect-ratio: 13/9) {
-  .Admin {
-    padding: 1rem 0.5rem;
-  }
-}
-@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13/9) {
-  .Admin {
-    padding: 1rem 2rem;
-  }
-}
-@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13/9) {
-  .Admin {
-    padding: 1.5rem 1.5rem;
-  }
-}
-@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13/9) {
-  .Admin {
-    padding: 1.5rem 3rem;
-  }
-}
-@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13/9) {
-  .Admin {
-    padding: 2rem 2rem;
-  }
-}
-@media screen and (min-width: 1332.5px) {
-  .Admin {
-    padding: 2rem 4rem;
-  }
-}
-.Admin-dialog {
+.buttons-bar {
+  max-width: 1025px;
   display: flex;
   flex-direction: row;
-  max-width: 1025px;
-  height: 3rem;
-}
+  justify-content: space-around; }
 
-.Admin-dialog__main {
+.buttons-bar__cell {
   display: flex;
-  height: 100%;
-  flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
-}
+  flex-direction: column;
+  padding: 2rem 1rem; }
+  @media screen and (max-width: 320px) {
+    .buttons-bar__cell {
+      padding: 2px; } }
+  @media screen and (min-width: 320px) and (max-width: 1024px) {
+    .buttons-bar__cell {
+      padding: 0.75rem 0.5rem; } }
 
-.Admin-dialog__button {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
+@media screen and (max-width: 320px) and (max-aspect-ratio: 13 / 9) {
+  .Admin {
+    padding: 0.5rem 1rem; } }
+@media screen and (max-width: 320px) and (min-aspect-ratio: 13 / 9) {
+  .Admin {
+    padding: 1rem 0.5rem; } }
+@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13 / 9) {
+  .Admin {
+    padding: 1rem 2rem; } }
+@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13 / 9) {
+  .Admin {
+    padding: 1.5rem 1.5rem; } }
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13 / 9) {
+  .Admin {
+    padding: 1.5rem 3rem; } }
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13 / 9) {
+  .Admin {
+    padding: 2rem 2rem; } }
+@media screen and (min-width: 1332.5px) {
+  .Admin {
+    padding: 2rem 4rem; } }
 
 /*# sourceMappingURL=Admin.module.css.map */

@@ -1,7 +1,12 @@
 /* eslint-disable func-names,object-shorthand */
-import cp from 'class-propper';
+import cp, { Validator } from 'class-propper';
 import EventEmitter from 'eventemitter3';
 import WizardControllerPanel from './WizardControllerPanel';
+
+const orderValidator = new Validator([
+  new Validator('integer', 'order must be an integer'),
+  new Validator(s => s < 0, 'order must be >= 0'),
+]);
 
 class WizardController extends EventEmitter {
   constructor(title, config = {}) {
@@ -20,6 +25,19 @@ class WizardController extends EventEmitter {
     this._initPanel(panel);
     this.panels.push(panel);
     return this;
+  }
+
+  addPanelAt(order, ...args) {
+    orderValidator.try(order);
+    let panel;
+    if (typeof args[0] === 'object') {
+      panel = args[0];
+    } else {
+      panel = new WizardControllerPanel(...args);
+    }
+    this._initPanel(panel);
+    this.panels.splice(order + 1, 0, panel);
+    this.panels = _.compact(this.panels);
   }
 
   _initPanel(panel) {

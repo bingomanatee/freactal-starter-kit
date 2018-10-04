@@ -4,9 +4,25 @@ import seedFactory from 'freactal-seed';
 const Seed = seedFactory();
 
 const panelEditorState = new Seed();
-panelEditorState.addIntAndSetEffect('panelEditorCount', 1);
-panelEditorState.addEffect('incPanelEditorCount', update(state => ({
-  panelEditorCount: (state.panelEditorCount + 1),
-})));
+
+panelEditorState.addBoolPropAndEffects('editingPanel', false);
+panelEditorState.addStringAndSetEffect('panelTitle', '');
+panelEditorState.addArrayPropAndSetEffects('panelFields', []);
+panelEditorState.addObjectAndSetEffect('panel', {});
+panelEditorState.addStateSideEffect(
+  'saveEditPanel',
+  ({ setPanel, editingPanelOff }, { panel, panelTitle }) => {
+    panel.title = panelTitle;
+    setPanel(panel);
+    editingPanelOff();
+  },
+);
+panelEditorState.addStateSideEffect(
+  'cancelEditPanel',
+  ({ setPanelTitle, editingPanelOff }, { panel }) => {
+    setPanelTitle(panel.title);
+    editingPanelOff();
+  },
+);
 
 export default provideState(panelEditorState.toHash());

@@ -2,26 +2,30 @@
 @import './../node_modules/react-md/src/scss/react-md';
 
 $md-primary-color: $md-indigo-500;
-$md-secondary-color: $md-lime-a-400;
+$md-secondary-color: $md-orange-700;
 
 $md-font-size-base: 20;
-
-$md-list-primary-font-size: 20;
-$md-list-secondary-font-size: 16;
+$mobile-scale: 0.8;
+$md-list-primary-font-size: $md-font-size-base;
+$md-list-secondary-font-size: $md-font-size-base * $mobile-scale;
 $md-list-desktop-height: 4rem;
 $md-list-mobile-height: 3rem;
 
-$md-body-desktop-font-size: 20px;
-$md-body-mobile-font-size: 18px;
+$md-body-desktop-font-size: $md-font-size-base + 0px;
+$md-body-mobile-font-size: $md-font-size-base * $mobile-scale + 0px;
 
-$md-btn-desktop-font-size: 18px;
-$md-btn-mobile-font-size: 16px;
-$md-btn-desktop-height: 40px;
-$md-btn-mobile-height: 36px;
+$md-btn-desktop-font-size: $md-font-size-base * 0.9 + 0px;
+$md-btn-mobile-font-size: $md-font-size-base * $mobile-scale * 0.9 + 0px;
+$md-btn-desktop-height: $md-font-size-base * 2 + 0px;
+$md-btn-mobile-height: $md-font-size-base * $mobile-scale * 2 + 0px;
 
-$md-line-height: 125% !default;
+$md-text-field-desktop-font-size: $md-font-size-base + 0px;
+$md-text-field-mobile-font-size: $md-font-size-base * $mobile-scale + 0px;
+
+$md-line-height: 1.5;
 $md-body-1-line-height: 125%;
 $md-body-2-line-height: 125%;
+
 
 @include react-md-everything;
 

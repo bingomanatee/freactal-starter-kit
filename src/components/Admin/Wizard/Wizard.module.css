@@ -2,63 +2,73 @@
   * expose a set of global responsive brackets.
   * If you don't want to use react-md, set these to your preferred cutoffs.
  */
-@media screen and (max-width: 320px) and (max-aspect-ratio: 13/9) {
-  .Wizard {
-    padding: 0.5rem 1rem;
-  }
-}
-@media screen and (max-width: 320px) and (min-aspect-ratio: 13/9) {
-  .Wizard {
-    padding: 1rem 0.5rem;
-  }
-}
-@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13/9) {
-  .Wizard {
-    padding: 1rem 2rem;
-  }
-}
-@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13/9) {
-  .Wizard {
-    padding: 1.5rem 1.5rem;
-  }
-}
-@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13/9) {
-  .Wizard {
-    padding: 1.5rem 3rem;
-  }
-}
-@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13/9) {
-  .Wizard {
-    padding: 2rem 2rem;
-  }
-}
-@media screen and (min-width: 1332.5px) {
-  .Wizard {
-    padding: 2rem 4rem;
-  }
-}
-.Wizard-dialog {
+.buttons-bar {
+  max-width: 1025px;
   display: flex;
   flex-direction: row;
+  justify-content: space-around; }
+
+.buttons-bar__cell {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem 1rem; }
+  @media screen and (max-width: 320px) {
+    .buttons-bar__cell {
+      padding: 2px; } }
+  @media screen and (min-width: 320px) and (max-width: 1024px) {
+    .buttons-bar__cell {
+      padding: 0.75rem 0.5rem; } }
+
+@media screen and (max-width: 320px) and (max-aspect-ratio: 13 / 9) {
+  .Wizard {
+    padding: 0.5rem 1rem; } }
+@media screen and (max-width: 320px) and (min-aspect-ratio: 13 / 9) {
+  .Wizard {
+    padding: 1rem 0.5rem; } }
+@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13 / 9) {
+  .Wizard {
+    padding: 1rem 2rem; } }
+@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13 / 9) {
+  .Wizard {
+    padding: 1.5rem 1.5rem; } }
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13 / 9) {
+  .Wizard {
+    padding: 1.5rem 3rem; } }
+@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13 / 9) {
+  .Wizard {
+    padding: 2rem 2rem; } }
+@media screen and (min-width: 1332.5px) {
+  .Wizard {
+    padding: 2rem 4rem; } }
+
+.wizard-form {
   max-width: 1025px;
-  height: 3rem;
-}
+  margin-bottom: 2rem; }
 
-.Wizard-dialog__main {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
-}
+.wizard-form-panel {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 0.5rem 1rem;
+  padding-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0; }
+  @media screen and (min-width: 1025px) {
+    .wizard-form-panel {
+      padding: 0.75rem 1.5rem;
+      padding-bottom: 3rem; } }
 
-.Wizard-dialog__button {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
+.wizard-form-panel__title {
+  margin: 0;
+  padding: 0;
+  top: -0.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+  font-size: 1rem; }
+  @media screen and (max-width: 320px) {
+    .wizard-form-panel__title {
+      margin-bottom: 0.5rem; } }
+  @media screen and (min-width: 1025px) {
+    .wizard-form-panel__title {
+      margin-bottom: 1.5rem; } }
 
 /*# sourceMappingURL=Wizard.module.css.map */

@@ -10,12 +10,12 @@ export default withRouter(({ pages, history }) => (
       This is a page for generative scripts to create other pages, manage
       your site&apos;s structure, etc.
     </p>
-    <List className={styles['Home-PageList']} >
+    <List className={styles['AdminPageList']} >
       {pages
         .sort((a, b) => a.order = b.order)
         .map(pageDef => (<ListItem
           key={pageDef.id || pageDef.route}
-          className={styles['Home-PageList__item']}
+          className={styles['AdminPageList__item']}
           style={({ color: pageDef.route === '/' ? '#CCC' : 'inherit' })}
           primaryText={pageDef.navTitle + (pageDef.notes ? ` - ${pageDef.notes}` : '')}
           onClick={() => history.push(pageDef.route)}

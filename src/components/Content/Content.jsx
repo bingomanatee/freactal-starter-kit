@@ -9,6 +9,7 @@ import PageTwo from './../PageTwo';
 import PageThree from './../PageThree';
 import Callback from './../Callback';
 import Admin from './../Admin';
+import Wizard from './../Admin/Wizard';
 
 const componentMap = new Map();
 componentMap.set('components/PageOne', PageOne);
@@ -17,6 +18,7 @@ componentMap.set('components/PageThree', PageThree);
 componentMap.set('components/Home', Home);
 componentMap.set('components/Callback', Callback);
 componentMap.set('components/Admin', Admin);
+componentMap.set('components/Admin/Wizard', Wizard);
 
 export default contentState(injectState(class Content extends Component {
   componentDidMount() {

@@ -13,17 +13,27 @@ const env = process.env.NODE_ENV || 'development';
   });
 })(envs[env]);
 
+/**
+ * note - check the https://github.com/jaketrent/html-webpack-template for options for the HTML template
+ * @type {*[]}
+ */
 const uses = [
   [
     '@neutrinojs/react',
     {
       html: {
-        title: 'freactal-loader',
+        title: 'Mircosoft.com',
+        baseHref: '/',
         links: [
           'https://fonts.googleapis.com/icon?family=Material+Icons'
           , "https://fonts.googleapis.com/css?family=Roboto"
           , 'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
         ]
+      },
+      options: {
+        output: {
+          publicPath: '/'
+        }
       }
     }
   ],
