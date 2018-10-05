@@ -11,12 +11,13 @@ export default panelEditorState(injectState(class PanelEditor extends Component 
     if (panel) {
       effects.setPanel(panel);
       effects.setPanelTitle(panel.title);
+      effects.setPanelFields(panel.fields);
     }
   }
 
   render() {
     return (
-      <PanelEditorView />
+      <PanelEditorView state={this.props.state} />
     );
   }
 }));

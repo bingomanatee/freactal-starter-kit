@@ -1,13 +1,13 @@
 import cp from 'class-propper';
 import _ from 'lodash';
-
 import EventEmitter from 'eventemitter3';
+import WCPField from './WCPField';
 
 /**
  * A data model for a panel of a wizard.
  */
 class WizardControllerPanel extends EventEmitter {
-  constructor(title, config = {}, children) {
+  constructor(title, config = {}) {
     super();
     this.title = title;
     WizardControllerPanel.nextId += 1;
@@ -46,7 +46,11 @@ class WizardControllerPanel extends EventEmitter {
     if (!this.controller) {
       return true;
     }
-    return this === _.last(this.controller.panels);
+    return this.order === (this.controller.panels.length - 1);
+  }
+
+  get isOnly() {
+    return this.isFirst && this.isLast;
   }
 
   get classes() {
@@ -59,7 +63,33 @@ class WizardControllerPanel extends EventEmitter {
     }
     return classes.join(' ');
   }
+
+  addField(name, type = 'text', defaultValue = '') {
+    this.fields.push(new WCPField(this, name, type, { defaultValue }));
+  }
+
+  move(dir) {
+    const order = this.order;
+    this.controller.panels = this.controller.panels.filter(a => a !== this);
+    switch (dir) {
+      case 'up':
+        this.controller.panels.splice(order - 1, 0, this);
+        break;
+      case 'down':
+        this.controller.panels.splice(order + 1, 0, this);
+        break;
+
+      default:
+        throw new Error(`strange direction(${dir})`);
+    }
+    this.controller.panels = this.controller.panels.filter(a => a);
+  }
+
+  delete() {
+    this.controller.panels = this.controller.panels.filter(a => a !== this);
+  }
 }
+
 
 WizardControllerPanel.nextId = 0;
 
@@ -71,9 +101,9 @@ propper.addString('title', {
   .addProp('controller', {
     failsWhen: 'object',
   })
-  .addProp('data', {
-    failsWhen: 'object',
-    defaultValue: () => ({}),
+  .addProp('fields', {
+    failsWhen: 'array',
+    defaultValue: () => ([]),
   })
   .addProp('children', {});
 

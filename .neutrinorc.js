@@ -27,7 +27,7 @@ const uses = [
         links: [
           'https://fonts.googleapis.com/icon?family=Material+Icons'
           , "https://fonts.googleapis.com/css?family=Roboto"
-          , 'https://use.fontawesome.com/releases/v5.2.0/css/all.css'
+          , 'https://use.fontawesome.com/releases/v5.3.1/css/all.css'
         ]
       },
       options: {

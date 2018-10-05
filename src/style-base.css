@@ -987,13 +987,6 @@ html {
   background: #616161;
   color: #f5f5f5; }
 
-@media screen and (min-width: 1025px) {
-  .md-avatar-content {
-    font-size: 20px; }
-
-  .md-avatar--icon-sized {
-    height: 20px;
-    width: 20px; } }
 .md-avatar--red {
   background: #d50000;
   color: #ffebee; }
@@ -1216,20 +1209,20 @@ a.md-btn {
 
 @media screen and (min-width: 320px) {
   .md-btn--text {
-    height: 32px;
-    margin-bottom: 8px;
-    margin-top: 8px;
+    height: 36px;
+    margin-bottom: 6px;
+    margin-top: 6px;
     font-size: 14.4px; }
     .md-btn--text::before, .md-btn--text::after {
       content: '';
-      height: 8px;
+      height: 6px;
       left: 0;
       position: absolute;
       right: 0; }
     .md-btn--text::before {
-      top: -8px; }
+      top: -6px; }
     .md-btn--text::after {
-      bottom: -8px; }
+      bottom: -6px; }
 
   .md-btn--fixed-tl {
     left: 16px;
@@ -1248,7 +1241,7 @@ a.md-btn {
     right: 16px; } }
 @media screen and (min-width: 1025px) {
   .md-btn--text {
-    height: 40px;
+    height: 32px;
     margin-bottom: 0;
     margin-top: 0;
     font-size: 18px; }
@@ -1274,21 +1267,7 @@ a.md-btn {
 
   .md-btn--fixed-br {
     bottom: 24px;
-    right: 24px; }
-
-  .md-btn--icon {
-    height: 40px;
-    width: 40px;
-    padding: 10px; }
-
-  .md-btn--floating {
-    height: 48px;
-    padding: 14px;
-    width: 48px; }
-    .md-btn--floating-mini {
-      height: 40px;
-      padding: 10px;
-      width: 40px; } }
+    right: 24px; } }
 .md-card {
   display: block; }
   .md-card--raise {
@@ -1404,11 +1383,6 @@ a.md-btn {
 .md-chip-text--hover {
   color: #fff; }
 
-@media screen and (min-width: 1025px) {
-  .md-chip-icon {
-    margin-left: 6px;
-    margin-right: 6px;
-    top: 6px; } }
 .md-collapser.md-collapser {
   transition-duration: 0.15s;
   transition-property: transform; }
@@ -1954,13 +1928,6 @@ svg.md-icon {
   .md-icon-text:last-child {
     padding-left: 16px; }
 
-@media screen and (min-width: 1025px) {
-  .material-icons.md-icon {
-    font-size: 20px; }
-
-  svg.md-icon {
-    height: 20px;
-    width: 20px; } }
 .md-layover-enter {
   transform: scale(0); }
   .md-layover-enter.md-layover-enter-active {
@@ -2152,13 +2119,7 @@ svg.md-icon {
     .md-list-tile--three-lines .md-tile-text--secondary {
       height: 39px; }
     .md-list-tile--three-lines .md-tile-addon {
-      margin-top: 12px; }
-
-  .md-tile-addon--icon {
-    height: 20px; }
-
-  .md-tile-content--left-icon {
-    padding-left: 36px; } }
+      margin-top: 12px; } }
 .md-list--inline {
   display: flex;
   padding: 0; }
@@ -2248,9 +2209,6 @@ svg.md-icon {
 
   .md-title.md-title--persistent-offset {
     margin-left: 216px; } }
-@media screen and (min-width: 1025px) {
-  .md-title.md-title--persistent-offset {
-    margin-left: 226px; } }
 .md-toolbar.md-toolbar--over-drawer {
   z-index: 19; }
 
@@ -2763,10 +2721,7 @@ svg.md-icon {
     font-size: 16px; } }
 @media screen and (min-width: 1025px) {
   .md-selection-control-label {
-    font-size: 20px; }
-
-  .md-selection-control-container {
-    height: 40px; } }
+    font-size: 20px; } }
 .md-slider-container {
   display: flex;
   flex-wrap: wrap;
@@ -3185,11 +3140,7 @@ svg.md-icon {
 
   .md-tab-label {
     font-size: 13px;
-    line-height: 13px; }
-
-  .md-icon--tab {
-    margin-bottom: 12px;
-    margin-top: 2px; } }
+    line-height: 13px; } }
 .md-text-field-container {
   position: relative; }
 
@@ -3301,9 +3252,6 @@ svg.md-icon {
 
 .md-floating-label--icon-offset {
   left: 40px; }
-  @media screen and (min-width: 1025px) {
-    .md-floating-label--icon-offset {
-      left: 36px; } }
 
 .md-text-field-message-container {
   display: flex;
@@ -3472,16 +3420,16 @@ svg.md-icon {
     width: 20px; }
 
   .md-text-field-message-container--left-icon-offset {
-    padding-left: 36px; }
+    padding-left: 40px; }
   .md-text-field-message-container--right-icon-offset {
-    padding-right: 36px; }
+    padding-right: 40px; }
 
   .md-text-field-inline-indicator {
-    top: 9px; }
+    top: 7px; }
     .md-text-field-inline-indicator--floating {
-      top: 30px; }
+      top: 28px; }
     .md-text-field-inline-indicator--block {
-      top: 12px; }
+      top: 10px; }
 
   .md-floating-label--inactive-title {
     transform: translate3d(0, 36px, 0); } }
@@ -3508,8 +3456,8 @@ svg.md-icon {
     margin-top: 4px; }
 
   .md-toolbar .md-btn--text {
-    margin-bottom: 12px;
-    margin-top: 12px; }
+    margin-bottom: 10px;
+    margin-top: 10px; }
 
   .md-toolbar--action-left {
     margin-left: 4px; }
@@ -3558,8 +3506,8 @@ svg.md-icon {
     margin-top: 8px; }
 
   .md-toolbar .md-btn--text {
-    margin-bottom: 16px;
-    margin-top: 16px; }
+    margin-bottom: 14px;
+    margin-top: 14px; }
 
   .md-toolbar--action-left {
     margin-left: 12px; }
@@ -3580,23 +3528,8 @@ svg.md-icon {
     margin-bottom: 12px;
     margin-top: 12px; } }
 @media screen and (min-width: 1025px) {
-  .md-toolbar--action-left {
-    margin-left: 14px; }
-  .md-toolbar--action-right {
-    margin-right: 14px; }
-
-  .md-title--toolbar {
-    margin-left: 26px; }
-    .md-title--toolbar-offset {
-      margin-left: 80px; }
-
-  .md-btn--toolbar {
-    margin-bottom: 12px;
-    margin-top: 12px; }
-
-  .md-toolbar .md-btn--text {
-    margin-bottom: 12px;
-    margin-top: 12px; } }
+  .md-title--toolbar-offset {
+    margin-left: 80px; } }
 .md-toolbar {
   display: flex; }
   .md-toolbar--fixed {
@@ -3766,5 +3699,14 @@ html, body, #root {
   height: 100%;
   width: 100%;
   overflow: hidden; }
+
+.md-list--menu .md-list-tile {
+  height: 3rem; }
+  @media screen and (max-width: 320px) {
+    .md-list--menu .md-list-tile {
+      height: 2rem; } }
+  @media screen and (min-width: 320px) and (max-width: 767px) {
+    .md-list--menu .md-list-tile {
+      height: 1.5rem; } }
 
 /*# sourceMappingURL=style-base.css.map */

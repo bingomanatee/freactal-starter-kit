@@ -20,20 +20,7 @@
     .buttons-bar__cell {
       padding: 0.75rem 0.5rem; } }
 
-.PanelEditor {
-  position: relative; }
+.PanelFieldEditor-row {
+  overflow: visible; }
 
-.PanelEditor-nav-button-up {
-  position: absolute !important;
-  top: 5px;
-  right: 0; }
-
-.PanelEditor-nav-button-down {
-  position: absolute !important;
-  bottom: 5px;
-  right: 0; }
-
-.PanelEditor-fields-list {
-  overflow-x: visible !important; }
-
-/*# sourceMappingURL=PanelEditor.module.css.map */
+/*# sourceMappingURL=PanelFieldEditor.module.css.map */

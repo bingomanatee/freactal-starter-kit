@@ -48,14 +48,18 @@
 
 .wizard-form-panel {
   border: 1px solid rgba(0, 0, 0, 0.25);
-  padding: 0.5rem 1rem;
-  padding-bottom: 1.5rem;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
   border-radius: 0.5rem;
   margin: 1rem 0; }
   @media screen and (min-width: 1025px) {
     .wizard-form-panel {
-      padding: 0.75rem 1.5rem;
-      padding-bottom: 3rem; } }
+      padding-top: 0.75rem;
+      padding-right: 1.5rem;
+      padding-left: 1.5rem;
+      padding-bottom: 1.5rem; } }
 
 .wizard-form-panel__title {
   margin: 0;

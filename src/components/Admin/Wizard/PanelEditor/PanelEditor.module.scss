@@ -5,6 +5,7 @@ $PanelEditorMedium: $ResponsiveSizeMedium;
 $PanelEditorBig: $ResponsiveSizeBig;
 
 .PanelEditor {
+  position: relative;
   // tiny
   @media screen and (max-width: $PanelEditorSmall) {
   }
@@ -22,56 +23,16 @@ $PanelEditorBig: $ResponsiveSizeBig;
   }
 }
 
-.PanelEditor-head {
-  // tiny
-  @media screen and (max-width: $PanelEditorSmall) {
-  }
-
-  // small
-  @media screen and (min-width: $PanelEditorSmall) and(max-width: ($PanelEditorMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $PanelEditorMedium) and(max-width: ($PanelEditorBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $PanelEditorBig) {
-  }
+.PanelEditor-nav-button-up {
+  position: absolute !important;
+  top: 5px;
+  right: 0;
 }
-
-.PanelEditor-body {
-  // tiny
-  @media screen and (max-width: $PanelEditorSmall) {
-  }
-
-  // small
-  @media screen and (min-width: $PanelEditorSmall) and(max-width: ($PanelEditorMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $PanelEditorMedium) and(max-width: ($PanelEditorBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $PanelEditorBig) {
-  }
+.PanelEditor-nav-button-down {
+  position: absolute !important;
+   bottom: 5px;
+  right: 0;
 }
-
-.PanelEditor-button {
-  // tiny
-  @media screen and (max-width: $PanelEditorSmall) {
-  }
-
-  // small
-  @media screen and (min-width: $PanelEditorSmall) and(max-width: ($PanelEditorMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $PanelEditorMedium) and(max-width: ($PanelEditorBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $PanelEditorBig) {
-  }
+.PanelEditor-fields-list {
+  overflow-x: visible !important;
 }

@@ -5,10 +5,4 @@ import { withRouter } from 'react-router-dom';
 import WizardView from './Wizard.view.jsx';
 import wizardState from './Wizard.state';
 
-export default withRouter(wizardState(injectState(class Wizard extends Component {
-  render() {
-    return (
-      <WizardView />
-    );
-  }
-})));
+export default withRouter(wizardState(injectState(WizardView)));

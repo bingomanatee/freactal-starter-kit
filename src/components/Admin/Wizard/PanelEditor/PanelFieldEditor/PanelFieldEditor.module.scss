@@ -1,0 +1,12 @@
+@import '../../../../css/shared';
+
+$PanelFieldEditorSmall: $ResponsiveSizeSmall;
+$PanelFieldEditorMedium: $ResponsiveSizeMedium;
+$PanelFieldEditorBig: $ResponsiveSizeBig;
+
+.PanelFieldEditor {
+}
+
+.PanelFieldEditor-row {
+  overflow: visible;
+}
