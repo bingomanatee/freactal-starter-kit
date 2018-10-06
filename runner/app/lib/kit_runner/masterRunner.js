@@ -57,6 +57,10 @@ module.exports = (kitBottle) => {
             this.emit('stopped UI');
             break;
 
+          case 'alive?':
+            this.messageToWorker('Alive!');
+            break;
+
           default:
             console.log('unresponded message: ', message);
         }

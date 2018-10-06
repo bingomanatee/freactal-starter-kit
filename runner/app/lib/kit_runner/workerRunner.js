@@ -29,6 +29,34 @@ module.exports = (kitBottle) => {
         process.on('message', (...args) => {
           self.messageFromMaster(...args);
         });
+        setTimeout(() => this.startHeartbeat(), 5000);
+      }
+
+      startHeartBeat() {
+        if (this.heartBeatTO) return;
+
+        this.heartBeatTO = setInterval(() => {
+          if (this.isStale) {
+            this.stopHeartBeat();
+            process.kill('SIGTERM');
+          } else {
+            this.sendHeartBeat();
+          }
+        }, 10000);
+      }
+
+      get isStale() {
+        return (this.lastAlive && Date.now() - this.lastAlive > 20000);
+      }
+
+      sendHeartBeat() {
+        this.messageToMaster('alive?');
+      }
+
+      stopHeartBeat() {
+        if (this.heartBeatTO) {
+          clearInterval(this.heartBeatTO);
+        }
       }
 
       workerStartApp() {
@@ -58,10 +86,15 @@ module.exports = (kitBottle) => {
         switch (msg) {
           case 'start':
             this.workerStartApp(args);
+            this.startHeartbeat();
             break;
 
           case 'stop':
             this.workerStopApp(args);
+            break;
+
+          case 'alive!':
+            this.lastAlive = Date.now();
             break;
 
           default:
