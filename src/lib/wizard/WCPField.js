@@ -18,6 +18,10 @@ class WCPField {
     }
     return -1;
   }
+
+  delete() {
+    this.panel.fields = this.panel.fields.filter(f => f !== this);
+  }
 }
 
 const wPropper = cp(WCPField);

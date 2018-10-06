@@ -27,6 +27,8 @@ $md-body-1-line-height: 125%;
 $md-body-2-line-height: 125%;
 $md-font-icon-include-dense: false;
 
+$md-data-table-header-font-size: $md-font-size-base * 0.8 + 0px;
+
 @include react-md-everything;
 
 html, body, #root {

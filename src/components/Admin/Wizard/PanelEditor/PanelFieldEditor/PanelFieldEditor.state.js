@@ -27,5 +27,11 @@ panelFieldEditorState.addStateSideEffect('saveFieldEdit', (effects, state, field
   effects.setEditingFieldID(0);
   effects.refreshWizard();
 });
+panelFieldEditorState.addStateSideEffect('deletePanelField', (effects, state, field) => {
+  effects.setEditingFieldID(0);
+  field.delete();
+  effects.refreshWizard();
+  effects.refreshFields();
+});
 
 export default provideState(panelFieldEditorState.toHash());

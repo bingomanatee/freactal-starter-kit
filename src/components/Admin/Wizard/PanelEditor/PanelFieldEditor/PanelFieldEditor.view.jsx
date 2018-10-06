@@ -30,7 +30,7 @@ export default injectState(({
   },
   effects: {
     saveFieldEdit, editPanelField, cancelFieldEdit,
-    setPanelFieldName, setPanelFieldType, addPanelField,
+    setPanelFieldName, setPanelFieldType, deletePanelField,
   },
 }) => (panelField.id === editingFieldID ? (
   <TableRow>
@@ -53,26 +53,35 @@ export default injectState(({
       menuItems={TYPES}
     />
     </TableColumn>
-    <TableColumn style={small}><Button
-      primary
-      flat
-      onClick={() => saveFieldEdit(panelField)}
-    >Save
-    </Button>
+    <TableColumn style={small}>
+      <Button
+        primary
+        flat
+        onClick={() => saveFieldEdit(panelField)}
+      >Save
+      </Button>
       <Button secondary flat onClick={() => cancelFieldEdit(panelField)}>Cancel</Button>
     </TableColumn>
   </TableRow>
 ) : (
   <TableRow>
-    <TableColumn>({panelField.id}) {panelField.name}</TableColumn>
+    <TableColumn>{panelField.name}</TableColumn>
     <TableColumn>{panelField.type}</TableColumn>
-    <TableColumn style={small}><Button
-      primary
-      flat
-      disabled={!!editingFieldID}
-      onClick={() => editPanelField(panelField)}
-    >Edit
-    </Button>
+    <TableColumn style={small}>
+      <Button
+        primary
+        flat
+        disabled={!!editingFieldID}
+        onClick={() => editPanelField(panelField)}
+      >Edit
+      </Button>
+      <Button
+        primary
+        flat
+        disabled={!!editingFieldID}
+        onClick={() => deletePanelField(panelField)}
+      >Delete
+      </Button>
     </TableColumn>
   </TableRow>
 )));

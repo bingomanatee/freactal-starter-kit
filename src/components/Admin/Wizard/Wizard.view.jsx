@@ -12,10 +12,10 @@ export default injectState(({ state, effects }) => (
     </p>
 
     <div className={styles['wizard-form']}>
-      <div className={styles['wizard-form-panel']}>
+      <div className={'md-paper--3 ' + styles['wizard-form-panel']}>
         <h2 className={styles['wizard-form-panel__title']}>Global Values</h2>
         <Grid>
-          <Cell size={6} tableSize={4}>
+          <Cell size={6} tabletSize={4}>
             <TextField
               id="wizard-title"
               label="Title of Wizard"
@@ -23,7 +23,7 @@ export default injectState(({ state, effects }) => (
               onChange={effects.setTitle}
             />
           </Cell>
-          <Cell size={5} tableSize={4}>
+          <Cell size={5} tabletSize={4}>
             <TextField
               id="wizard-name"
               label="Filename of wizard"
@@ -34,7 +34,7 @@ export default injectState(({ state, effects }) => (
         </Grid>
       </div>
 
-      <div className={styles['wizard-form-panel']}>
+      <div className={'md-paper--3 ' + styles['wizard-form-panel']}>
         <h2 className={styles['wizard-form-panel__title']}>Panels</h2>
         {state.panels.map(panel => <PanelEditor key={`panel_${panel.id}`} panel={panel} />)}
       </div>

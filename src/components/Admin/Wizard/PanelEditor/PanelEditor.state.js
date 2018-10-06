@@ -9,6 +9,10 @@ panelEditorState.addBoolPropAndEffects('editingPanel', false);
 panelEditorState.addStringAndSetEffect('panelTitle', '');
 panelEditorState.addArrayPropAndSetEffects('panelFields', []);
 panelEditorState.addObjectAndSetEffect('panel', {});
+panelEditorState.addStateSideEffect('refreshFields', ({ setPanelFields }, { panel }) => {
+  setPanelFields(panel.fields);
+});
+
 panelEditorState.addStateSideEffect(
   'saveEditPanel',
   ({ setPanel, editingPanelOff }, { panel, panelTitle }) => {

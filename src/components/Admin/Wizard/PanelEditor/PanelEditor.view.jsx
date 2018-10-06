@@ -30,8 +30,8 @@ export default injectState(({
     } = effects;
   return (
     <div className={styles.PanelEditor}>
-      <h3 className={styles['PanelEditor-head']}>{panel.order + 1}: Wizard
-        panel &quot;{panel.title}&quot; (id = {panel.id}) (efid = {editingFieldID}) ({panelFields.length} fields)
+      <h3 className={styles['PanelEditor-head']}> Wizard
+        panel &quot;{panel.title}&quot;
       </h3>
       {editingPanel && <div>
         <TextField
@@ -41,18 +41,6 @@ export default injectState(({
           onChange={setPanelTitle}
         />
       </div>}
-      {(panel && panel.fields) && (<DataTable plain className={styles['PanelEditor-fields-list']}>
-        <TableHeader>
-          <TableRow>
-            <TableColumn>Field</TableColumn>
-            <TableColumn style={({ width: '9rem' })}>DataType</TableColumn>
-            <TableColumn>&nbsp;</TableColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {panelFields.map(field => <PanelField key={`${field.id}_field`} field={field} />)}
-        </TableBody>
-      </DataTable>)}
       <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
         <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
           {(!editingPanel) && <Button primary flat onClick={editingPanelOn}>Edit</Button>}
@@ -87,34 +75,44 @@ export default injectState(({
           </Button>
         </div>
       </div>
-      <Button
+      {(panel && panel.fields) && (<DataTable plain className={styles['PanelEditor-fields-list']}>
+        <TableHeader>
+          <TableRow>
+            <TableColumn>Field</TableColumn>
+            <TableColumn style={({ width: '9rem' })}>DataType</TableColumn>
+            <TableColumn>&nbsp;</TableColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {panelFields.map(field => <PanelField key={`${field.id}_field`} field={field} />)}
+        </TableBody>
+      </DataTable>)}
+      {(!panel.isFirst) && <Button
         className={styles['PanelEditor-nav-button-up']}
         floating
         secondary
         swapTheming
         mini
-        disabled={panel.isFirst}
         onClick={() => movePanelUp(panel, wizardController)}
       ><FontIcon
         iconClassName="fa fa-angle-up"
         secondary
         style={arrowStyle}
       />
-      </Button>
-      <Button
+      </Button>}
+      {(!panel.isLast) && <Button
         className={styles['PanelEditor-nav-button-down']}
         floating
         secondary
         swapTheming
         mini
         onClick={() => movePanelDown(panel, wizardController)}
-        disabled={panel.isLast}
       ><FontIcon
         iconClassName="fa fa-angle-down"
         secondary
         style={arrowStyle}
       />
-      </Button>
+      </Button>}
     </div>
   );
 });

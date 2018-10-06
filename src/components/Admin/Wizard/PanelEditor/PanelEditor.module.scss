@@ -5,9 +5,20 @@ $PanelEditorMedium: $ResponsiveSizeMedium;
 $PanelEditorBig: $ResponsiveSizeBig;
 
 .PanelEditor {
+  border: 1px solid rgba(0,0,0,0.25);
+  padding-top: 0.5rem;
+  padding-right: 5rem;
+  padding-left: 1rem;
+  padding-bottom: 0.75rem;
   position: relative;
+  margin-bottom: 1.25rem;
   // tiny
   @media screen and (max-width: $PanelEditorSmall) {
+    padding-top: 0.75rem;
+    padding-right: 5rem;
+    padding-left: 0.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
   }
 
   // small
@@ -25,14 +36,20 @@ $PanelEditorBig: $ResponsiveSizeBig;
 
 .PanelEditor-nav-button-up {
   position: absolute !important;
-  top: 5px;
-  right: 0;
+  top: 15px;
+  right: 1rem;
 }
 .PanelEditor-nav-button-down {
   position: absolute !important;
-   bottom: 5px;
-  right: 0;
+   bottom: 15px;
+  right: 1rem;
 }
 .PanelEditor-fields-list {
   overflow-x: visible !important;
+}
+
+.PanelEditor-head {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
 }

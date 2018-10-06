@@ -1431,7 +1431,7 @@ tbody .md-table-row {
   .md-table-column--adjusted {
     padding-right: 56px; }
   .md-table-column--header {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     height: 56px; }
     .md-table-column--header .md-icon {
@@ -1474,7 +1474,7 @@ tbody .md-table-row {
 .md-edit-dialog__header {
   font-weight: 500; }
   .md-edit-dialog__header.md-text-field {
-    font-size: 12px; }
+    font-size: 16px; }
 .md-edit-dialog__blocked-field {
   height: 47px;
   width: 250px; }
