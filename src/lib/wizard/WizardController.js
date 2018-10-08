@@ -52,6 +52,7 @@ class WizardController extends EventEmitter {
   toJSON() {
     return {
       title: this.title,
+      fileName: this.fileName,
       panels: this.panels.map(panel => panel.toJSON()),
     };
   }
@@ -71,7 +72,7 @@ propper.addProp('panels', {
     }
   },
 })
-  .addString('filePath', {
+  .addString('fileName', {
     required: true,
   })
   .addString('title', {

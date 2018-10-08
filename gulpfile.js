@@ -35,14 +35,14 @@ gulp.task('comp', () => {
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
 
-
 gulp.task('wizard', () => {
   const { name, where, title } = minimist(process.argv.slice(2));
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
   const cWhere = ensureEndingBackslash(where || 'components');
-
+  console.log('executing wizard ', cName, 'where:', cWhere, 'title: ', title);
   containerNameValidator.try(name);
+  containerNameValidator.try(cName);
   const source = template('wizard');
   gulp.src(source)
     .pipe(rename((file) => {

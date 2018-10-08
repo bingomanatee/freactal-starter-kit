@@ -141,6 +141,11 @@ or go to `localhost:7777/api/stop`.
 
 This will gracefully close out of all the processes the runner creates.
 
+## If termination goes wrong
+
+The Admin UI is still in a very raw state. Keep you eye out for stray node processes;
+you may end up having to kill some of them manually.
+
 ## Roadmap
 
 Some  of the things I want to do when this is all stable is:

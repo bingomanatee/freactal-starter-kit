@@ -13,23 +13,28 @@ wizardState.addObjectAndSetEffect('wizardController', controller);
 wizardState.addArrayPropAndSetEffects('panels', [firstPanel]);
 wizardState.addArrayPropAndSetEffects('wizardMessages', []);
 wizardState.addStringAndSetEffect('wizardComponentName', 'NewWizard');
-wizardState.addStringAndSetEffect('title', 'New Wizard');
-wizardState.addStringAndSetEffect('wizardFileName', 'NewWizard');
-wizardState.addIntAndSetEffect('editingFieldID', 0);
-wizardState.addStateSideEffect(({ refreshWizard }, { wizardController, title, wizardFileName }) => {
-  wizardController.title = title;
+wizardState.addStateString('title', 'New Wizard');
+wizardState.addStateString('wizardFileName', 'NewWizard');
+wizardState.addEffect('setWizardFileName', (effects, wizardFileName) => (state) => {
+  const { wizardController } = state;
   wizardController.fileName = wizardFileName;
-  refreshWizard();
+  return Object.assign({}, state, { wizardFileName, wizardController });
 });
+wizardState.addEffect('setTitle', (effects, title) => (state) => {
+  const { wizardController } = state;
+  wizardController.title = title;
+  return Object.assign({}, state, { title, wizardController });
+});
+wizardState.addIntAndSetEffect('editingFieldID', 0);
 
 wizardState.addBoolPropAndEffects('wizardSaved', false);
-wizardState.addSideEffect('dismissWizardMessages', ({ pushToWizardMessages }) => {
+wizardState.addSideEffect('dismissWizardMessages', ({ unshiftToWizardMessages }) => {
   console.log('dismissing');
-  pushToWizardMessages('');
+  unshiftToWizardMessages('');
 });
 wizardState.addStateSideEffect('refreshWizard', ({ setWizardController, setPanels }, { wizardController }) => {
   setWizardController(wizardController);
-  setPanels(wizardController.panels);
+  setPanels(wizardController.panels.slice(0));
 });
 
 wizardState.addStateSideEffect('addPanel', ({ setPanels }, { wizardController }, order) => {
@@ -38,11 +43,11 @@ wizardState.addStateSideEffect('addPanel', ({ setPanels }, { wizardController },
 });
 
 wizardState.addStateSideEffect('saveWizard', (
-  { wizardSavedOn, pushToWizardMessages },
+  { wizardSavedOn, unshiftToWizardMessages },
   { wizardController },
 ) => {
   lib.axios.post(`${lib.ADMIN_API_URL}/api/wizard-maker`, wizardController.toJSON());
   wizardSavedOn();
-  pushToWizardMessages({ text: 'Wizard Saved', action: '' });
+  unshiftToWizardMessages({ text: 'Wizard Saved', action: '' });
 });
 export default provideState(wizardState.toHash());

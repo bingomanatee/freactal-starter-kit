@@ -16,7 +16,6 @@ const requestId = require('./middlewares/requestId');
 const responseHandler = require('./middlewares/responseHandler');
 const router = require('./routes');
 
-
 const app = new Koa();
 
 // Trust proxy
@@ -45,7 +44,7 @@ app.use(koaStatic(`${__dirname}/public`));
 
 function onError(err, ctx) {
   if (apm.active) { apm.captureError(err); }
-  if (ctx == null) { logger.error({ err, event: 'error' }, 'Unhandled exception occured'); }
+  if (ctx == null) { logger.error({ err, event: 'error' }, 'Unhandled exception occurred'); }
 }
 
 // Handle uncaught errors
