@@ -29,7 +29,7 @@ module.exports = (kitBottle) => {
         process.on('message', (...args) => {
           self.messageFromMaster(...args);
         });
-        setTimeout(() => this.startHeartbeat(), 5000);
+        setTimeout(() => this.startHeartBeat(), 5000);
       }
 
       startHeartBeat() {
@@ -56,10 +56,11 @@ module.exports = (kitBottle) => {
       stopHeartBeat() {
         if (this.heartBeatTO) {
           clearInterval(this.heartBeatTO);
+          this.heartBeatTO = null;
         }
       }
 
-      workerStartApp() {
+      startUI() {
         log('starting yarn in ', ROOT);
         this.appProcess = child_process.spawn('yarn', ['start'], {
           env: Object.assign({}, process.env, { ADMIN_MODE: 1 }),
@@ -69,12 +70,23 @@ module.exports = (kitBottle) => {
         this.messageToMaster('started UI');
       }
 
-      workerStopApp() {
+      stopUI() {
         if (this.appProcess) {
+          this.appProcess.on('exit', () => {
+            this.messageToMaster(('stopped UI'));
+            this.appProcess = null;
+          });
           this.appProcess.kill('SIGTERM');
         }
-        this.appProcess = null;
-        this.messageToMaster(('stopped UI'));
+      }
+
+      stopWorker() {
+        this.stopHeartBeat();
+        this.appProcess.on('exit', () => {
+          this.messageToMaster('terminated');
+          process.nextTick(() => process.disconnect());
+        });
+        this.stopUI();
       }
 
       messageFromMaster(message) {
@@ -85,16 +97,24 @@ module.exports = (kitBottle) => {
         log('message from master:', message, args);
         switch (msg) {
           case 'start':
-            this.workerStartApp(args);
-            this.startHeartbeat();
+            this.startUI(args);
+            this.startHeartBeat();
             break;
 
-          case 'stop':
-            this.workerStopApp(args);
+          case 'stop UI':
+            this.stopUI(args);
+            break;
+
+          case 'start UI':
+            this.startUI(args);
             break;
 
           case 'alive!':
             this.lastAlive = Date.now();
+            break;
+
+          case 'terminate':
+            this.stopWorker();
             break;
 
           default:

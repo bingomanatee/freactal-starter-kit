@@ -33,20 +33,32 @@ module.exports = (kitBottle) => {
       }
 
       askWorkerToLaunchWebAop() {
-        this.messageToWorker('start');
+        if (!this.worker) this.createWorker();
+        else { this.messageToWorker('start'); }
       }
 
       askWorkerToStopWebAop() {
-        this.messageToWorker('stop');
+        this.messageToWorker('terminate');
+      }
+
+      askWorkerToStopUI() {
+        this.messageToWorker('stop UI');
+      }
+
+      askWorkerToStartUI() {
+        this.createWorker();
       }
 
       messageToWorker(...args) {
+        if (!this.worker) {
+          return log('master: cannot send message - no worker', ...args);
+        }
         log('master: sending ', args);
         this.worker.send(...args);
       }
 
       messageFromWorker(message) {
-        log('master: recieved ', message, 'from worker');
+        log('master: received ', message, 'from worker');
 
         switch (message) {
           case 'KitRunnerWorker created':
@@ -54,15 +66,30 @@ module.exports = (kitBottle) => {
             break;
 
           case 'stopped UI':
+            console.log('stopped child UI process');
             this.emit('stopped UI');
+            this.worker.kill('SIGTERM');
+            this.worker = null;
+            break;
+
+          case 'terminated':
+            console.log('stopped worker');
+            this.worker.kill('SIGTERM');
+            this.worker.on('exit', () => {
+              this.emit('worker terminated');
+            });
             break;
 
           case 'alive?':
-            this.messageToWorker('Alive!');
+            this.messageToWorker('alive!');
+            break;
+
+          case 'terminate':
+            console.log('worker terminated');
             break;
 
           default:
-            console.log('unresponded message: ', message);
+            console.log('master: unresponded message from worker: ', message);
         }
       }
     }

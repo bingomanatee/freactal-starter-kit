@@ -6,13 +6,14 @@ import {
   TableBody,
   TableRow,
   TableColumn,
+  Grid,
+  Cell,
 } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './PanelEditor.module.css';
 import PanelField from './PanelFieldEditor';
 
-const arrowStyle = {
-};
+const arrowStyle = {};
 
 // eslint-disable-next-line no-unused-vars
 export default injectState(({
@@ -20,13 +21,12 @@ export default injectState(({
   state,
 }) => {
   const {
-    panel, editingPanel, wizardController, panelTitle, editingFieldID, panelFields,
+    panel, editingPanel, wizardController, panelTitle, editingFieldID, panelFields, panelFileName,
   } = state;
   const
     {
-      editingPanelOn, setPanelTitle, saveEditPanel,
-      addPanel, cancelEditPanel, addField,
-      movePanelUp, movePanelDown, deletePanel, addPanelField,
+      setPanelTitle, saveEditPanel, setPanelFileName, addPanel,
+      movePanelUp, movePanelDown, deletePanel, addPanelField, editingPanelOn,
     } = effects;
   return (
     <div className={styles.PanelEditor}>
@@ -34,13 +34,37 @@ export default injectState(({
         panel &quot;{panel.title}&quot;
       </h3>
       {editingPanel && <div>
-        <TextField
-          id={`state.panel-title-${panel.order}`}
-          label="Title of state.panel"
-          value={panelTitle}
-          onChange={setPanelTitle}
-        />
+        <Grid>
+          <Cell size={6} tabletSize={4}>
+            <TextField
+              id={`state.panel-title-${panel.order}`}
+              label="Title of state.panel"
+              value={panelTitle}
+              onChange={setPanelTitle}
+            />
+          </Cell>
+          <Cell size={5} tabletSize={4}>
+            <TextField
+              id="wizard-name"
+              label="Filename of panel"
+              value={panelFileName}
+              onChange={setPanelFileName}
+            />
+          </Cell>
+        </Grid>
       </div>}
+      {(panel && panel.fields) && (<DataTable plain className={styles['PanelEditor-fields-list']}>
+        <TableHeader>
+          <TableRow>
+            <TableColumn>Field</TableColumn>
+            <TableColumn style={({ width: '9rem' })}>DataType</TableColumn>
+            <TableColumn>&nbsp;</TableColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {panelFields.map(field => <PanelField key={`${field.id}_field`} field={field} />)}
+        </TableBody>
+      </DataTable>)}
       <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
         <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
           {(!editingPanel) && <Button primary flat onClick={editingPanelOn}>Edit</Button>}
@@ -75,18 +99,6 @@ export default injectState(({
           </Button>
         </div>
       </div>
-      {(panel && panel.fields) && (<DataTable plain className={styles['PanelEditor-fields-list']}>
-        <TableHeader>
-          <TableRow>
-            <TableColumn>Field</TableColumn>
-            <TableColumn style={({ width: '9rem' })}>DataType</TableColumn>
-            <TableColumn>&nbsp;</TableColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {panelFields.map(field => <PanelField key={`${field.id}_field`} field={field} />)}
-        </TableBody>
-      </DataTable>)}
       {(!panel.isFirst) && <Button
         className={styles['PanelEditor-nav-button-up']}
         floating

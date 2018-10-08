@@ -88,6 +88,13 @@ class WizardControllerPanel extends EventEmitter {
   delete() {
     this.controller.panels = this.controller.panels.filter(a => a !== this);
   }
+
+  toJSON() {
+    return {
+      title: this.title,
+      fileName: this.fileName,
+    };
+  }
 }
 
 
@@ -98,13 +105,15 @@ const propper = cp(WizardControllerPanel);
 propper.addString('title', {
   required: true,
 })
+  .addString('fileName', {
+    required: true,
+  })
   .addProp('controller', {
     failsWhen: 'object',
   })
   .addProp('fields', {
     failsWhen: 'array',
     defaultValue: () => ([]),
-  })
-  .addProp('children', {});
+  });
 
 export default WizardControllerPanel;

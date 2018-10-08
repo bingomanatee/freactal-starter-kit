@@ -5,9 +5,19 @@
         fetch(new Request('runner/reload'));
         event.preventDefault();
       }
+      function reloadWindow(event) {
+        document.location.reload();
+        event.preventDefault();
+      }
       function stop(event) {
         fetch(new Request('runner/stop'));
         event.preventDefault();
+        document.getElementById('start-button').disabled = true;
+        document.getElementById('stop-message').innerHTML = '<hr />' +
+          '<h2 style="color: red">YOUR ADMIN SERVER IS TERMINATED.</h2>' +
+          '<p>None of these buttons will work unless you re-launch the runner process.</p>' +
+          '<p>This window will no longer work until you restart your runner from the command line' +
+          ' and press this button: <button type="button" onClick="reloadWindow(event)">Reload Admin UI</button> </p>'
       }
     </script>
 </head>
@@ -27,11 +37,13 @@
 </article>
 
 <nav>
-    <button type="button" onClick="restart()">Start or Restart UI App</button>
+    <button id="start-button" type="button" onClick="restart(event)">Start or Restart UI App</button>
     |
-    <button type="button" onClick="stop()">Stop</button>
+    <button id="stop-button" type="button" onClick="stop(event)">Stop</button>
     |
-    <a href="http://localhost:5000" target="webapp">View UI</a>
+    <a href="http://localhost:5000" target="webapp"><b>View Local React Application</b></a>
 </nav>
+
+<p id="stop-message"></p>
 </body>
 </html>

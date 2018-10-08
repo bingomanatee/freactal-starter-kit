@@ -1,0 +1,105 @@
+@import '../../src/components/css/shared';
+
+$ComponentNameSmall: $ResponsiveSizeSmall;
+$ComponentNameMedium: $ResponsiveSizeMedium;
+$ComponentNameBig: $ResponsiveSizeBig;
+
+.ComponentName {
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
+
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameBig) {
+  }
+}
+
+.ComponentName-head {
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameBig) {
+  }
+}
+
+.ComponentName-body {
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameBig) {
+  }
+}
+
+.ComponentName-button {
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameBig) {
+  }
+}
+
+@mixin vertCentered {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ComponentName-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $ComponentNameBig;
+  height: 3rem;
+}
+
+.ComponentName-dialog__main {
+  @include vertCentered;
+  flex-grow: 1;
+}
+
+.ComponentName-dialog__button {
+  @include vertCentered;
+  flex-grow: 0;
+  flex-shrink: 0;
+}

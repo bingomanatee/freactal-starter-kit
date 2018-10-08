@@ -12,15 +12,15 @@ function main() {
   process.emit('message', 'start');
   setTimeout(() => {
     console.log('killing appProcess', kitRunnerWorker.appProcess.pid);
-    kitRunnerWorker.workerStopApp();
+    kitRunnerWorker.stopWorker();
     console.log('process closed');
     setTimeout(() => {
       console.log('starting app again');
-      kitRunnerWorker.workerStartApp();
+      kitRunnerWorker.startUI();
       setTimeout(() => {
         console.log('killing appProcess');
         console.log(kitRunnerWorker.appProcess.pid);
-        kitRunnerWorker.workerStopApp();
+        kitRunnerWorker.stopWorker();
       }, 1000 * 10);
     }, 1000 * 4);
   }, 1000 * 20);

@@ -7,6 +7,7 @@ const panelEditorState = new Seed();
 
 panelEditorState.addBoolPropAndEffects('editingPanel', false);
 panelEditorState.addStringAndSetEffect('panelTitle', '');
+panelEditorState.addStringAndSetEffect('panelFileName', '');
 panelEditorState.addArrayPropAndSetEffects('panelFields', []);
 panelEditorState.addObjectAndSetEffect('panel', {});
 panelEditorState.addStateSideEffect('refreshFields', ({ setPanelFields }, { panel }) => {

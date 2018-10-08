@@ -34,3 +34,24 @@ gulp.task('comp', () => {
       .replace('../../src/components/css/shared', '../css/shared')))
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
+
+
+gulp.task('wizard', () => {
+  const { name, where, title } = minimist(process.argv.slice(2));
+  const cName = _.upperFirst(name);
+  const lcName = _.lowerFirst(name);
+  const cWhere = ensureEndingBackslash(where || 'components');
+
+  containerNameValidator.try(name);
+  const source = template('wizard');
+  gulp.src(source)
+    .pipe(rename((file) => {
+      file.basename = file.basename.replace(/^ComponentName/g, `${cName}`);
+      return file;
+    }))
+    .pipe(modify(text => text.replace(/ComponentName/g, cName)
+      .replace(/componentName/g, lcName)
+      .replace(/ComponentTitle/g, title)
+      .replace('../../src/components/css/shared', '../css/shared')))
+    .pipe(gulp.dest(`./src/${cWhere}${cName}`));
+});

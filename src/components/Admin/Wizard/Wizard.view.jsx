@@ -1,4 +1,4 @@
-import { Button, TextField, Grid, Cell } from 'react-md';
+import { Button, TextField, Grid, Cell, Snackbar } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './Wizard.module.css';
 import PanelEditor from './PanelEditor';
@@ -41,9 +41,17 @@ export default injectState(({ state, effects }) => (
 
       <div className={styles['buttons-bar']}>
         <div className={styles['buttons-bar__cell']}>
-          <Button primary raised onClick={effects.createWizard}>Create Wizard</Button>
+          <Button primary raised onClick={effects.saveWizard}>Create Wizard</Button>
         </div>
       </div>
     </div>
+    <p>WizardMessages: {JSON.stringify(state.wizardMessages)}</p>
+    <Snackbar
+      id="wizard-snackbar"
+      toasts={state.wizardMessages}
+      autohide={true}
+      autohideTimeout={4000}
+      onDismiss={effects.dismissWizardMessages}
+    />
   </div>
 ));

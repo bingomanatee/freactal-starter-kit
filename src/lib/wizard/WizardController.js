@@ -48,6 +48,13 @@ class WizardController extends EventEmitter {
   nextPage() {
     this.index = this.index + 1;
   }
+
+  toJSON() {
+    return {
+      title: this.title,
+      panels: this.panels.map(panel => panel.toJSON()),
+    };
+  }
 }
 
 const propper = cp(WizardController);
@@ -64,6 +71,9 @@ propper.addProp('panels', {
     }
   },
 })
+  .addString('filePath', {
+    required: true,
+  })
   .addString('title', {
     required: true,
   })

@@ -58,7 +58,11 @@ module.exports = () => {
       }
 
       askWorkerToLaunchWebAop() {
-        this.messageToWorker('start');
+        if (this.worker) {
+          this.messageToWorker('start');
+        } else {
+          this.createWorker();
+        }
       }
 
       askWorkerToStopWebAop() {
