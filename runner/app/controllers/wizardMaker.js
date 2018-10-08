@@ -1,5 +1,6 @@
 const path = require('path');
 const child_process = require('child_process');
+const pageProvider = require('../lib/models/pageProvider');
 
 const ROOT = __dirname.replace(/.runner.app.*/, '');
 
@@ -16,7 +17,7 @@ exports.make = async (ctx) => {
     where = path.dirname(fileName);
     name = path.basename(fileName);
   }
-
+  ctx.status = 200;
   console.log('creating wizard', name, title, where);
   await (new Promise((resolve, reject) => {
     const props = `wizard,--name=${name},--title="${title}",--where=${where}`.split(',');
@@ -26,7 +27,14 @@ exports.make = async (ctx) => {
     });
     result.on('exit', () => {
       console.log('done with wizard');
-      resolve();
+      ctx.body = { success: true };
+      pageProvider.addPage({
+        component: fileName,
+        name: title,
+        navTitle: title,
+        published: true,
+        route: `wizard/${fileName.replace(/\//g, '-')}`,
+      }).then(resolve);
     });
 
     result.stdout.on('data', (data) => {

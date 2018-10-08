@@ -64,6 +64,14 @@
       "access": {
         "env": "admin"
       }
+    },
+    {
+      "component": "components/NewWizard",
+      "name": "New Wizard",
+      "navTitle": "New Wizard",
+      "published": true,
+      "route": "wizard/components-NewWizard",
+      "id": 6
     }
   ]
 }

@@ -72,6 +72,10 @@ module.exports = (kitBottle) => {
             this.worker = null;
             break;
 
+          case 'started UI':
+            console.log('React UI listening on port 5000');
+            break;
+
           case 'terminated':
             console.log('stopped worker');
             this.worker.kill('SIGTERM');

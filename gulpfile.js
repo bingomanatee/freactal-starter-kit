@@ -36,7 +36,8 @@ gulp.task('comp', () => {
 });
 
 gulp.task('wizard', () => {
-  const { name, where, title } = minimist(process.argv.slice(2));
+  let { name, where, title } = minimist(process.argv.slice(2));
+  title = title.replace(/"/g, '');
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
   const cWhere = ensureEndingBackslash(where || 'components');
@@ -44,6 +45,7 @@ gulp.task('wizard', () => {
   containerNameValidator.try(name);
   containerNameValidator.try(cName);
   const source = template('wizard');
+  const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
   gulp.src(source)
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/g, `${cName}`);
@@ -52,6 +54,10 @@ gulp.task('wizard', () => {
     .pipe(modify(text => text.replace(/ComponentName/g, cName)
       .replace(/componentName/g, lcName)
       .replace(/ComponentTitle/g, title)
-      .replace('../../src/components/css/shared', '../css/shared')))
+      .replace('./../../src/', `${ROOT_BACK}`)))
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
+
+gulp.task('mapComponents', () => {
+
+})

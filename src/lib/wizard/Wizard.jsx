@@ -15,8 +15,8 @@ function getChildren(props) {
 export default class Wizard extends Component {
   constructor(props) {
     super(props);
-    const { title, footer } = props;
-    const wizard = new WizardController(title);
+    const { title, footer, controller } = props;
+    const wizard = controller || new WizardController(title);
     const children = getChildren(props);
 
     children.forEach((child) => {

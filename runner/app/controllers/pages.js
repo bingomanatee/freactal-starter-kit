@@ -1,8 +1,8 @@
-const fs = require('fs');
+const pageProvider = require('../lib/models/pageProvider');
 
-const ROOT = __dirname.replace(/.runner.app.*/, '');
 exports.all = async (ctx) => {
-  const file = await fs.promises.readFile(`${ROOT}/src/lib/models/content/pageList.json`);
-  ctx.body = file.toString();
+  const file = await pageProvider.getPages();
+  console.log('file: ', file);
+  ctx.body = file;
   ctx.type = 'json';
 };

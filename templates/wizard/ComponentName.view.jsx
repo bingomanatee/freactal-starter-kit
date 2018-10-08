@@ -1,19 +1,24 @@
 import { Button } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './ComponentName.module.css';
+import lib from './../../src/lib';
+
+const { WizardComponent: Wizard } = lib;
 
 // eslint-disable-next-line no-unused-vars
-export default injectState(({ state, effects }) => (
-  <div className={styles.ComponentName}>
-    <h2 className={styles['ComponentName-head']}>ComponentTitle Wizard!</h2>
-    <div className={styles['ComponentName-dialog']}>
-      <div className={styles['ComponentName-dialog__main']}>
-        <p className={styles['ComponentName-body']}>ComponentName body: Count = {state.componentNameCount}
-        </p>
-      </div>
-      <div className={styles['ComponentName-dialog__button']}>
-        <Button primary raised onClick={effects.incComponentNameCount}>Increment</Button>
-      </div>
+export default injectState(({ state, effects }) => {
+  if (!state.componentNameWizardController) return '';
+  return (
+    <div className={styles.ComponentName}>
+      <h1>ComponentTitle</h1>
+      <Wizard controller={state.componentNameWizardController}>
+        <div>
+          First Panel
+        </div>
+        <div>
+          Second Panel
+        </div>
+      </Wizard>
     </div>
-  </div>
-));
+  );
+});
