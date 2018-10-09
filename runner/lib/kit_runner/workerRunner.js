@@ -1,5 +1,6 @@
 /* eslint-disable prefer-arrow-callback,camelcase */
 const { easyPropper } = require('class-propper');
+const util = require('util');
 
 module.exports = (kitBottle) => {
   kitBottle.factory('KitRunnerWorker', ({
@@ -68,7 +69,6 @@ module.exports = (kitBottle) => {
       }
 
       startUI() {
-        log('starting yarn in ', ROOT);
         if (this.appProcess) return;
         this.appProcess = child_process.spawn('yarn', ['start'], {
           env: Object.assign({}, process.env, { ADMIN_MODE: 1 }),
@@ -162,7 +162,10 @@ module.exports = (kitBottle) => {
       .addProp('appProcess', {
         onChange(appProcess, old) {
           if (appProcess) {
-            // @TODO: clear old
+            if (old) {
+              old.exit();
+            }
+
             appProcess.stdout.on('data', (message) => {
               message.toString().split('\n').forEach(message => log('app stdout:', message));
             });

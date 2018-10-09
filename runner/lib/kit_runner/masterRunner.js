@@ -8,6 +8,7 @@ module.exports = (kitBottle) => {
     STATE_WORKER_LISTENING,
     cluster,
     EventEmitter,
+    process,
     log,
   }) => {
     class KitRunnerMaster extends EventEmitter {
@@ -19,13 +20,11 @@ module.exports = (kitBottle) => {
       }
 
       createWorker() {
-        log('creating worker');
         this.state = STATE_WORKER_CREATED;
         const self = this;
         this.worker = cluster.fork();
         this.worker
           .on('message', (message) => {
-            log('master:worker message: ', message);
             self.messageFromWorker(message);
           })
           .on('error', (message) => {
@@ -52,14 +51,14 @@ module.exports = (kitBottle) => {
 
       messageToWorker(...args) {
         if (!this.worker) {
-          return log('master: cannot send message - no worker', ...args);
+          log('master: cannot send message - no worker', ...args);
+          return;
         }
-        log('master: sending ', args);
         this.worker.send(...args);
       }
 
       messageFromWorker(message) {
-        if (message !== 'alive?') { log('master: received ', message, 'from worker'); }
+        if (message !== 'alive?') { log('::::::::: master: received ', message, 'from worker'); }
 
         switch (message) {
           case 'KitRunnerWorker created':
