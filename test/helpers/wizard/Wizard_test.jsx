@@ -1,6 +1,6 @@
 import { mount, shallow } from '../../enzyme';
 
-import Wizard from '../../../src/lib/wizard/Wizard';
+import Wizard from '../../../src/helpers/wizard/Wizard';
 
 describe('wizard', () => {
   describe('Wizard', () => {

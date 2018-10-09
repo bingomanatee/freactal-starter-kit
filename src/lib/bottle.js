@@ -26,5 +26,6 @@ export default (getBottle = false) => {
   state(bottle);
   model(bottle);
   wizard(bottle);
+
   return getBottle ? bottle : bottle.container;
 };

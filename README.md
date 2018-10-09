@@ -62,7 +62,7 @@ This will spawn a component with:
 React Router is available; working on a Gulp task to create a route.
 The Dom version is included in the root index file.
 The Route switch is in content, but as the guide outlines,
-you can have sub-switches in other pages in your app as well.
+you can have sub-switches in other panels in your app as well.
 
 https://reacttraining.com/react-router/core/guides/philosophy
 

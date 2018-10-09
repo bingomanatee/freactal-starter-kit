@@ -169,7 +169,6 @@ ECHO --------------( end${msg})---------------------`);
           expect.assertions(1);
           await delay(100);
           expect(cluster.isMaster).toBeTruthy();
-          echo('should be running in worker context', kitRunner);
         });
 
         it('should create a master runner', async () => {

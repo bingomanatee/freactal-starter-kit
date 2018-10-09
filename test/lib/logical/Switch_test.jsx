@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-indent */
-import Switch, { Case } from '../../../src/lib/logical/Switch';
+import Switch, { Case } from '../../../src/helpers/logical/Switch';
 import { mount } from '../../enzyme';
 
 describe('logical', () => {

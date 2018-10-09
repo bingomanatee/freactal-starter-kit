@@ -1,6 +1,13 @@
-import WizardController from './../../../src/lib/wizard/WizardController';
+import bottle from './../../../src/lib/bottle';
 
 describe('wizard', () => {
+  let WizardController;
+
+  beforeEach(() => {
+    const b = bottle();
+    WizardController = b.WizardController;
+  });
+
   describe('WizardController', () => {
     describe('constructor', () => {
       it('should reflect title', () => {

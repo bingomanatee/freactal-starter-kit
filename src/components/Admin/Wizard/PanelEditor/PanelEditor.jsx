@@ -12,6 +12,8 @@ export default panelEditorState(injectState(class PanelEditor extends Component 
       effects.setPanel(panel);
       effects.setPanelTitle(panel.title);
       effects.setPanelFields(panel.fields);
+      if (!panel.fileName) panel.fileName = `Panel${panel.order + 1}`;
+      effects.setPanelFileName(panel.fileName);
     }
   }
 

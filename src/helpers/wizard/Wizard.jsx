@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import _ from 'lodash';
-import WizardController from './../../lib/wizard/WizardController';
+import lib from './../../lib';
 import Switch, { Case } from '../logical/Switch';
 import WizardPanel from './Panel.js';
 
@@ -16,11 +16,11 @@ export default class Wizard extends Component {
   constructor(props) {
     super(props);
     const { title, footer, controller } = props;
-    const wizard = controller || new WizardController(title);
+    const wizard = controller || new lib.WizardController(title);
     const children = getChildren(props);
 
     children.forEach((child) => {
-      let { title: cTitle, config = {}, children: cChildren } = child.props;
+      const { title: cTitle, config = {}, children: cChildren } = child.props;
       wizard.addPanel(cTitle, config, cChildren);
     });
     this.footerClass = footer;

@@ -4,37 +4,33 @@ const pageProvider = require('./../../lib/models/pageProvider');
 
 const ROOT = __dirname.replace(/.runner.app.*/, '');
 
-exports.make = async (ctx) => {
-  const def = ctx.request.body;
-  const { fileName, title, pages } = def;
-  console.log('fileName: ', fileName);
-  console.log('title:', title);
-  console.log('pages:', pages);
+function makeWizardPage(page, fileName) {
+  return new Promise((resolve, fail) => {
+    console.log('making page: ', page);
+    const props = ['comp', `--name=${page.fileName}`, `--title="${page.title}"`, `--where=${fileName}`];
+    console.log('making page with props:', props);
+    const result = child_process.spawn('gulp', props, {
+      cwd: ROOT,
+    });
+    result.on('exit', resolve);
+    resolve();
+  });
+}
 
-  let where = '';
-  let name = fileName;
-  if (fileName.search('/') > -1) {
-    where = path.dirname(fileName);
-    name = path.basename(fileName);
-  }
-  ctx.status = 200;
-  console.log('creating wizard', name, title, where);
-  await (new Promise((resolve, reject) => {
-    const props = `wizard,--name=${name},--title="${title}",--where=${where}`.split(',');
-    console.log('props: ', props);
+function makeWizard(title, name, where, panels) {
+  (new Promise((resolve, reject) => {
+    if (typeof panels !== 'string') panels = `'${JSON.stringify(panels)}"`;
+    const props = ['wizard',
+      `--name=${name}`,
+      `--title="${title}"`,
+      `--where=${where}`,
+      `--panels=${panels}`,
+    ];
     const result = child_process.spawn('gulp', props, {
       cwd: ROOT,
     });
     result.on('exit', () => {
-      console.log('done with wizard');
-      ctx.body = { success: true };
-      pageProvider.addPage({
-        component: fileName,
-        name: title,
-        navTitle: title,
-        published: true,
-        route: `wizard/${fileName.replace(/\//g, '-')}`,
-      }).then(resolve);
+      setTimeout(resolve, 1000); // wait to ensure writes.
     });
 
     result.stdout.on('data', (data) => {
@@ -46,4 +42,36 @@ exports.make = async (ctx) => {
       reject();
     });
   }));
+}
+
+exports.make = async (ctx) => {
+  const def = ctx.request.body;
+  const { fileName, title, panels } = def;
+  console.log('fileName: ', fileName);
+  console.log('title:', title);
+  console.log('panels:', panels);
+
+  let where = '';
+  let name = fileName;
+  if (fileName.search('/') > -1) {
+    where = path.dirname(fileName);
+    name = path.basename(fileName);
+  }
+  console.log('creating wizard', name, title, where);
+  try {
+    await makeWizard(title, name, where, panels);
+    await pageProvider.addPage({
+      component: fileName,
+      name: title,
+      navTitle: title,
+      published: true,
+      route: `/wizard/${fileName.replace(/\//g, '-')}`,
+    });
+    await Promise.all(panels.map(page => makeWizardPage(page, fileName)));
+
+    ctx.body = { success: true };
+    ctx.status = 200;
+  } catch (err) {
+    console.log('error in make wizard: ', err.message);
+  }
 };

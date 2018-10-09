@@ -22,6 +22,7 @@ gulp.task('comp', () => {
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
   const cWhere = ensureEndingBackslash(where || 'components');
+  const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
 
   containerNameValidator.try(name);
   const source = template('component');
@@ -32,19 +33,36 @@ gulp.task('comp', () => {
     }))
     .pipe(modify(text => text.replace(/ComponentName/g, cName)
       .replace(/componentName/g, lcName)
-      .replace('../../src/components/css/shared', '../css/shared')))
+      .replace(
+        '../../src/components/css/shared',
+        `${where.split('/').map(() => '..').join('/')}/css/shared`,
+      )
+      .replace(/SOURCE_ROOT/g, ROOT_BACK)))
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
 
 gulp.task('wizard', () => {
-  let { name, where, title } = minimist(process.argv.slice(2));
+  let {
+    name, where, title, panels,
+  } = minimist(process.argv.slice(2));
+  console.log('arguments; ', process.argv.slice(2));
   title = title.replace(/"/g, '');
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
+  console.log('panels: ', panels);
+  const panelList = JSON.parse(_.trim(panels, "'\""));
   const cWhere = ensureEndingBackslash(where || 'components');
-  console.log('executing wizard ', cName, 'where:', cWhere, 'title: ', title);
+
   containerNameValidator.try(name);
   containerNameValidator.try(cName);
+
+  const panelImports = panelList.map(panel => `import ${panel.fileName} from "./${panel.fileName}";`)
+    .join('\n');
+
+  const panelMarkup = panelList.map((panel, i) => `<div title="${panel.title}">
+   <${panel.fileName} panel={state.componentNameWizardController.panels[${i}]} />
+</div>
+`);
   const source = template('wizard');
   const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
   gulp.src(source)
@@ -53,9 +71,12 @@ gulp.task('wizard', () => {
       return file;
     }))
     .pipe(modify(text => text.replace(/ComponentName/g, cName)
+      .replace(/WizardPanelImports/, panelImports)
+      .replace(/WizardPanels/, panelMarkup)
       .replace(/componentName/g, lcName)
       .replace(/ComponentTitle/g, title)
-      .replace('./../../src/', `${ROOT_BACK}`)))
+      .replace('./../../src/', `${ROOT_BACK}`)
+      .replace(/SOURCE_ROOT/g, ROOT_BACK)))
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
 
@@ -63,7 +84,8 @@ function componentToVariable(item) {
   return `Page${_.upperFirst(item.replace('components', '')
     .replace(/\//g, ''))}`;
 }
-gulp.task('mapComponents', async () => {
+
+gulp.task('mapComp', async () => {
   const data = await fs.promises.readFile('./src/pageList.json');
   const pages = JSON.parse(data.toString()).pages;
   const imports = pages.map((page) => {

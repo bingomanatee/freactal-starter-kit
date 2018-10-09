@@ -29,8 +29,7 @@ wizardState.addIntAndSetEffect('editingFieldID', 0);
 
 wizardState.addBoolPropAndEffects('wizardSaved', false);
 wizardState.addSideEffect('dismissWizardMessages', ({ unshiftToWizardMessages }) => {
-  console.log('dismissing');
-  unshiftToWizardMessages('');
+  unshiftToWizardMessages(null);
 });
 wizardState.addStateSideEffect('refreshWizard', ({ setWizardController, setPanels }, { wizardController }) => {
   setWizardController(wizardController);

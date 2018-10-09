@@ -7,9 +7,10 @@ import WCPField from './WCPField';
  * A data model for a panel of a wizard.
  */
 class WizardControllerPanel extends EventEmitter {
-  constructor(title, config = {}) {
+  constructor(title, config = {}, children = null) {
     super();
     this.title = title;
+    this.children = children;
     WizardControllerPanel.nextId += 1;
     this.id = WizardControllerPanel.nextId;
     Object.assign(this, config);
@@ -114,6 +115,7 @@ propper.addString('title', {
   .addProp('fields', {
     failsWhen: 'array',
     defaultValue: () => ([]),
-  });
+  })
+  .addProp('children');
 
 export default WizardControllerPanel;
