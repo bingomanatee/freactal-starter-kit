@@ -3,7 +3,7 @@ import { Component } from 'react';
 
 import contentState from './Content.state';
 import ContentView from './Content.view.jsx';
-import lib from '../../lib';
+import componentMap from '../../componentMap';
 
 export default contentState(injectState(class Content extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ export default contentState(injectState(class Content extends Component {
         if (!pageDef.published) {
           return false;
         }
-        const component = lib.pages.componentMap.get(pageDef.component);
+        const component = componentMap.get(pageDef.component);
         if (!component) {
           return false;
         }

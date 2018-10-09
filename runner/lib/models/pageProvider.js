@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const ROOT = __dirname.replace(/.runner.app.*/, '');
+const ROOT = __dirname.replace(/.runner.*/, '');
 const PAGES_FILE = `${ROOT}/src/pageList.json`;
 
 const pageProvider = {

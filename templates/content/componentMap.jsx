@@ -2,12 +2,8 @@
 
 ComponentImports
 
-export default (bottle => {
-  bottle.service('componentMap', () => {
-    const componentMap = new Map();
+const componentMap = new Map();
 
-    ComponentsMapping
+ComponentsMapping
 
-    return componentMap;
-  })
-})
+export default componentMap;

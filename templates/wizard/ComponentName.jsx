@@ -11,7 +11,7 @@ export default withRouter(componentNameState(injectState(class ComponentName ext
   constructor(props) {
     super(props);
     const controller = new lib.WizardController('ComponentTitle');
-    props.effects.setComponentNameStateWizardController(controller);
+    props.effects.setComponentNameWizardController(controller);
   }
 
   render() {

@@ -9,16 +9,15 @@ const { WizardComponent: Wizard } = lib;
 export default injectState(({ state, effects }) => {
   if (!state.componentNameWizardController) return '';
   return (
-    <div className={styles.ComponentName}>
-      <h1>ComponentTitle</h1>
+    <section className={styles.ComponentName}>
       <Wizard controller={state.componentNameWizardController}>
-        <div>
+        <div title="First Panel">
           First Panel
         </div>
-        <div>
+        <div title="Second Panel">
           Second Panel
         </div>
       </Wizard>
-    </div>
+    </section>
   );
 });

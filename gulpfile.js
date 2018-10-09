@@ -69,7 +69,7 @@ gulp.task('mapComponents', async () => {
   const imports = pages.map((page) => {
     const { published, component } = page;
     const componentVarName = componentToVariable(component);
-    return `import ${componentVarName} from './../../../${component}';`;
+    return `import ${componentVarName} from './${component}';`;
   }).join('\n');
 
   const maps = pages.map((page) => {
@@ -81,5 +81,5 @@ gulp.task('mapComponents', async () => {
   gulp.src(template('content'))
     .pipe(modify(text => text.replace('ComponentImports', imports)
       .replace('ComponentsMapping', maps)))
-    .pipe(gulp.dest('./src/lib/models/content/'));
+    .pipe(gulp.dest('./src/'));
 });

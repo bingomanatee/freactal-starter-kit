@@ -70,7 +70,7 @@
       "name": "New Wizard",
       "navTitle": "New Wizard",
       "published": true,
-      "route": "wizard/components-NewWizard",
+      "route": "/wizard/components-NewWizard",
       "id": 6
     }
   ]
