@@ -29,7 +29,7 @@ module.exports = (kitBottle) => {
         process.on('message', (...args) => {
           self.messageFromMaster(...args);
         });
-        setTimeout(() => this.startHeartBeat(), 5000);
+        this.startHeartBeat();
       }
 
       startHeartBeat() {
@@ -38,7 +38,14 @@ module.exports = (kitBottle) => {
         this.heartBeatTO = setInterval(() => {
           if (this.isStale) {
             this.stopHeartBeat();
-            process.kill('SIGTERM');
+            if (this.appProcess) {
+              this.appProcess.once('exit', () => {
+                process.exit();
+              });
+              this.appProcess.kill(0);
+            } else {
+              process.exit();
+            }
           } else {
             this.sendHeartBeat();
           }
@@ -62,6 +69,7 @@ module.exports = (kitBottle) => {
 
       startUI() {
         log('starting yarn in ', ROOT);
+        if (this.appProcess) return;
         this.appProcess = child_process.spawn('yarn', ['start'], {
           env: Object.assign({}, process.env, { ADMIN_MODE: 1 }),
           cwd: ROOT,
@@ -76,17 +84,21 @@ module.exports = (kitBottle) => {
             this.messageToMaster(('stopped UI'));
             this.appProcess = null;
           });
-          this.appProcess.kill('SIGTERM');
+          this.appProcess.kill();
         }
       }
 
       stopWorker() {
         this.stopHeartBeat();
-        this.appProcess.on('exit', () => {
-          this.messageToMaster('terminated');
-          process.nextTick(() => process.disconnect());
-        });
-        this.stopUI();
+        if (this.appProcess) {
+          this.appProcess.on('exit', () => {
+            this.messageToMaster('UI stopped');
+            process.nextTick(() => process.exit());
+          });
+          this.stopUI();
+        } else {
+          process.exit();
+        }
       }
 
       updateHeartBeat() {
@@ -98,13 +110,8 @@ module.exports = (kitBottle) => {
           return;
         }
         const [msg, ...args] = message.split('/t');
-        log('message from master:', message, args);
+        if (msg !== 'alive!') { log('message from master:', msg, args); }
         switch (msg) {
-          case 'start':
-            this.startUI(args);
-            this.startHeartBeat();
-            break;
-
           case 'stop UI':
             this.stopUI(args);
             break;

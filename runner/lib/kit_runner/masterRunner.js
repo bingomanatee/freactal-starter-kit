@@ -35,7 +35,7 @@ module.exports = (kitBottle) => {
 
       askWorkerToLaunchWebAop() {
         if (!this.worker) this.createWorker();
-        else { this.messageToWorker('start'); }
+        else { this.messageToWorker('start UI'); }
       }
 
       askWorkerToStopWebAop() {
@@ -59,7 +59,7 @@ module.exports = (kitBottle) => {
       }
 
       messageFromWorker(message) {
-        log('master: received ', message, 'from worker');
+        if (message !== 'alive?') { log('master: received ', message, 'from worker'); }
 
         switch (message) {
           case 'KitRunnerWorker created':
@@ -77,8 +77,8 @@ module.exports = (kitBottle) => {
             console.log('React UI listening on port 5000');
             break;
 
-          case 'terminated':
-            console.log('stopped worker');
+          case 'UI stopped':
+            console.log('worker UI subprocess stopped');
             this.worker.kill('SIGTERM');
             this.worker.on('exit', () => {
               this.emit('worker terminated');
@@ -87,10 +87,6 @@ module.exports = (kitBottle) => {
 
           case 'alive?':
             this.messageToWorker('alive!');
-            break;
-
-          case 'terminate':
-            console.log('worker terminated');
             break;
 
           default:
