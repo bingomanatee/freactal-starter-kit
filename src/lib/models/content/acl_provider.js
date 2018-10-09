@@ -1,12 +1,9 @@
-import pageList from './pageList.json';
-
 export default (bottle) => {
   bottle.factory('aclProvider', ({
     NODE_ENV, ADMIN_MODE,
   }) => ({
     canSeePage: (page) => {
       let access = false;
-      console.log('aclProvider: ', page);
       if (!page.access) {
         access = true;
       } else {

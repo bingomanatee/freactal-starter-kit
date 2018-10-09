@@ -1,3 +1,4 @@
+const fs = require('fs');
 const gulp = require('gulp');
 const path = require('path');
 const minimist = require('minimist');
@@ -58,6 +59,27 @@ gulp.task('wizard', () => {
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
 
-gulp.task('mapComponents', () => {
+function componentToVariable(item) {
+  return `Page${_.upperFirst(item.replace('components', '')
+    .replace(/\//g, ''))}`;
+}
+gulp.task('mapComponents', async () => {
+  const data = await fs.promises.readFile('./src/pageList.json');
+  const pages = JSON.parse(data.toString()).pages;
+  const imports = pages.map((page) => {
+    const { published, component } = page;
+    const componentVarName = componentToVariable(component);
+    return `import ${componentVarName} from './../../../${component}';`;
+  }).join('\n');
 
-})
+  const maps = pages.map((page) => {
+    const { published, component } = page;
+    const componentVarName = componentToVariable(component);
+    return `componentMap.set('${component}', ${componentVarName});`;
+  }).join('\n');
+
+  gulp.src(template('content'))
+    .pipe(modify(text => text.replace('ComponentImports', imports)
+      .replace('ComponentsMapping', maps)))
+    .pipe(gulp.dest('./src/lib/models/content/'));
+});

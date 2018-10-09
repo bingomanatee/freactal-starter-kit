@@ -1,6 +1,6 @@
 const path = require('path');
 const child_process = require('child_process');
-const pageProvider = require('../lib/models/pageProvider');
+const pageProvider = require('./../../lib/models/pageProvider');
 
 const ROOT = __dirname.replace(/.runner.app.*/, '');
 

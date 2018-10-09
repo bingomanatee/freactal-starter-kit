@@ -1,4 +1,4 @@
-import pageList from './pageList.json';
+import pageList from './../../../pageList.json';
 
 export default (bottle) => {
   bottle.factory('pageProvider', ({
@@ -8,20 +8,18 @@ export default (bottle) => {
       all: () => {
         if (NODE_ENV === 'development') {
           if (ADMIN_MODE) {
-            return axios.get(`${ADMIN_API_URL}/api/pages`, {responseType: 'json'})
+            return axios.get(`${ADMIN_API_URL}/api/pages`, { responseType: 'json' })
               .then(result => result.data);
           }
         }
         return Promise.resolve(pageList);
       },
 
-      forParent: (parentName) => {
-        return provider.all()
-          .then((def) => {
-            let pages = def.pages.filter(p => p.parent === parentName);
-            return Object.assign(def, {pages});
-          });
-      }
+      forParent: parentName => provider.all()
+        .then((def) => {
+          const pages = def.pages.filter(p => p.parent === parentName);
+          return Object.assign(def, { pages });
+        }),
 
     };
 

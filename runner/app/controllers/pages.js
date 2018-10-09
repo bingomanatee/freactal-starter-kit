@@ -1,4 +1,4 @@
-const pageProvider = require('../lib/models/pageProvider');
+const pageProvider = require('./../../lib/models/pageProvider');
 
 exports.all = async (ctx) => {
   const file = await pageProvider.getPages();

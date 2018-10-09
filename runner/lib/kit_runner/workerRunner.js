@@ -89,6 +89,10 @@ module.exports = (kitBottle) => {
         this.stopUI();
       }
 
+      updateHeartBeat() {
+        this.lastAlive = Date.now();
+      }
+
       messageFromMaster(message) {
         if (!message) {
           return;
@@ -110,7 +114,7 @@ module.exports = (kitBottle) => {
             break;
 
           case 'alive!':
-            this.lastAlive = Date.now();
+            this.updateHeartBeat();
             break;
 
           case 'terminate':
@@ -153,7 +157,7 @@ module.exports = (kitBottle) => {
           if (appProcess) {
             // @TODO: clear old
             appProcess.stdout.on('data', (message) => {
-              message.toString().split('\n').forEach(error => log('app stdout:', error));
+              message.toString().split('\n').forEach(message => log('app stdout:', message));
             });
             appProcess.stderr.on('data', (message) => {
               message.toString().split('\n').forEach(error => log('app error:', error));

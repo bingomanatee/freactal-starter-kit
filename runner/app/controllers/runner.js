@@ -1,6 +1,6 @@
 
 
-const kit = require('./../lib/kit_runner');
+const kit = require('./../../lib/kit_runner');
 
 exports.reload = (ctx) => {
   console.log('reloading ');

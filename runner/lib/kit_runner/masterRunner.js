@@ -25,10 +25,11 @@ module.exports = (kitBottle) => {
         this.worker = cluster.fork();
         this.worker
           .on('message', (message) => {
+            log('master:worker message: ', message);
             self.messageFromWorker(message);
           })
           .on('error', (message) => {
-            log('fork error: ', message);
+            log('master:fork error: ', message);
           });
       }
 
