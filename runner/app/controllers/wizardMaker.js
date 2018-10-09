@@ -59,6 +59,7 @@ exports.make = async (ctx) => {
   }
   console.log('creating wizard', name, title, where);
   try {
+    await Promise.all(panels.map(page => makeWizardPage(page, fileName)));
     await makeWizard(title, name, where, panels);
     await pageProvider.addPage({
       component: fileName,
@@ -67,7 +68,6 @@ exports.make = async (ctx) => {
       published: true,
       route: `/wizard/${fileName.replace(/\//g, '-')}`,
     });
-    await Promise.all(panels.map(page => makeWizardPage(page, fileName)));
 
     ctx.body = { success: true };
     ctx.status = 200;

@@ -15,7 +15,7 @@ export default class WizardPanel extends Component {
     return (
       <div className={this.classes}>
         <h3>{this.state.panel.title}</h3>
-        {this.state.panel.content || ''}
+        {this.state.panel.children || ''}
       </div>
     );
   }

@@ -48,6 +48,9 @@ class WizardController extends EventEmitter {
   nextPage() {
     this.index = this.index + 1;
   }
+  nextPanel() {
+    this.index = this.index + 1;
+  }
 
   toJSON() {
     return {
