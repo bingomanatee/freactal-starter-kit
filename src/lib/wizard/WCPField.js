@@ -19,6 +19,15 @@ class WCPField {
     return -1;
   }
 
+  toJSON() {
+    return {
+      id: this.id,
+      order: this.order,
+      name: this.name,
+      type: this.type,
+    };
+  }
+
   delete() {
     this.panel.fields = this.panel.fields.filter(f => f !== this);
   }

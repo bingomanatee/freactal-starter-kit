@@ -94,6 +94,7 @@ class WizardControllerPanel extends EventEmitter {
     return {
       title: this.title,
       fileName: this.fileName,
+      fields: this.fields.map(f => f.toJSON()),
     };
   }
 }

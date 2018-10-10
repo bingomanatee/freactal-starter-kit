@@ -1,0 +1,26 @@
+@import '../../src/components/css/shared';
+
+$ComponentNameSmall: $ResponsiveSizeSmall;
+$ComponentNameMedium: $ResponsiveSizeMedium;
+$ComponentNameBig: $ResponsiveSizeBig;
+
+.ComponentName {
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
+
+  // tiny
+  @media screen and (max-width: $ComponentNameSmall) {
+  }
+
+  // small
+  @media screen and (min-width: $ComponentNameSmall) and(max-width: ($ComponentNameMedium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $ComponentNameMedium) and(max-width: ($ComponentNameBig - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $ComponentNameBig) {
+  }
+}

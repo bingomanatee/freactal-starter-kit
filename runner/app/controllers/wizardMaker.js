@@ -4,10 +4,13 @@ const pageProvider = require('./../../lib/models/pageProvider');
 
 const ROOT = __dirname.replace(/.runner.app.*/, '');
 
-function makeWizardPage(page, fileName) {
+function makeWizardPanel(panel, fileName) {
   return new Promise((resolve, fail) => {
-    console.log('making page: ', page);
-    const props = ['comp', `--name=${page.fileName}`, `--title="${page.title}"`, `--where=${fileName}`];
+    console.log('making page: ', panel);
+    const props = ['wizardPanel', `--name=${panel.fileName}`,
+      `--title="${panel.title}"`,
+      `--panel='${JSON.stringify(page.toJSON()}'`,
+      `--where=${fileName}`];
     console.log('making page with props:', props);
     const result = child_process.spawn('gulp', props, {
       cwd: ROOT,
@@ -59,7 +62,7 @@ exports.make = async (ctx) => {
   }
   console.log('creating wizard', name, title, where);
   try {
-    await Promise.all(panels.map(page => makeWizardPage(page, fileName)));
+    await Promise.all(panels.map(panel => makeWizardPanel(panel, fileName)));
     await makeWizard(title, name, where, panels);
     await pageProvider.addPage({
       component: fileName,

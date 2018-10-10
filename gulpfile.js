@@ -41,6 +41,37 @@ gulp.task('comp', () => {
     .pipe(gulp.dest(`./src/${cWhere}${cName}`));
 });
 
+gulp.task('wizardPanel', () => {
+  const { name, where, panel } = minimist(process.argv.slice(2));
+  const cName = _.upperFirst(name);
+  const lcName = _.lowerFirst(name);
+  const cWhere = ensureEndingBackslash(where || 'components');
+  const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
+  const panelData = JSON.parse(_.trim(panel, "'"));
+
+  const fields = (panelData.fields || [])
+    .map(field => `componentNameState.add${_.upperFirst(field.type)}('${field.name}',);`);
+
+  containerNameValidator.try(name);
+  const source = template('wizardPanel');
+  gulp.src(source)
+    .pipe(rename((file) => {
+      file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
+      return file;
+    }))
+    .pipe(modify(text => text
+
+      .replace(/componentFields/, fields)
+      .replace(/ComponentName/g, cName)
+      .replace(/componentName/g, lcName)
+      .replace(
+        '../../src/components/css/shared',
+        `${where.split('/').map(() => '..').join('/')}/css/shared`,
+      )
+      .replace(/SOURCE_ROOT/g, ROOT_BACK)))
+    .pipe(gulp.dest(`./src/${cWhere}${cName}`));
+});
+
 gulp.task('wizard', () => {
   let {
     name, where, title, panels,
@@ -65,6 +96,7 @@ gulp.task('wizard', () => {
 `);
   const source = template('wizard');
   const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
+
   gulp.src(source)
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/g, `${cName}`);
