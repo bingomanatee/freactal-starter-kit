@@ -44,6 +44,7 @@ export default class Switch extends Component {
         // console.log('--result: ', value(s));
         return value(s);
       }],
+      ['istrue', (s) => !!s],
       ['is', (s, value) => s === value],
       ['gt', (s, value) => s > value],
       ['lt', (s, value) => s < value],
