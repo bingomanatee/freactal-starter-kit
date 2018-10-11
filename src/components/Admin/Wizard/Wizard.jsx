@@ -9,7 +9,7 @@ export default wizardState(injectState(class Wizard extends Component {
   constructor(props) {
     super(props);
     const {
-      effects: { setWizardController },
+      effects: { setWizardController, isEditingWizardOff },
       state: { wizardController },
     } = props;
     console.log('old wizard controller', wizardController);
@@ -18,6 +18,7 @@ export default wizardState(injectState(class Wizard extends Component {
       controller.addPanel('First Panel', { fileName: 'PanelOne' });
       setWizardController(controller);
     }
+    isEditingWizardOff();
   }
 
   render() {

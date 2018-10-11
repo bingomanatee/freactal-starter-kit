@@ -1,8 +1,8 @@
 /* eslint-disable func-names,object-shorthand */
 import cp, { Validator } from 'class-propper';
 import EventEmitter from 'eventemitter3';
+import util from 'util';
 import WizardControllerPanel from './WizardControllerPanel';
-
 const orderValidator = new Validator([
   new Validator('integer', 'order must be an integer'),
   new Validator(s => s < 0, 'order must be >= 0'),
@@ -42,12 +42,16 @@ class WizardController extends EventEmitter {
   }
 
   _initPanel(panel) {
-    panel.controller = this;
-    this.emit('panel added', panel);
-    panel.removeAllListeners('change');
-    panel.on('change', (...args) => {
-      this.emit('panel changed', args);
-    });
+    try {
+      panel.controller = this;
+      this.emit('panel added', panel);
+      panel.removeListener('change');
+      panel.on('change', (...args) => {
+        this.emit('panel changed', args);
+      });
+    } catch (err) {
+      console.log('error initializing panel: ', err.message, util.inspect(panel));
+    }
   }
 
   nextPage() {
@@ -55,6 +59,12 @@ class WizardController extends EventEmitter {
   }
   nextPanel() {
     this.index = this.index + 1;
+  }
+
+  get errors() {
+
+    const out = this.propErrors || [];
+    return out;
   }
 
   toJSON() {
@@ -78,6 +88,7 @@ WizardController.fromJSON = (data) => {
 };
 
 const propper = cp(WizardController);
+propper.addIsValid();
 
 propper.addProp('panels', {
   failsWhen: 'array',

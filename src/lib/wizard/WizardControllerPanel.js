@@ -27,6 +27,11 @@ class WizardControllerPanel extends EventEmitter {
     return -1;
   }
 
+  errors() {
+    const out = this.propErrors() || [];
+    return out;
+  }
+
   /**
    * the outer class of the panel can be set as 'mainClass' in configuration
    * or defaults to the shared controller property 'panelClass';
@@ -81,7 +86,6 @@ class WizardControllerPanel extends EventEmitter {
     field.panel = this;
     field.removeAllListeners('changed');
     field.on('changed', (...args) => {
-      console.log('field changed:', args);
       this.emit('change', { field: args });
     });
   }
@@ -129,6 +133,7 @@ WizardControllerPanel.fromJSON = (data, controller = null) => {
 WizardControllerPanel.nextId = 0;
 
 const propper = cp(WizardControllerPanel);
+propper.addIsValid();
 
 propper.addString('title', {
   required: true,

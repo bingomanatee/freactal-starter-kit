@@ -1,3 +1,3 @@
 
 
-export default ({ children }) => (children);
+export default ({ children }) => (<span>{children}</span>);

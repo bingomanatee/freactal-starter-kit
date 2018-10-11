@@ -11,7 +11,9 @@ const wizardState = new Seed();
 wizardState.addObjectAndSetEffect('wizardController', null, {
   onSet: (effects, state) => {
     if (state.wizardController) {
-      state.wizardController.removeAllListeners('panel changed');
+      state.wizardController.removeListener('panel changed');
+      effects.setWizardTitle(state.wizardController.title);
+      effects.setWizardFileName(state.wizardController.fileName);
       state.wizardController.on('panel changed', () => {
         effects.updateWizardPanels();
       });
@@ -20,33 +22,37 @@ wizardState.addObjectAndSetEffect('wizardController', null, {
     return state;
   },
 });
+
 wizardState.addArrayPropAndSetEffects('wizardPanels', []);
+wizardState.addArrayPropAndSetEffects('wizardErrors', []);
 
-wizardState.addStateSideEffect('updateWizardPanels', ({ setWizardPanels }, { wizardController }) => {
-  setWizardPanels(wizardController ? wizardController.panels.slice(0) : []);
+wizardState.addStateSideEffect('saveWizardChanges', ({ isEditingWizardOff, updateWizardController }, {
+  wizardTitle, wizardFileName, wizardController,
+}) => {
+  wizardController.title = wizardTitle;
+  wizardController.fileName = wizardFileName;
+  return updateWizardController(wizardController)
+    .then(isEditingWizardOff);
 });
 
-wizardState.addStateSideEffect('setWizardTitle', ({
-  setWizardController,
-}, { wizardController }, title) => {
-  if (!wizardController) return;
-  wizardController.title = title;
-  console.log('setting title of ', wizardController, 'to', title);
-  setWizardController(wizardController);
-});
+wizardState.addStateSideEffect('cancelWizardChanges', ({ isEditingWizardOff, setWizardTitle, setWizardFileName }, {
+  wizardController,
+}) => setWizardTitle(wizardController.title)
+  .then(() => setWizardFileName(wizardController.fileName))
+  .then(isEditingWizardOff));
 
-wizardState.addStateSideEffect('setWizardFileName', ({
-  setWizardController,
-}, { wizardController }, fileName) => {
-  if (!wizardController) return;
-  wizardController.fileName = fileName;
-  setWizardController(wizardController);
-});
+wizardState.addStateSideEffect('updateWizardPanels', (
+  { setWizardPanels, setWizardErrors },
+  { wizardController },
+) => setWizardPanels(wizardController ? wizardController.panels.slice(0) : [])
+  .then(() => setWizardErrors(wizardController ? wizardController.errors : [])));
 
 wizardState.addArrayPropAndSetEffects('wizardMessages', []);
-wizardState.addStringAndSetEffect('wizardComponentName', 'NewWizard');
+wizardState.addStringAndSetEffect('wizardTitle', 'New Wizard');
+wizardState.addStringAndSetEffect('wizardFileName', 'components/NewWizard');
 wizardState.addIntAndSetEffect('editingFieldID', 0);
 
+wizardState.addBoolPropAndEffects('isEditingWizard', false);
 wizardState.addBoolPropAndEffects('wizardSaved', false);
 wizardState.addSideEffect('dismissWizardMessages', ({ unshiftToWizardMessages }) => {
   unshiftToWizardMessages(null);
@@ -63,7 +69,6 @@ wizardState.addStateSideEffect('addPanel', (
 ) => {
   if (_.isUndefined(order)) order = wizardController.panels.length;
   wizardController.addPanelAt(order, `New Panel ${order || wizardController.panels.length}`);
-  console.log('added panel to ', wizardController);
   setWizardController(wizardController);
 });
 
@@ -78,4 +83,6 @@ wizardState.addStateSideEffect('saveWizard', (
   wizardSavedOn();
   unshiftToWizardMessages({ text: 'Wizard Saved', action: '' });
 });
+
+console.log('------------------- initial state:', wizardState.toHash().initialState());
 export default provideState(wizardState.toHash());

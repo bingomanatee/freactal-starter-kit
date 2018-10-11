@@ -4,7 +4,7 @@ const deleteIconStyle = { color: 'red' };
 export default ({ onClick }) => (
   <Button
     swapTheming
-    mini
+    icon
     onClick={onClick}
   >
     <FontIcon
