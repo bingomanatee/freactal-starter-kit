@@ -4,104 +4,107 @@ import _ from 'lodash';
 import Switch from '../../../helpers/logical/Switch';
 import styles from './Wizard.module.css';
 import PanelEditor from './PanelEditor';
-import Case from '../../../helpers/logical/Switch/Switch';
+import Case from '../../../helpers/logical/Switch/Case';
+import FieldErrors from '../../../helpers/input/FieldErrors';
 import util from 'util';
 
 // eslint-disable-next-line no-unused-vars
 export default injectState(({ state, effects }) => {
   const { wizardController, isEditingWizard } = state;
-  console.log('=============== view state wizardController: ', wizardController);
-  console.log('=============== view state: ', state);
   return (
     <div className={styles.Wizard}>
       <h1 className={styles['Wizard-head']}>Create a Wizard</h1>
-      <p>
-        This is a &quot;Wizard wizard:&quot; a page for creating multi-step actions.
-      </p>
-      sample
-      <Switch name="sample" subject={isEditingWizard}>
-        <Case istrue>
-          Is Editing
-        </Case>
-        <Case else>
-          Is Not Editing
-        </Case>
-      </Switch>
-
       <div className={styles['wizard-form']}>
         <div className={`md-paper--3 ${styles['wizard-form-panel']}`}>
           <h2 className={styles['wizard-form-panel__title']}>Global Values</h2>
           {wizardController && (<Grid>
-            <Cell size={6} tabletSize={4}>
-              {isEditingWizard && (
-                <TextField
-                  id="wizard-title"
-                  label="Title of Wizard"
-                  value={state.wizardTitle || ''}
-                  onChange={effects.setWizardTitle}
-                />)
-              }
-              {(!isEditingWizard) && (
-                <div>
-                  <div><b>Title:</b></div>
-                  <p>{wizardController ? wizardController.title : ''}</p>
-                </div>)}
+            <Cell size={5} tabletSize={3}>
+              <Switch subject={isEditingWizard}>
+                <Case istrue>
+                  <TextField
+                    id="wizard-title"
+                    label="Title of Wizard"
+                    value={state.wizardTitle || ''}
+                    onChange={effects.setWizardTitle}
+                  />
+                </Case>
+                <Case else>
+                  <div>
+                    <p><b>Title:</b></p>
+                    <p>{wizardController ? wizardController.title || '(empty)' : ''}</p>
+                    <FieldErrors subject={wizardController} field="title" />
+                  </div>
+                </Case>
+              </Switch>
             </Cell>
-            <Cell size={6} tabletSize={4}>
-              {isEditingWizard && (<TextField
-                id="wizard-name"
-                label="Filename of wizard"
-                value={state.wizardFileName || ''}
-                onChange={effects.setWizardFileName}
-              />)}
-              {(!isEditingWizard) && (<div>
-                <div>
-                  <b>Filename:</b>
+            <Cell size={5} tabletSize={3}>
+              <Switch subject={isEditingWizard}>
+                <Case istrue>
+                  <TextField
+                    id="wizard-name"
+                    label="Filename of wizard"
+                    value={state.wizardFileName || ''}
+                    onChange={effects.setWizardFileName}
+                  />
+                </Case>
+                <Case else>
+                  <div>
+                    <p>
+                      <b>Filename:</b>
+                    </p>
+                    <p>
+                      {wizardController ? wizardController.fileName || '(empty)' : ''}
+                    </p>
+                    <FieldErrors subject={wizardController} field="fileName" />
+                  </div>
+                </Case>
+              </Switch>
+            </Cell>
+            <Cell size={2}>
+              <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
+                <Switch subject={isEditingWizard}>
+                  <Case istrue>
+                    <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+                      <Button
+                        primary
+                        flat
+                        onClick={effects.saveWizardChanges}
+                      >
+                      Save
+                      </Button>
+                    </div>
+                  </Case>
+                </Switch>
+                <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+                  {isEditingWizard && (<Button
+                    primary
+                    flat
+                    onClick={effects.cancelWizardChanges}
+                  >
+                    Cancel
+                  </Button>)}
+                  {(!isEditingWizard) && (
+                    <Button
+                      primary
+                      flat
+                      onClick={() => effects.isEditingWizardOn()}
+                    >
+                      Edit
+                    </Button>
+                  )}
                 </div>
-                <p>
-                  {wizardController ? wizardController.fileName : ''}
-                </p>
-              </div>)}
+              </div>
             </Cell>
           </Grid>)}
-          <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
-            {isEditingWizard && (
-              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-                <Button
-                  primary
-                  flat
-                  onClick={effects.saveWizardChanges}
-                >
-                Save
-                </Button>
-              </div>
-            )}
-            <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-              {isEditingWizard && (<Button
-                primary
-                flat
-                onClick={effects.cancelWizardChanges}
-              >
-                  Cancel
-              </Button>)}
-              {(!isEditingWizard) && (
-                <Button
-                  primary
-                  flat
-                  onClick={() => effects.isEditingWizardOn()}
-                >
-                  Edit
-                </Button>
-              )}
-            </div>
-            <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-              <Button secondary flat onClick={() => effects.addPanel()}>Add Panel</Button>
-            </div>
-          </div>
         </div>
 
         <div className={`md-paper--3 ${styles['wizard-form-panel']}`}>
           <h2 className={styles['wizard-form-panel__title']}>Panels</h2>
+          <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
+            <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+              <Button secondary flat onClick={() => effects.addPanel(-1)}>Add Panel</Button>
+            </div>
+          </div>
           {state.wizardPanels &&
           state.wizardPanels.map(panel => <PanelEditor key={`panel_${panel.id}`} panel={panel} />)}
         </div>
@@ -114,7 +117,17 @@ export default injectState(({ state, effects }) => {
 
         <div className={styles['buttons-bar']}>
           <div className={styles['buttons-bar__cell']}>
-            <Button primary raised onClick={effects.saveWizard}>Create Wizard</Button>
+            <Button
+              primary
+              raised
+              disabled={wizardController && (!(wizardController.isValid && wizardController.panelIsValid))}
+              onClick={effects.saveWizard}
+            >Create Wizard
+            </Button>
+            <FieldErrors
+              subject={wizardController}
+              errors={wizardController && wizardController.panelErrors}
+            />
           </div>
         </div>
       </div>
@@ -127,6 +140,8 @@ export default injectState(({ state, effects }) => {
         <pre>
           {state.wizardPanels ? JSON.stringify(state.wizardPanels.map(p => p.toJSON()), true, 4) : 'no wizard panels'}
         </pre>
+        <h3>Panel Errors</h3>
+        <pre>{wizardController && JSON.stringify(wizardController.panelErrors)}</pre>
       </div>
       <Snackbar
         id="wizard-snackbar"

@@ -79,14 +79,14 @@ class WizardControllerPanel extends EventEmitter {
     }
     this._initField(field);
     this.fields.push(field);
-    this.emit('change', { addedField: field.toJSON() });
+    this.emit('changed', { addedField: field.toJSON() });
   }
 
   _initField(field) {
     field.panel = this;
     field.removeAllListeners('changed');
     field.on('changed', (...args) => {
-      this.emit('change', { field: args });
+      this.emit('changed', { field: args });
     });
   }
 
@@ -135,24 +135,27 @@ WizardControllerPanel.nextId = 0;
 const propper = cp(WizardControllerPanel);
 propper.addIsValid();
 
-propper.addString('title', {
-  required: true,
-  onChange(...args) {
-    this.emit('changed', { change: args, panel: this });
-  },
-})
+propper
+  .addString('title', {
+    required: true,
+    onChange(...args) {
+      this.emit('changed', { change: args, panel: this });
+    },
+    // eslint-disable-next-line object-shorthand
+    onBadData: function () { return true; },
+  })
   .addString('fileName', {
     required: true,
     onChange(...args) {
       this.emit('changed', { change: args, panel: this });
     },
+    onBadData: function () { return true; },
   })
-
   .addProp('controller', {
-    failsWhen: 'object',
+    type: 'object',
   })
   .addProp('fields', {
-    failsWhen: 'array',
+    type: 'array',
     defaultValue: () => ([]),
   })
   .addProp('children');

@@ -16,8 +16,9 @@ panelEditorState.addStateSideEffect('refreshFields', ({ setPanelFields }, { pane
 
 panelEditorState.addStateSideEffect(
   'saveEditPanel',
-  ({ setPanel, editingPanelOff }, { panel, panelTitle }) => {
+  ({ setPanel, editingPanelOff }, { panel, panelTitle, panelFileName }) => {
     panel.title = panelTitle;
+    panel.fileName = panelFileName;
     setPanel(panel);
     editingPanelOff();
   },

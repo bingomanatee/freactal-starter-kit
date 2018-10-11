@@ -1,6 +1,42 @@
 import { Component } from 'react';
-import { injectState } from 'freactal';
 
+const updateVisibleMemo = (visibleMemo, child, breakAt) => {
+  let out = visibleMemo;
+  let { all: getAll, values, stop } = visibleMemo;
+
+  if (stop) {
+    out = visibleMemo;
+  } else {
+    if (getAll) {
+      //  console.log('all: ', values, child);
+      values.push(child);
+    } else {
+      values = [child];
+    }
+
+    out = Object.assign({}, visibleMemo, { values, stop: breakAt || (!getAll) });
+  }
+
+  return out;
+};
+
+const tests = [
+  ['test', (s, value) =>
+    // console.log('test: ', value);
+    // console.log('--input: ', s);
+    // console.log('--result: ', value(s));
+    value(s),
+  ],
+  ['istrue', s => !!s],
+  ['is', (s, value) => s === value],
+  ['gt', (s, value) => s > value],
+  ['lt', (s, value) => s < value],
+  ['gte', (s, value) => s >= value],
+  ['lte', (s, value) => s <= value],
+  ['not', (s, value) => s !== value],
+  ['in', (s, value) => value.indexOf(s) !== -1],
+  ['notin', (s, value) => value.indexOf(s) === -1],
+];
 export default class Switch extends Component {
   render() {
     let {
@@ -17,59 +53,21 @@ export default class Switch extends Component {
       return out;
     }
 
-    const g = (props, child, breakAt) => {
-      let out = props;
-      let { all: getAll, values, stop } = props;
-
-      if (stop) {
-        out = props;
-      } else {
-        if (getAll) {
-        //  console.log('all: ', values, child);
-          values.push(child);
-        } else {
-          values = [child];
-        }
-
-        out = Object.assign({}, props, { values, stop: breakAt || (!getAll) });
-      }
-
-      return out;
-    };
-
-    const tests = [
-      ['test', (s, value) => {
-        // console.log('test: ', value);
-        // console.log('--input: ', s);
-        // console.log('--result: ', value(s));
-        return value(s);
-      }],
-      ['istrue', (s) => !!s],
-      ['is', (s, value) => s === value],
-      ['gt', (s, value) => s > value],
-      ['lt', (s, value) => s < value],
-      ['gte', (s, value) => s >= value],
-      ['lte', (s, value) => s <= value],
-      ['not', (s, value) => s !== value],
-      ['in', (s, value) => value.indexOf(s) !== -1],
-      ['notin', (s, value) => value.indexOf(s) === -1],
-    ];
-
-    const result = children.reduce((props, child) => {
+    const result = children.reduce((visibleMemo, child) => {
       try {
-        const { values, stop } = props;
+        const { values, stop } = visibleMemo;
         const hasValues = values.length > 0;
         if (stop) {
-          return props;
+          return visibleMemo;
         }
-        if (!('props' in child)) return props;
+        if (!('props' in child)) return visibleMemo;
         const breakAt = child.props.break;
 
         if ('else' in child.props) {
-          let out = props;
+          let out = visibleMemo;
           if (hasValues) {
-            out = Object.assign({}, props, { stop: true });
-          } else out = Object.assign({}, props, { values: [child], stop: true });
+            out = Object.assign({}, visibleMemo, { stop: true });
+          } else out = Object.assign({}, visibleMemo, { values: [child], stop: true });
           return out;
         }
 
@@ -81,14 +79,14 @@ export default class Switch extends Component {
             const value = child.props[prop];
             if (test(subject, value)) {
               // console.log('passed test', prop, 'v=', value, 'breakAt=', breakAt);
-              return g(props, child, breakAt);
+              return updateVisibleMemo(visibleMemo, child, breakAt);
             }
           }
         }
       } catch (err) {
-        console.log('error in Switch: ', props, err.message);
+        console.log('error in Switch: ', visibleMemo, err.message);
       }
-      return props;
+      return visibleMemo;
     }, {
       stop: false,
       all,

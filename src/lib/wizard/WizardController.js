@@ -3,9 +3,10 @@ import cp, { Validator } from 'class-propper';
 import EventEmitter from 'eventemitter3';
 import util from 'util';
 import WizardControllerPanel from './WizardControllerPanel';
+
 const orderValidator = new Validator([
   new Validator('integer', 'order must be an integer'),
-  new Validator(s => s < 0, 'order must be >= 0'),
+  new Validator(s => s < -1, 'order must be >= -1'),
 ]);
 
 class WizardController extends EventEmitter {
@@ -45,8 +46,8 @@ class WizardController extends EventEmitter {
     try {
       panel.controller = this;
       this.emit('panel added', panel);
-      panel.removeListener('change');
-      panel.on('change', (...args) => {
+      panel.removeListener('changed');
+      panel.on('changed', (...args) => {
         this.emit('panel changed', args);
       });
     } catch (err) {
@@ -61,14 +62,62 @@ class WizardController extends EventEmitter {
     this.index = this.index + 1;
   }
 
-  get errors() {
+  get panelErrors() {
+    console.log('checking panel errors');
+    const errors = _(this.panels)
+      .map('propErrors')
+      .compact()
+      .value();
 
+    const sameTitles = _(this.panels)
+      .map('title')
+      .compact()
+      .groupBy(_.identity)
+      .values()
+      .filter(set => set.length > 1)
+      .map(set => set[0])
+      .value();
+
+    const sameFileNames = _(this.panels)
+      .map('fileName')
+      .compact()
+      .groupBy(_.identity)
+      .values()
+      .filter(set => set.length > 1)
+      .map(set => set[0])
+      .value();
+
+    if (sameTitles.length) {
+      errors.push({
+        prop: 'panels',
+        value: sameTitles.join(','),
+        error: `Duplicate titles: ${sameTitles.map(t => `"${t}"`).join(', ')}`,
+
+      });
+    }
+    if (sameFileNames.length) {
+      console.log('sameFileNames');
+      errors.push({
+        prop: 'panels',
+        value: sameFileNames.join(','),
+        error: `Duplicate fileNames: ${sameFileNames.map(t => `"${t}"`).join(', ')}`,
+
+      });
+    }
+
+    return errors;
+  }
+
+  get panelIsValid() {
+    return this.panelErrors.length < 1;
+  }
+
+  get errors() {
     const out = this.propErrors || [];
     return out;
   }
 
   toJSON() {
-    console.log('toJSON from ', this);
     return {
       title: this.title,
       fileName: this.fileName,
@@ -91,7 +140,7 @@ const propper = cp(WizardController);
 propper.addIsValid();
 
 propper.addProp('panels', {
-  failsWhen: 'array',
+  type: 'array',
   defaultValue: () => [],
   onChange: function (panels) {
     //  this._panels.forEach(panel => this.emit('panel removed', panel));
@@ -100,26 +149,28 @@ propper.addProp('panels', {
         this._initPanel(panel);
       });
     }
-    console.log('panels set');
     this.emit('panel changed', { panels });
   },
 })
   .addString('fileName', {
     required: true,
+    onBadData: function (field, value, err) { this.emit('error', { field, value, error: err }); return true; },
   })
   .addString('title', {
     required: true,
+    onBadData: function (field, value, err) { this.emit('error', { field, value, error: err }); return true; },
   })
   .addProp('index', {
+    type: 'integer',
     defaultValue: 0,
     onChange: function (index, old) {
       this.emit('index changed', { index, old });
     },
   })
-  .addProp('panelClass', {
+  .addString('panelClass', {
     defaultValue: 'wizardPanel',
   })
-  .addProp('mainClass', {
+  .addString('mainClass', {
     defaultValue: 'wizard',
   });
 

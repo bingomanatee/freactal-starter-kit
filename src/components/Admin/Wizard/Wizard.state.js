@@ -49,6 +49,7 @@ wizardState.addStateSideEffect('updateWizardPanels', (
 
 wizardState.addArrayPropAndSetEffects('wizardMessages', []);
 wizardState.addStringAndSetEffect('wizardTitle', 'New Wizard');
+wizardState.addStringAndSetEffect('wizardTitleErrors', '');
 wizardState.addStringAndSetEffect('wizardFileName', 'components/NewWizard');
 wizardState.addIntAndSetEffect('editingFieldID', 0);
 

@@ -14,6 +14,9 @@ import { injectState } from 'freactal';
 import styles from './PanelEditor.module.css';
 import PanelField from './PanelFieldEditor';
 import DeleteButton from '../../../../helpers/buttons/DeleteButton';
+import Switch from '../../../../helpers/logical/Switch';
+import Case from '../../../../helpers/logical/Switch/Case';
+import FieldErrors from '../../../../helpers/input/FieldErrors';
 
 const arrowStyle = {};
 
@@ -35,57 +38,68 @@ export default injectState(({
         <h3 className={styles['PanelEditor-head']}>
           Wizard panel &quot;{panel.title}&quot;
         </h3>
-        <span>
-      {editingPanel && <Grid>
-        <Cell size={6} tabletSize={4}>
-          <TextField
-            id={`state.panel-title-${panel.order}`}
-            label="Title of state.panel"
-            value={panelTitle}
-            onChange={setPanelTitle}
-          />
-        </Cell>
-        <Cell size={5} tabletSize={4}>
-          <TextField
-            id="wizard-name"
-            label="Filename of panel"
-            value={panelFileName}
-            onChange={setPanelFileName}
-          />
-        </Cell>
-      </Grid>}
-          {!editingPanel && <Grid>
-            <Cell size={6} tabletSize={4}>
-              <div><b>Title:</b></div>
-              <p>{panelTitle}</p>
-            </Cell>
-            <Cell size={5} tabletSize={4}>
-              <div><b>File Name:</b></div>
-              <p>{panelFileName}</p>
-            </Cell>
-          </Grid>}
-        </span>
+        <Grid>
+          <Cell size={5} tabletSize={3}>
+            <Switch subject={editingPanel}>
+              <Case istrue>
+                <TextField
+                  id={`state.panel-title-${panel.order}`}
+                  label="Title of state.panel"
+                  value={panelTitle}
+                  onChange={setPanelTitle}
+                /></Case>
+              <Case else>
+                <div><b>Title:</b></div>
+                <p>{panel.title}</p>
+              </Case>
+            </Switch>
+          </Cell>
+          <Cell size={5} tabletSize={3}>
+            <Switch subject={editingPanel}>
+              <Case istrue>
+                <TextField
+                  id="wizard-name"
+                  label="Filename of panel"
+                  value={panelFileName}
+                  onChange={setPanelFileName}
+                /></Case>
+              <Case else>
+                <div><b>File Name:</b></div>
+                <p>{panel.fileName}</p>
+              </Case>
+            </Switch>
+          </Cell>
+          <Cell size={2}>
+            <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
+              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+                <Switch subject={editingPanel}>
+                  <Case istrue>
+                    <Button primary flat onClick={saveEditPanel}>Save</Button>
+                  </Case>
+                  <Case else>
+                    <Button primary flat onClick={editingPanelOn}>Edit</Button>
+                  </Case>
+                </Switch>
+              </div>
+              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+                <Button
+                  secondary
+                  flat
+                  disabled={editingPanel || !!editingFieldID}
+                  onClick={() => addPanelField(panel)}
+                >Add Field
+                </Button>
+              </div>
+              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+                <DeleteButton
+                  disabled={editingPanel || !!editingFieldID}
+                  onClick={() => deletePanel(panel, wizardController)}
+                />
+              </div>
+            </div>
+          </Cell>
+        </Grid>
 
-        <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
-          <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-            {(!editingPanel) && <Button primary flat onClick={editingPanelOn}>Edit</Button>}
-            {(editingPanel) && <Button primary flat onClick={saveEditPanel}>Save</Button>}
-          </div>
-          <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-            <Button
-              secondary
-              flat
-              disabled={editingPanel || !!editingFieldID}
-              onClick={() => addPanelField(panel)}
-            >Add Field
-            </Button>
-          </div>
-          <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-            {(!editingPanel && (!panel.isOnly)) && <DeleteButton
-              onClick={() => deletePanel(panel, wizardController)}
-            />}
-          </div>
-        </div>
         {(panel && panel.fields) && (<DataTable plain className={styles['PanelEditor-fields-list']}>
           <TableHeader>
             <TableRow>

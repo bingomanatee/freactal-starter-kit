@@ -47,6 +47,33 @@ $ResponsiveSizeHuge: $md-desktop-min-width * 1.3;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  &.buttons-bar--small {
+    .buttons-bar__cell {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding-top: 0.25rem;
+      padding-right: 0.125rem;
+      padding-left: 0.125rem;
+      padding-bottom: 0.25rem;
+      // tiny
+      @media screen and (max-width: $ResponsiveSizeSmall)  {
+        padding-top: 0.125rem;
+        padding-right: 0.125rem;
+        padding-left: 0.125rem;
+        padding-bottom: 0.125rem;
+      }
+
+      // small
+      @media screen and (min-width: $ResponsiveSizeSmall) and(max-width: ($ResponsiveSizeBig - 1px)) {
+        padding-top: 0.125rem;
+        padding-right: 0.25rem;
+        padding-left: 0.25rem;
+        padding-bottom: 0.125rem;
+      }
+    }
+
+  }
 }
 
 .buttons-bar__cell {

@@ -1,11 +1,11 @@
 import { Button, FontIcon } from 'react-md';
 
 const deleteIconStyle = { color: 'red' };
-export default ({ onClick }) => (
+export default props => (
   <Button
     swapTheming
     icon
-    onClick={onClick}
+    {...props}
   >
     <FontIcon
       iconClassName="fa fa-minus-circle"
