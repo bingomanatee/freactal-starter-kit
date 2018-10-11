@@ -13,6 +13,7 @@ import {
 import { injectState } from 'freactal';
 import styles from './PanelEditor.module.css';
 import PanelField from './PanelFieldEditor';
+import DeleteButton from '../../../../helpers/buttons/DeleteButton';
 
 const arrowStyle = {};
 
@@ -30,6 +31,7 @@ export default injectState(({
     } = effects;
   return (
     <div className={styles.PanelEditor}>
+      <section className={styles.PanelEditor__inner}>
       <h3 className={styles['PanelEditor-head']}>
         Wizard panel &quot;{panel.title}&quot;
       </h3>
@@ -67,26 +69,6 @@ export default injectState(({
           {(editingPanel) && <Button primary flat onClick={saveEditPanel}>Save</Button>}
         </div>
         <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-
-          {(!editingPanel && (!panel.isOnly)) && <Button
-            primary
-            style={({ color: 'red' })}
-            flat
-            onClick={() => deletePanel(panel, wizardController)}
-          >Delete
-          </Button>}
-        </div>
-        <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-          {(editingPanel) && <Button secondary flat onClick={cancelEditPanel}>Cancel</Button>}
-          {(!editingPanel) && <Button
-            secondary
-            flat
-            disabled={editingPanel}
-            onClick={() => addPanel(panel.order)}
-          >Add Panel
-          </Button>}
-        </div>
-        <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
           <Button
             secondary
             flat
@@ -94,6 +76,11 @@ export default injectState(({
             onClick={() => addPanelField(panel)}
           >Add Field
           </Button>
+        </div>
+        <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
+          {(!editingPanel && (!panel.isOnly)) && <DeleteButton
+            onClick={() => deletePanel(panel, wizardController)}
+          />}
         </div>
       </div>
       {(panel && panel.fields) && (<DataTable plain className={styles['PanelEditor-fields-list']}>
@@ -136,6 +123,20 @@ export default injectState(({
         style={arrowStyle}
       />
       </Button>}
+      </section>
+
+      <div className={`${styles['buttons-bar']}`}>
+        <div className={`${styles['buttons-bar__cell']}`}>
+      {(editingPanel) && <Button secondary flat onClick={cancelEditPanel}>Cancel</Button>}
+      {(!editingPanel) && <Button
+        secondary
+        flat
+        disabled={editingPanel}
+        onClick={() => addPanel(panel.order)}
+      >Add Panel
+      </Button>}
+        </div>
+      </div>
     </div>
   );
 });

@@ -33,43 +33,38 @@ panelEditorState.addSideEffect(
   'addPanelField',
   (
     {
-      refreshWizard,
       setPanelFields,
     },
     panel,
   ) => {
     panel.addField('untitled', 'text', '');
     setPanelFields(panel.fields.slice(0));
-    refreshWizard();
   },
 );
 panelEditorState.addSideEffect(
   'movePanelUp',
   (
-    { refreshWizard },
+    effects,
     panel,
   ) => {
     panel.move('up');
-    refreshWizard();
   },
 );
 panelEditorState.addSideEffect(
   'movePanelDown',
   (
-    { refreshWizard },
+    { },
     panel,
   ) => {
     panel.move('down');
-    refreshWizard();
   },
 ); panelEditorState.addSideEffect(
   'deletePanel',
   (
-    { refreshWizard },
+    effects,
     panel,
   ) => {
     panel.delete();
-    refreshWizard();
   },
 );
 

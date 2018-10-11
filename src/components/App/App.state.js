@@ -36,14 +36,11 @@ appState.addStateSideEffect('loadPages', (
   }
   return Promise.resolve(pages);
 });
-appState.addInitializer('pagesLoadingOff', 10);
-appState.addInitializer('pagesLoadedOff', 11);
-appState.addInitializer(({ pagesLoadingOff }) => {
+
+appState.addInitializer((state) => {
   console.log('turning pagesLoading off');
-  return pagesLoadingOff();
+  return Object.assign(state, { pagesLoading: false, pagesLoaded: false });
 }, 12);
 lib.addAuth0ToStateDef(appState);
-
-console.log('state:', appState.toHash());
 
 export default provideState(appState);

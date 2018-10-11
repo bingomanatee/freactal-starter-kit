@@ -10,6 +10,7 @@ import {
 } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './PanelFieldEditor.module.css';
+import DeleteButton from '../../../../../helpers/buttons/DeleteButton';
 
 const small = {
   width: '0.1%',
@@ -75,13 +76,7 @@ export default injectState(({
         onClick={() => editPanelField(panelField)}
       >Edit
       </Button>
-      <Button
-        primary
-        flat
-        disabled={!!editingFieldID}
-        onClick={() => deletePanelField(panelField)}
-      >Delete
-      </Button>
+      <DeleteButton onClick={() => deletePanelField(panelField)} />
     </TableColumn>
   </TableRow>
 )));

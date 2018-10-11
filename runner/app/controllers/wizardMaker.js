@@ -1,4 +1,5 @@
 const path = require('path');
+// eslint-disable-next-line camelcase
 const child_process = require('child_process');
 const pageProvider = require('./../../lib/models/pageProvider');
 
@@ -9,7 +10,7 @@ function makeWizardPanel(panel, fileName) {
     console.log('making page: ', panel);
     const props = ['wizardPanel', `--name=${panel.fileName}`,
       `--title="${panel.title}"`,
-      `--panel='${JSON.stringify(page.toJSON()}'`,
+      `--panel='${JSON.stringify(panel.toJSON())}'`,
       `--where=${fileName}`];
     console.log('making page with props:', props);
     const result = child_process.spawn('gulp', props, {
@@ -21,7 +22,7 @@ function makeWizardPanel(panel, fileName) {
 }
 
 function makeWizard(title, name, where, panels) {
-  (new Promise((resolve, reject) => {
+  return (new Promise((resolve, reject) => {
     if (typeof panels !== 'string') panels = `'${JSON.stringify(panels)}"`;
     const props = ['wizard',
       `--name=${name}`,

@@ -66,7 +66,24 @@ class WizardControllerPanel extends EventEmitter {
   }
 
   addField(name, type = 'text', defaultValue = '') {
-    this.fields.push(new WCPField(this, name, type, { defaultValue }));
+    let field;
+    if (typeof name === 'object') {
+      field = Object.assign(name, { panel: this });
+    } else {
+      field = new WCPField(this, name, type, { defaultValue });
+    }
+    this._initField(field);
+    this.fields.push(field);
+    this.emit('change', { addedField: field.toJSON() });
+  }
+
+  _initField(field) {
+    field.panel = this;
+    field.removeAllListeners('changed');
+    field.on('changed', (...args) => {
+      console.log('field changed:', args);
+      this.emit('change', { field: args });
+    });
   }
 
   move(dir) {
@@ -99,6 +116,15 @@ class WizardControllerPanel extends EventEmitter {
   }
 }
 
+WizardControllerPanel.fromJSON = (data, controller = null) => {
+  const panel = new WizardControllerPanel(data.title, { controller });
+  if (data.fields && Array.isArray(data.fields)) {
+    data.fields.forEach((field) => {
+      panel.addField(WCPField.fromJSON(field));
+    });
+  }
+  return panel;
+};
 
 WizardControllerPanel.nextId = 0;
 
@@ -106,10 +132,17 @@ const propper = cp(WizardControllerPanel);
 
 propper.addString('title', {
   required: true,
+  onChange(...args) {
+    this.emit('changed', { change: args, panel: this });
+  },
 })
   .addString('fileName', {
     required: true,
+    onChange(...args) {
+      this.emit('changed', { change: args, panel: this });
+    },
   })
+
   .addProp('controller', {
     failsWhen: 'object',
   })

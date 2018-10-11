@@ -25,12 +25,10 @@ panelFieldEditorState.addStateSideEffect('saveFieldEdit', (effects, state, field
   field.name = state.panelFieldName;
   field.type = state.panelFieldType;
   effects.setEditingFieldID(0);
-  effects.refreshWizard();
 });
 panelFieldEditorState.addStateSideEffect('deletePanelField', (effects, state, field) => {
   effects.setEditingFieldID(0);
   field.delete();
-  effects.refreshWizard();
   effects.refreshFields();
 });
 

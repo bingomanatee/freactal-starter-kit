@@ -1,7 +1,9 @@
-import cp from 'class-propper';
+import { easyPropper } from 'class-propper';
+import EventEmitter from 'eventemitter3';
 
-class WCPField {
+class WCPField extends EventEmitter {
   constructor(panel, name, type) {
+    super();
     WCPField.nextId += 1;
     this.id = WCPField.nextId;
     this.panel = panel;
@@ -29,21 +31,27 @@ class WCPField {
   }
 
   delete() {
+    this.emit('changed', { deleted: this.toJSON() });
+    this.removeAllListeners();
     this.panel.fields = this.panel.fields.filter(f => f !== this);
   }
 }
 
-const wPropper = cp(WCPField);
+WCPField.fromJSON = ({ name, type = 'text' }, panel) => new WCPField(panel, name, type);
+
+const wPropper = easyPropper(WCPField);
 wPropper
-  .addProp('panel', {
-    required: true,
+  .addInteger('id', {
   })
+  .addObject('panel')
   .addString('name', {
     required: true,
+    onChange(...args) { this.emit('changed', { what: args }); },
   })
   .addString('type', {
     required: true,
     default: 'text',
+    onChange(...args) { this.emit('changed', { what: args }); },
   });
 
 WCPField.nextId = 0;

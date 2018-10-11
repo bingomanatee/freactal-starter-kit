@@ -4,12 +4,11 @@ $PanelEditorSmall: $ResponsiveSizeSmall;
 $PanelEditorMedium: $ResponsiveSizeMedium;
 $PanelEditorBig: $ResponsiveSizeBig;
 
-.PanelEditor {
+.PanelEditor__inner {
   border: 1px solid rgba(0,0,0,0.25);
-  padding-top: 0.5rem;
+  padding-top:0;
   padding-right: 5rem;
   padding-left: 1rem;
-  padding-bottom: 0.75rem;
   position: relative;
   margin-bottom: 1.25rem;
   // tiny
@@ -20,18 +19,9 @@ $PanelEditorBig: $ResponsiveSizeBig;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
   }
-
-  // small
-  @media screen and (min-width: $PanelEditorSmall) and(max-width: ($PanelEditorMedium - 1px)) {
-  }
-
-  // regular
-  @media screen and (min-width: $PanelEditorMedium) and(max-width: ($PanelEditorBig - 1px)) {
-  }
-
-  // biggest
-  @media screen and (min-width: $PanelEditorBig) {
-  }
+}
+.PanelEditor {
+  padding-bottom: 0.75rem;
 }
 
 .PanelEditor-nav-button-up {
@@ -49,7 +39,11 @@ $PanelEditorBig: $ResponsiveSizeBig;
 }
 
 .PanelEditor-head {
-  font-weight: bold;
+  font-weight: normal;
   font-size: 1rem;
-  text-align: center;
+  text-align: left;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  color: rgb(102,102, 102)
 }

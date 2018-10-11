@@ -4429,9 +4429,9 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-freactal-seed@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/freactal-seed/-/freactal-seed-0.0.6.tgz#a67d26bfcfa75d2e765d766aeea45cebdd5c0b9f"
+freactal-seed@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/freactal-seed/-/freactal-seed-0.0.7.tgz#3a0cd01a4a6e5d0e2d517c94277e228f9f14aa58"
   dependencies:
     bottlejs "^1.7.1"
     freactal "^2.0.3"

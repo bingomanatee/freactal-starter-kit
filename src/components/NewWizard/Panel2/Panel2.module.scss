@@ -1,0 +1,105 @@
+@import '../../css/shared';
+
+$Panel2Small: $ResponsiveSizeSmall;
+$Panel2Medium: $ResponsiveSizeMedium;
+$Panel2Big: $ResponsiveSizeBig;
+
+.Panel2 {
+  // should only be for primary pages (ones the route in content drives to); remove for sub-components
+  @include mainPagePadding();
+
+  // tiny
+  @media screen and (max-width: $Panel2Small) {
+  }
+
+  // small
+  @media screen and (min-width: $Panel2Small) and(max-width: ($Panel2Medium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $Panel2Medium) and(max-width: ($Panel2Big - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $Panel2Big) {
+  }
+}
+
+.Panel2-head {
+  // tiny
+  @media screen and (max-width: $Panel2Small) {
+  }
+
+  // small
+  @media screen and (min-width: $Panel2Small) and(max-width: ($Panel2Medium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $Panel2Medium) and(max-width: ($Panel2Big - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $Panel2Big) {
+  }
+}
+
+.Panel2-body {
+  // tiny
+  @media screen and (max-width: $Panel2Small) {
+  }
+
+  // small
+  @media screen and (min-width: $Panel2Small) and(max-width: ($Panel2Medium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $Panel2Medium) and(max-width: ($Panel2Big - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $Panel2Big) {
+  }
+}
+
+.Panel2-button {
+  // tiny
+  @media screen and (max-width: $Panel2Small) {
+  }
+
+  // small
+  @media screen and (min-width: $Panel2Small) and(max-width: ($Panel2Medium - 1px)) {
+  }
+
+  // regular
+  @media screen and (min-width: $Panel2Medium) and(max-width: ($Panel2Big - 1px)) {
+  }
+
+  // biggest
+  @media screen and (min-width: $Panel2Big) {
+  }
+}
+
+@mixin vertCentered {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Panel2-dialog {
+  display: flex;
+  flex-direction: row;
+  max-width: $Panel2Big;
+  height: 3rem;
+}
+
+.Panel2-dialog__main {
+  @include vertCentered;
+  flex-grow: 1;
+}
+
+.Panel2-dialog__button {
+  @include vertCentered;
+  flex-grow: 0;
+  flex-shrink: 0;
+}

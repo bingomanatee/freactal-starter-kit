@@ -10,7 +10,7 @@ export default withRouter(injectState(({ state, effects, history }) => (
   <div className={styles.Home}>
     <h1 className={styles['Home-head']}>Welcome to {lib.SITE_NAME}</h1>
     <List className={styles['Home-PageList']}>
-      {state.pages.filter(lib.aclProvider.canSeePage)
+      {state.pages && state.pages.filter(lib.aclProvider.canSeePage)
         .filter(page => !page.parent)
         .map((pageDef) => {
         if (!pageDef.published) return '';

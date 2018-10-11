@@ -16,7 +16,6 @@ export default (bottle) => {
     };
 
     stateDef.addStringAndSetEffect('accessToken', null);
-    stateDef.addInitializer('logoutIfNotLoggedIn', -1);
     stateDef.addEffect('logoutIfNotLoggedIn', effects => (state) => {
       if (!container.isLoggedIn(state)) {
         effects.logout();

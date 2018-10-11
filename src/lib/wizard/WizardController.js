@@ -23,26 +23,31 @@ class WizardController extends EventEmitter {
       panel = new WizardControllerPanel(...args);
     }
     this._initPanel(panel);
-    this.panels.push(panel);
+    this.panels = this.panels.concat([panel]);
     return this;
   }
 
-  addPanelAt(order, ...args) {
-    orderValidator.try(order);
-    let panel;
-    if (typeof args[0] === 'object') {
-      panel = args[0];
-    } else {
-      panel = new WizardControllerPanel(...args);
+  addPanelAt(order, title, config) {
+    try {
+      orderValidator.try(order);
+    } catch (err) {
+      console.log('bad order: ', order);
+      return;
     }
+    const panel = new WizardControllerPanel(title, config);
     this._initPanel(panel);
-    this.panels.splice(order + 1, 0, panel);
-    this.panels = _.compact(this.panels);
+    const newPanels = this.panels.slice(0);
+    newPanels.splice(order + 1, 0, panel);
+    this.panels = _.compact(newPanels);
   }
 
   _initPanel(panel) {
     panel.controller = this;
     this.emit('panel added', panel);
+    panel.removeAllListeners('change');
+    panel.on('change', (...args) => {
+      this.emit('panel changed', args);
+    });
   }
 
   nextPage() {
@@ -53,6 +58,7 @@ class WizardController extends EventEmitter {
   }
 
   toJSON() {
+    console.log('toJSON from ', this);
     return {
       title: this.title,
       fileName: this.fileName,
@@ -60,6 +66,16 @@ class WizardController extends EventEmitter {
     };
   }
 }
+
+WizardController.fromJSON = (data) => {
+  const controller = new WizardController(data.title, data);
+  if (data.panels && Array.isArray(data.panels)) {
+    data.panels.forEach((panel) => {
+      controller.addPanel(WizardControllerPanel.fromJSON(panel, controller));
+    });
+  }
+  return controller;
+};
 
 const propper = cp(WizardController);
 
@@ -73,6 +89,8 @@ propper.addProp('panels', {
         this._initPanel(panel);
       });
     }
+    console.log('panels set');
+    this.emit('panel changed', { panels });
   },
 })
   .addString('fileName', {
