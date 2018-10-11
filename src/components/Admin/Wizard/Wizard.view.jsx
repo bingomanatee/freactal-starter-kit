@@ -1,4 +1,4 @@
-import { Button, TextField, Grid, Cell, Snackbar } from 'react-md';
+import {Button, TextField, Grid, Cell, Snackbar, FontIcon} from 'react-md';
 import { injectState } from 'freactal';
 import _ from 'lodash';
 import Switch from '../../../helpers/logical/Switch';
@@ -6,6 +6,7 @@ import styles from './Wizard.module.css';
 import PanelEditor from './PanelEditor';
 import Case from '../../../helpers/logical/Switch/Case';
 import FieldErrors from '../../../helpers/input/FieldErrors';
+import ButtonBar from '../../../helpers/buttons/ButtonBar/ButtonBar';
 import util from 'util';
 
 // eslint-disable-next-line no-unused-vars
@@ -18,7 +19,7 @@ export default injectState(({ state, effects }) => {
         <div className={`md-paper--3 ${styles['wizard-form-panel']}`}>
           <h2 className={styles['wizard-form-panel__title']}>Global Values</h2>
           {wizardController && (<Grid>
-            <Cell size={5} tabletSize={3}>
+            <Cell size={4} tabletSize={3} phoneSize={4}>
               <Switch subject={isEditingWizard}>
                 <Case istrue>
                   <TextField
@@ -37,7 +38,7 @@ export default injectState(({ state, effects }) => {
                 </Case>
               </Switch>
             </Cell>
-            <Cell size={5} tabletSize={3}>
+            <Cell size={4} tabletSize={3} phoneSize={4}>
               <Switch subject={isEditingWizard}>
                 <Case istrue>
                   <TextField
@@ -60,40 +61,43 @@ export default injectState(({ state, effects }) => {
                 </Case>
               </Switch>
             </Cell>
-            <Cell size={2}>
-              <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
+            <Cell size={4} tabletSize={2} phoneSize={4}>
+              <ButtonBar small>
                 <Switch subject={isEditingWizard}>
                   <Case istrue>
-                    <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-                      <Button
-                        primary
-                        flat
-                        onClick={effects.saveWizardChanges}
-                      >
+                    <Button
+                      primary
+                      flat
+                      onClick={effects.saveWizardChanges}
+                    >
                       Save
-                      </Button>
-                    </div>
+                    </Button>
                   </Case>
                 </Switch>
-                <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-                  {isEditingWizard && (<Button
-                    primary
-                    flat
-                    onClick={effects.cancelWizardChanges}
-                  >
-                    Cancel
-                  </Button>)}
-                  {(!isEditingWizard) && (
+                <Switch subject={isEditingWizard}>
+                  <Case istrue>
+                    <Button
+                      secondary
+                      flat
+                      onClick={effects.cancelWizardChanges}
+                    >
+                      <FontIcon
+                        iconClassName="fa fa-ban"
+                        secondary
+                      />
+                    </Button>
+                  </Case>
+                  <Case else>
                     <Button
                       primary
                       flat
                       onClick={() => effects.isEditingWizardOn()}
                     >
-                      Edit
+                    Edit
                     </Button>
-                  )}
-                </div>
-              </div>
+                  </Case>
+                </Switch>
+              </ButtonBar>
             </Cell>
           </Grid>)}
         </div>
@@ -113,7 +117,7 @@ export default injectState(({ state, effects }) => {
           <div className={styles['wizard-form__errors']}>
             {wizardController.errors.map(({ message }) => (<span>{message}</span>))}
           </div>
-          )}
+        )}
 
         <div className={styles['buttons-bar']}>
           <div className={styles['buttons-bar__cell']}>

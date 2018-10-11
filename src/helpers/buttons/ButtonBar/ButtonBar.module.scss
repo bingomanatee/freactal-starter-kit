@@ -1,0 +1,71 @@
+@import '../../../components/css/shared';
+
+$ButtonBarSmall: $ResponsiveSizeSmall;
+$ButtonBarMedium: $ResponsiveSizeMedium;
+$ButtonBarBig: $ResponsiveSizeBig;
+
+.ButtonBar {
+  max-width: $ResponsiveSizeBig;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  // tiny
+  @media screen and (max-width: $ResponsiveSizeSmall)  {
+    margin-top: 0.125rem;
+    margin-right: 2px;
+    margin-left: 2px;
+    margin-bottom: 0.125rem;
+  }
+
+  // small
+  @media screen and (min-width: $ResponsiveSizeSmall) and(max-width: ($ResponsiveSizeBig - 1px)) {
+    margin-top: 0.125rem;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+    margin-bottom: 0.125rem;
+  }
+
+  &.ButtonBar--small {
+    .ButtonBar__cell {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding-right: 0.25rem;
+      padding-left: 0.25rem;
+
+      // tiny
+      @media screen and (max-width: $ResponsiveSizeSmall)  {
+        padding-right: 2px;
+        padding-left: 2px;
+      }
+
+      // small
+      @media screen and (min-width: $ResponsiveSizeSmall) and(max-width: ($ResponsiveSizeBig - 1px)) {
+        padding-right: 1px;
+        padding-left: 1px;
+      }
+    }
+  }
+}
+
+.ButtonBar__cell {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 0;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0;
+
+  // tiny
+  @media screen and (max-width: $ResponsiveSizeSmall)  {
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+  }
+
+  // small
+  @media screen and (min-width: $ResponsiveSizeSmall) and(max-width: ($ResponsiveSizeBig - 1px)) {
+    padding-right: 3px;
+    padding-left: 3px;
+  }
+}

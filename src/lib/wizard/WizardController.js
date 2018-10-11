@@ -63,7 +63,6 @@ class WizardController extends EventEmitter {
   }
 
   get panelErrors() {
-    console.log('checking panel errors');
     const errors = _(this.panels)
       .map('propErrors')
       .compact()
@@ -96,7 +95,6 @@ class WizardController extends EventEmitter {
       });
     }
     if (sameFileNames.length) {
-      console.log('sameFileNames');
       errors.push({
         prop: 'panels',
         value: sameFileNames.join(','),

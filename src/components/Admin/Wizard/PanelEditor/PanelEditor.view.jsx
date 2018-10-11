@@ -17,6 +17,7 @@ import DeleteButton from '../../../../helpers/buttons/DeleteButton';
 import Switch from '../../../../helpers/logical/Switch';
 import Case from '../../../../helpers/logical/Switch/Case';
 import FieldErrors from '../../../../helpers/input/FieldErrors';
+import ButtonBar from '../../../../helpers/buttons/ButtonBar';
 
 const arrowStyle = {};
 
@@ -39,7 +40,7 @@ export default injectState(({
           Wizard panel &quot;{panel.title}&quot;
         </h3>
         <Grid>
-          <Cell size={5} tabletSize={3}>
+          <Cell size={4} tabletSize={3} phoneSize={4}>
             <Switch subject={editingPanel}>
               <Case istrue>
                 <TextField
@@ -54,7 +55,7 @@ export default injectState(({
               </Case>
             </Switch>
           </Cell>
-          <Cell size={5} tabletSize={3}>
+          <Cell size={4} tabletSize={3} phoneSize={4}>
             <Switch subject={editingPanel}>
               <Case istrue>
                 <TextField
@@ -69,34 +70,37 @@ export default injectState(({
               </Case>
             </Switch>
           </Cell>
-          <Cell size={2}>
-            <div className={`${styles['buttons-bar']} ${styles['buttons-bar--small']}`}>
-              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-                <Switch subject={editingPanel}>
-                  <Case istrue>
-                    <Button primary flat onClick={saveEditPanel}>Save</Button>
-                  </Case>
-                  <Case else>
-                    <Button primary flat onClick={editingPanelOn}>Edit</Button>
-                  </Case>
-                </Switch>
-              </div>
-              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-                <Button
-                  secondary
-                  flat
-                  disabled={editingPanel || !!editingFieldID}
-                  onClick={() => addPanelField(panel)}
-                >Add Field
-                </Button>
-              </div>
-              <div className={`${styles['buttons-bar__cell']} ${styles['buttons-bar__cell--small']}`}>
-                <DeleteButton
-                  disabled={editingPanel || !!editingFieldID}
-                  onClick={() => deletePanel(panel, wizardController)}
-                />
-              </div>
-            </div>
+          <Cell size={4} tabletSize={2} phoneSize={4}>
+            <ButtonBar small>
+              <Switch subject={editingPanel}>
+                <Case istrue>
+                  <Button primary flat onClick={saveEditPanel}>Save</Button>
+                </Case>
+                <Case else>
+                  <Button primary flat onClick={editingPanelOn}>Edit</Button>
+                </Case>
+              </Switch>
+              <Switch subject={editingPanel}>
+                <Case istrue>
+                  <Button
+                    secondary
+                    flat
+                    onClick={effects.cancelEditPanel}
+                  >
+                    <FontIcon
+                      iconClassName="fa fa-ban"
+                      secondary
+                    />
+                  </Button>
+                </Case>
+                <Case else>
+                  <DeleteButton
+                    disabled={panel.isOnly || editingFieldID}
+                    onClick={() => deletePanel(panel, wizardController)}
+                  />
+                </Case>
+              </Switch>
+            </ButtonBar>
           </Cell>
         </Grid>
 
@@ -112,6 +116,15 @@ export default injectState(({
             {panelFields.map(field => <PanelField key={`${field.id}_field`} field={field} />)}
           </TableBody>
         </DataTable>)}
+        <ButtonBar>
+          <Button
+            secondary
+            flat
+            disabled={editingPanel || !!editingFieldID}
+            onClick={() => addPanelField(panel)}
+          >Add Field
+          </Button>
+        </ButtonBar>
 
         {(!panel.isFirst) && <Button
           className={styles['PanelEditor-nav-button-up']}
@@ -143,22 +156,17 @@ export default injectState(({
         </Button>}
       </section>
 
-      <div className={`${styles['buttons-bar']}`}>
-        <div className={`${styles['buttons-bar__cell']}`}>
-          {(editingPanel) && <Button
-            secondary
-            flat
-            onClick={cancelEditPanel}
-          >Cancel</Button>}
-          {(!editingPanel) && <Button
+      {(!editingPanel) && (
+        <ButtonBar>
+          <Button
             secondary
             flat
             disabled={editingPanel}
             onClick={() => addPanel(panel.order)}
           >Add Panel
-          </Button>}
-        </div>
-      </div>
+          </Button>
+        </ButtonBar>
+      )}
     </div>
   );
 });

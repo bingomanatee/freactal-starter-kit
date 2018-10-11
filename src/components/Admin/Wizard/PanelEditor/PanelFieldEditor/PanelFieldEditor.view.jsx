@@ -1,12 +1,9 @@
 import {
-  DataTable,
-  TableHeader,
-  TableBody,
   TableRow,
   TableColumn,
   Button,
   TextField,
-  SelectField,
+  SelectField, FontIcon,
 } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './PanelFieldEditor.module.css';
@@ -61,7 +58,12 @@ export default injectState(({
         onClick={() => saveFieldEdit(panelField)}
       >Save
       </Button>
-      <Button secondary flat onClick={() => cancelFieldEdit(panelField)}>Cancel</Button>
+      <Button secondary flat onClick={() => cancelFieldEdit(panelField)}>
+        <FontIcon
+          iconClassName="fa fa-ban"
+          secondary
+        />
+      </Button>
     </TableColumn>
   </TableRow>
 ) : (
