@@ -72,7 +72,7 @@ module.exports = (kitBottle) => {
             this.worker = null;
             break;
 
-          case 'started UI':
+          case 'start UI':
             console.log('React UI listening on port 5000');
             break;
 

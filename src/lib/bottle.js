@@ -3,6 +3,7 @@ import config from './config';
 import state from './state';
 import model from './models';
 import wizard from './wizard';
+import localStorage from './localStorage';
 /**
  * this method exists to separate the singleton (in index.js) from a reusable bottle.
  *
@@ -26,6 +27,7 @@ export default (getBottle = false) => {
   state(bottle);
   model(bottle);
   wizard(bottle);
+  localStorage(bottle);
 
   return getBottle ? bottle : bottle.container;
 };

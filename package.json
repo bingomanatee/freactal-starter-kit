@@ -39,7 +39,7 @@
     "elastic-apm-node": "^1.8.3",
     "eventemitter3": "^3.1.0",
     "freactal": "^2.0.3",
-    "freactal-seed": "^0.0.7",
+    "freactal-seed": "^0.0.8",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",

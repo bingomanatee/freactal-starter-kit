@@ -1,26 +1,20 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import lib from './../../lib';
 import Switch, { Case } from '../logical/Switch';
 import WizardPanel from './Panel.js';
 
-function getChildren(props) {
-  let children = props.children || [];
-  if (!Array.isArray(children)) {
-    children = [children];
-  }
-  return children;
-}
-
 export default class Wizard extends Component {
   constructor(props) {
     super(props);
     const { title, footer, controller } = props;
-    const wizard = controller || new lib.WizardController(title);
-    const children = getChildren(props);
+    const wizard = controller || new lib.WizardController({ title });
+    const children = React.Children.toArray(props.children);
     children.forEach((child) => {
       const { title: cTitle, config = {}, children: cChildren } = child.props;
-      wizard.addPanel(cTitle, config, cChildren);
+      config.title = cTitle;
+      config.children = cChildren;
+      wizard.addPanel(config);
     });
     this.footerClass = footer;
     this.state = {

@@ -1,4 +1,4 @@
-import {Button, TextField, Grid, Cell, Snackbar, FontIcon} from 'react-md';
+import { Button, TextField, Grid, Cell, Snackbar, FontIcon } from 'react-md';
 import { injectState } from 'freactal';
 import _ from 'lodash';
 import Switch from '../../../helpers/logical/Switch';
@@ -113,7 +113,7 @@ export default injectState(({ state, effects }) => {
           state.wizardPanels.map(panel => <PanelEditor key={`panel_${panel.id}`} panel={panel} />)}
         </div>
 
-        {(wizardController && wizardController.errors.length) && (
+        {(wizardController && wizardController.errors && wizardController.errors.length) && (
           <div className={styles['wizard-form__errors']}>
             {wizardController.errors.map(({ message }) => (<span>{message}</span>))}
           </div>
@@ -124,7 +124,9 @@ export default injectState(({ state, effects }) => {
             <Button
               primary
               raised
-              disabled={wizardController && (!(wizardController.isValid && wizardController.panelIsValid))}
+              disabled={Boolean(wizardController && (
+                !(wizardController.isValid && wizardController.panelIsValid)
+              ))}
               onClick={effects.saveWizard}
             >Create Wizard
             </Button>
@@ -137,15 +139,20 @@ export default injectState(({ state, effects }) => {
       </div>
       <div>
         <h3>wizard</h3>
-        <pre>
-          {wizardController ? JSON.stringify(wizardController.toJSON(), true, 4) : 'no wizard controller'}
-        </pre>
-        <h3>wizardPanels</h3>
-        <pre>
-          {state.wizardPanels ? JSON.stringify(state.wizardPanels.map(p => p.toJSON()), true, 4) : 'no wizard panels'}
-        </pre>
-        <h3>Panel Errors</h3>
-        <pre>{wizardController && JSON.stringify(wizardController.panelErrors)}</pre>
+        {0 && (
+          [
+            <pre>
+              {wizardController ? JSON.stringify(wizardController.toJSON(), true, 4) : 'no wizard controller'}
+            </pre>,
+            <h3>wizardPanels</h3>,
+            <pre>,
+              {state.wizardPanels ? JSON.stringify(state.wizardPanels.map(p => p.toJSON()), true, 4) : 'no wizard panels'}
+            </pre>,
+            <h3>Panel Errors</h3>,
+            <pre>{wizardController && JSON.stringify(wizardController.panelErrors)}</pre>,
+          ]
+        )}
+
       </div>
       <Snackbar
         id="wizard-snackbar"

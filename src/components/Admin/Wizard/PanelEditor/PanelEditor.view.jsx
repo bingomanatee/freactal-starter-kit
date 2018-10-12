@@ -95,7 +95,7 @@ export default injectState(({
                 </Case>
                 <Case else>
                   <DeleteButton
-                    disabled={panel.isOnly || editingFieldID}
+                    disabled={Boolean(panel.isOnly || editingFieldID)}
                     onClick={() => deletePanel(panel, wizardController)}
                   />
                 </Case>

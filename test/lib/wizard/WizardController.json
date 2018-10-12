@@ -1,0 +1,46 @@
+{
+  "title": "foo",
+  "fileName": "controllers/Foo",
+  "panels": [
+    {
+      "id": 1,
+      "title": "alpha",
+      "fileName": "Alpha",
+      "fields": [
+        {
+          "id": 1,
+          "name": "foo",
+          "type": "date"
+        },
+        {
+          "id": 2,
+          "name": "bar",
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "beta",
+      "fileName": "Beta",
+      "fields": [
+        {
+          "id": 3,
+          "name": "vey",
+          "type": "date"
+        },
+        {
+          "id": 4,
+          "name": "delta",
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "gamma",
+      "fileName": "Gamma",
+      "fields": []
+    }
+  ]
+}

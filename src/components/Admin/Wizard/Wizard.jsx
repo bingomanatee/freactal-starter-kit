@@ -9,14 +9,16 @@ export default wizardState(injectState(class Wizard extends Component {
   constructor(props) {
     super(props);
     const {
-      effects: { setWizardController, isEditingWizardOff },
+      effects: {
+        loadWizardControllerFromLS, isEditingWizardOff, newWizardController,
+      },
       state: { wizardController },
     } = props;
     console.log('old wizard controller', wizardController);
-    if (!wizardController) {
-      const controller = new lib.WizardController('New Wizard', { fileName: 'controllers/NewWizard' });
-      controller.addPanel('First Panel', { fileName: 'PanelOne' });
-      setWizardController(controller);
+    if (lib.localStorageHas(lib.WIZARD_CONTROLLER_LS_ID)) {
+      loadWizardControllerFromLS();
+    } else {
+      newWizardController();
     }
     isEditingWizardOff();
   }
