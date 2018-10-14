@@ -50,7 +50,8 @@ gulp.task('wizardPanel', () => {
   const panelData = JSON.parse(_.trim(panel, "'"));
 
   const fields = (panelData.fields || [])
-    .map(field => `componentNameState.add${_.upperFirst(field.type)}('${field.name}',);`);
+    .map(field => `componentNameState.add${_.upperFirst(field.type.replace('text', 'string'))}AndSetEffect('${field.name}');`)
+    .join('\n');
 
   containerNameValidator.try(name);
   const source = template('wizardPanel');

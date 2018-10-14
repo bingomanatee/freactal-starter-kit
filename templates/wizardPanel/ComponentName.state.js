@@ -4,6 +4,6 @@ import seedFactory from 'freactal-seed';
 const Seed = seedFactory();
 
 const componentNameState = new Seed();
-componentFields;
+componentFields
 
 export default provideState(componentNameState.toHash());

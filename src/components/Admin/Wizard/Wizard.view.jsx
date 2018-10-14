@@ -1,4 +1,4 @@
-import { Button, TextField, Grid, Cell, Snackbar, FontIcon } from 'react-md';
+import { Button, Grid, Cell, Snackbar, FontIcon } from 'react-md';
 import { injectState } from 'freactal';
 import _ from 'lodash';
 import Switch from '../../../helpers/logical/Switch';
@@ -7,25 +7,31 @@ import PanelEditor from './PanelEditor';
 import Case from '../../../helpers/logical/Switch/Case';
 import FieldErrors from '../../../helpers/input/FieldErrors';
 import ButtonBar from '../../../helpers/buttons/ButtonBar/ButtonBar';
+import TextField from '../../../helpers/input/TextField.jsx';
 import util from 'util';
 
 // eslint-disable-next-line no-unused-vars
-export default injectState(({ state, effects }) => {
+export default injectState(({
+  state, effects,
+}) => {
+  console.log('rendering wizard');
   const { wizardController, isEditingWizard } = state;
+  if (!wizardController) return '';
+  console.log('rendering wizard with effects ', effects);
   return (
     <div className={styles.Wizard}>
       <h1 className={styles['Wizard-head']}>Create a Wizard</h1>
       <div className={styles['wizard-form']}>
         <div className={`md-paper--3 ${styles['wizard-form-panel']}`}>
           <h2 className={styles['wizard-form-panel__title']}>Global Values</h2>
-          {wizardController && (<Grid>
+          <Grid>
             <Cell size={4} tabletSize={3} phoneSize={4}>
               <Switch subject={isEditingWizard}>
                 <Case istrue>
                   <TextField
-                    id="wizard-title"
+                    id="wizard-title-field"
                     label="Title of Wizard"
-                    value={state.wizardTitle || ''}
+                    value={state.wizardTitle}
                     onChange={effects.setWizardTitle}
                   />
                 </Case>
@@ -42,7 +48,7 @@ export default injectState(({ state, effects }) => {
               <Switch subject={isEditingWizard}>
                 <Case istrue>
                   <TextField
-                    id="wizard-name"
+                    id="wizard-name-field"
                     label="Filename of wizard"
                     value={state.wizardFileName || ''}
                     onChange={effects.setWizardFileName}
@@ -99,7 +105,7 @@ export default injectState(({ state, effects }) => {
                 </Switch>
               </ButtonBar>
             </Cell>
-          </Grid>)}
+          </Grid>
         </div>
 
         <div className={`md-paper--3 ${styles['wizard-form-panel']}`}>

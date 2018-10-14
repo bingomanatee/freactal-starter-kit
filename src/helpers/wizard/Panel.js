@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import { injectState } from 'freactal';
 
-export default class WizardPanel extends Component {
+export default injectState(class WizardPanel extends Component {
   constructor(props) {
     super(props);
     const panel = (props.panel);
@@ -19,4 +20,4 @@ export default class WizardPanel extends Component {
       </div>
     );
   }
-}
+});

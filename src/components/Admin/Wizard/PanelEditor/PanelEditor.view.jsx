@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/jsx-closing-tag-location */
 import {
-  Button, TextField, FontIcon,
+  Button, FontIcon,
   DataTable,
   TableHeader,
   TableBody,
@@ -10,6 +10,7 @@ import {
   Grid,
   Cell,
 } from 'react-md';
+
 import { injectState } from 'freactal';
 import styles from './PanelEditor.module.css';
 import PanelField from './PanelFieldEditor';
@@ -18,12 +19,14 @@ import Switch from '../../../../helpers/logical/Switch';
 import Case from '../../../../helpers/logical/Switch/Case';
 import FieldErrors from '../../../../helpers/input/FieldErrors';
 import ButtonBar from '../../../../helpers/buttons/ButtonBar';
+import TextField from '../../../../helpers/input/TextField.jsx';
 
 const arrowStyle = {};
 
 export default injectState(({
   effects,
   state,
+  peid
 }) => {
   const {
     panel, editingPanel, wizardController, panelTitle, editingFieldID, panelFields, panelFileName,
@@ -33,6 +36,7 @@ export default injectState(({
       setPanelTitle, saveEditPanel, setPanelFileName, addPanel, addField, cancelEditPanel,
       movePanelUp, movePanelDown, deletePanel, addPanelField, editingPanelOn,
     } = effects;
+
   return (
     <div className={styles.PanelEditor}>
       <section className={styles.PanelEditor__inner}>
@@ -43,12 +47,13 @@ export default injectState(({
           <Cell size={4} tabletSize={3} phoneSize={4}>
             <Switch subject={editingPanel}>
               <Case istrue>
-                <TextField
-                  id={`state.panel-title-${panel.order}`}
-                  label="Title of state.panel"
-                  value={panelTitle || ''}
-                  onChange={setPanelTitle}
-                /></Case>
+              <TextField
+                id={`panel_title_${panel.order}`}
+                label="Title"
+                value={panelTitle || ''}
+                onChange={setPanelTitle}
+              />
+              </Case>
               <Case else>
                 <div><b>Title:</b></div>
                 <p>{panel.title}</p>
@@ -59,9 +64,9 @@ export default injectState(({
             <Switch subject={editingPanel}>
               <Case istrue>
                 <TextField
-                  id="wizard-name"
-                  label="Filename of panel"
-                  value={panelFileName || ''}
+                  id={`panel-name-${panel.order}`}
+                  label="FileName"
+                  value={panelFileName}
                   onChange={setPanelFileName}
                 /></Case>
               <Case else>

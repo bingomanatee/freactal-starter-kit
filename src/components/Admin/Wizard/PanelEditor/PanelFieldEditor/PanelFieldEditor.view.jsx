@@ -2,23 +2,23 @@ import {
   TableRow,
   TableColumn,
   Button,
-  TextField,
   SelectField, FontIcon,
 } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './PanelFieldEditor.module.css';
 import DeleteButton from '../../../../../helpers/buttons/DeleteButton';
+import TextField from '../../../../../helpers/input/TextField.jsx';
 
 const small = {
   width: '0.1%',
   whiteSpace: 'nowrap',
 };
 const TYPES = [
-  'text',
-  'integer',
-  'float',
-  'date',
-  'other',
+  { label: 'string', value: 'String' },
+  { label: 'integer', value: 'Int' },
+  { label: 'float', value: 'Float' },
+  { label: 'date', value: 'Date' },
+  { label: 'object', value: 'Object' },
 ];
 
 // eslint-disable-next-line no-unused-vars

@@ -10,7 +10,7 @@ import lib from './../../src/lib';
 export default withRouter(componentNameState(injectState(class ComponentName extends Component {
   constructor(props) {
     super(props);
-    const controller = new lib.WizardController('ComponentTitle');
+    const controller = new lib.WizardController({ title: 'ComponentTitle' });
     props.effects.setComponentNameWizardController(controller);
   }
 

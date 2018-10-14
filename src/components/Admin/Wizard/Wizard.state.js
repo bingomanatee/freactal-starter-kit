@@ -26,8 +26,8 @@ wizardState.addObjectAndSetEffect('wizardController', null, {
 wizardState.addArrayPropAndSetEffects('wizardPanels', []);
 wizardState.addArrayPropAndSetEffects('wizardErrors', []);
 
-wizardState.addStateSideEffect('saveWizardChanges', ({ isEditingWizardOff, updateWizardErrors }, {
-  wizardTitle, wizardFileName, wizardController, saveWizardToLS,
+wizardState.addStateSideEffect('saveWizardChanges', ({ isEditingWizardOff, saveWizardToLS, updateWizardErrors }, {
+  wizardTitle, wizardFileName, wizardController,
 }) => {
   if (wizardController) {
     wizardController.title = wizardTitle;
@@ -72,7 +72,7 @@ wizardState.addSideEffect('dismissWizardMessages', ({ unshiftToWizardMessages })
 });
 
 wizardState.addSideEffect('newWizardController', ({ setWizardController }) => {
-  const controller = new lib.WizardController({ title: 'New Wizard', fileName: 'controllers/NewWizard' });
+  const controller = new lib.WizardController({ title: 'New Wizard', fileName: 'components/NewWizard' });
   controller.addPanel({ title: 'First Panel', fileName: 'PanelOne' }, controller);
   setWizardController(controller);
 });

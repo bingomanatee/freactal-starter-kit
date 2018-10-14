@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import styles from './Content.module.css';
+import Four04 from './Four04';
 // eslint-disable-next-line no-unused-vars
 export default ({ pages: pageDefs }) => (
   <div className={styles.Content}>
@@ -12,6 +13,7 @@ export default ({ pages: pageDefs }) => (
           exact={pageDef.exact}
           component={pageDef.component}
         />))}
+      <Route component={Four04}/>
     </Switch>
   </div>
 );

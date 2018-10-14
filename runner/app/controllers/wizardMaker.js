@@ -10,7 +10,7 @@ function makeWizardPanel(panel, fileName) {
     console.log('making page: ', panel);
     const props = ['wizardPanel', `--name=${panel.fileName}`,
       `--title="${panel.title}"`,
-      `--panel='${JSON.stringify(panel.toJSON())}'`,
+      `--panel='${JSON.stringify(panel)}'`,
       `--where=${fileName}`];
     console.log('making page with props:', props);
     const result = child_process.spawn('gulp', props, {
@@ -23,7 +23,7 @@ function makeWizardPanel(panel, fileName) {
 
 function makeWizard(title, name, where, panels) {
   return (new Promise((resolve, reject) => {
-    if (typeof panels !== 'string') panels = `'${JSON.stringify(panels)}"`;
+    if (typeof panels !== 'string') panels = JSON.stringify(panels);
     const props = ['wizard',
       `--name=${name}`,
       `--title="${title}"`,
@@ -33,7 +33,9 @@ function makeWizard(title, name, where, panels) {
     const result = child_process.spawn('gulp', props, {
       cwd: ROOT,
     });
+    console.log('spawned');
     result.on('exit', () => {
+      console.log('makeWizard complete');
       setTimeout(resolve, 1000); // wait to ensure writes.
     });
 
@@ -65,6 +67,7 @@ exports.make = async (ctx) => {
   try {
     await Promise.all(panels.map(panel => makeWizardPanel(panel, fileName)));
     await makeWizard(title, name, where, panels);
+    console.log('makeWizard complete');
     await pageProvider.addPage({
       component: fileName,
       name: title,
@@ -76,6 +79,6 @@ exports.make = async (ctx) => {
     ctx.body = { success: true };
     ctx.status = 200;
   } catch (err) {
-    console.log('error in make wizard: ', err.message);
+    console.log('error in make wizard panels: ', err.message);
   }
 };
