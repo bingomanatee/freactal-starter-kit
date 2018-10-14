@@ -11,7 +11,7 @@ export default injectState(({ state, effects }) => {
   if (!state.componentNameWizardController) return '';
   return (
     <section className={styles.ComponentName}>
-      <Wizard controller={state.componentNameWizardController}>
+      <Wizard controller={state.componentNameWizardController} index={state.componentNameWizardIndex}>
           WizardPanels
       </Wizard>
       <Button

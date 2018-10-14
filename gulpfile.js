@@ -26,7 +26,7 @@ gulp.task('comp', () => {
 
   containerNameValidator.try(name);
   const source = template('component');
-  gulp.src(source)
+  gulp.src(source, { base: './' })
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
       return file;
@@ -55,7 +55,7 @@ gulp.task('wizardPanel', () => {
 
   containerNameValidator.try(name);
   const source = template('wizardPanel');
-  gulp.src(source)
+  gulp.src(source, { base: './' })
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
       return file;
@@ -94,11 +94,11 @@ gulp.task('wizard', () => {
   const panelMarkup = panelList.map((panel, i) => `<div title="${panel.title}">
    <${panel.fileName} panel={state.componentNameWizardController.panels[${i}]} />
 </div>
-`);
+`).join('');
   const source = template('wizard');
   const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
 
-  gulp.src(source)
+  gulp.src(source, { base: './' })
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/g, `${cName}`);
       return file;
@@ -133,7 +133,7 @@ gulp.task('mapComp', async () => {
     return `componentMap.set('${component}', ${componentVarName});`;
   }).join('\n');
 
-  gulp.src(template('content'))
+  gulp.src(template('content'), { base: './' })
     .pipe(modify(text => text.replace('ComponentImports', imports)
       .replace('ComponentsMapping', maps)))
     .pipe(gulp.dest('./src/'));

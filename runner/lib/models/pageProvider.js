@@ -5,15 +5,34 @@ const ROOT = __dirname.replace(/.runner.*/, '');
 const PAGES_FILE = `${ROOT}/src/pageList.json`;
 
 function remapComponents() {
-  return new Promise((resolve, fail) => {
+  return (new Promise((resolve, reject) => {
+    const result = child_process.spawn('mapComp', {
+      cwd: ROOT,
+    });
+    console.log('remapComponents spawned');
+    result.on('exit', () => {
+      console.log('makeWizard complete');
+      setTimeout(resolve, 1000); // wait to ensure writes.
+    });
 
-  });
+    result.stdout.on('data', (data) => {
+      console.log('data: ', data.toString());
+    });
+
+    result.on('error', (error) => {
+      console.log('error: ', error.message);
+      reject();
+    });
+  }));
 }
+
 const pageProvider = {
   getPages() {
     return fs.promises.readFile(PAGES_FILE)
       .then(file => JSON.parse(file.toString()));
   },
+
+  remapComponents,
 
   addPage(props) {
     return pageProvider.getPages()
@@ -38,7 +57,8 @@ const pageProvider = {
       .then(data => fs.promises.writeFile(PAGES_FILE, JSON.stringify(data))
         .then(() => data))
       .then(async (data) => {
-        await remapComponents();
+        await pageProvider.remapComponents();
+        console.log('components remapped');
         return data;
       })
       .catch((err) => {

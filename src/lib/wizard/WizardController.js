@@ -1,6 +1,7 @@
 /* eslint-disable func-names,object-shorthand */
 import cp, { Validator } from 'class-propper';
 import _ from 'lodash';
+import EventEmitter from 'eventemitter3';
 
 export default (bottle) => {
   bottle.factory('WizardController', ({
@@ -11,8 +12,9 @@ export default (bottle) => {
       new Validator(s => s < -1, 'order must be >= -1'),
     ]);
 
-    class WizardController {
+    class WizardController extends EventEmitter {
       constructor(config = {}) {
+        super();
         let panels;
         if (config.panels) {
           panels = config.panels;
@@ -54,7 +56,7 @@ export default (bottle) => {
       }
 
       nextPage() {
-        this.index = this.index + 1;
+        this.nextPanel();
       }
 
       nextPanel() {
@@ -175,6 +177,12 @@ export default (bottle) => {
       .addProp('index', {
         type: 'integer',
         defaultValue: 0,
+        onChange: function (value, oldValue) {
+          console.log('index changed: ', value, oldValue);
+          if (value !== oldValue) {
+            this.emit('index changed', { value, oldValue });
+          }
+        },
       })
       .addString('panelClass', {
         defaultValue: 'wizardPanel',
