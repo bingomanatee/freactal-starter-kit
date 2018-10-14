@@ -1,11 +1,9 @@
 import { easyPropper } from 'class-propper';
-import EventEmitter from 'eventemitter3';
 
 export default (bottle) => {
   bottle.factory('WCPField', () => {
-    class WCPField extends EventEmitter {
+    class WCPField {
       constructor(config, panel) {
-        super();
         Object.assign(this, config);
         if (panel) this.panel = panel;
         if (this.id) {
@@ -36,8 +34,6 @@ export default (bottle) => {
       }
 
       delete() {
-        this.emit('changed', { deleted: this.toJSON() });
-        this.removeAllListeners();
         this.panel.fields = this.panel.fields.filter(f => f !== this);
       }
     }
@@ -50,16 +46,10 @@ export default (bottle) => {
       .addObject('panel')
       .addString('name', {
         required: true,
-        onChange(...args) {
-          this.emit('changed', { what: args });
-        },
       })
       .addString('type', {
         required: true,
         default: 'text',
-        onChange(...args) {
-          this.emit('changed', { what: args });
-        },
       });
 
     WCPField.nextId = 0;

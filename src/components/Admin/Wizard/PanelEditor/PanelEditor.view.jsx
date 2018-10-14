@@ -46,7 +46,7 @@ export default injectState(({
                 <TextField
                   id={`state.panel-title-${panel.order}`}
                   label="Title of state.panel"
-                  value={panelTitle}
+                  value={panelTitle || ''}
                   onChange={setPanelTitle}
                 /></Case>
               <Case else>
@@ -61,7 +61,7 @@ export default injectState(({
                 <TextField
                   id="wizard-name"
                   label="Filename of panel"
-                  value={panelFileName}
+                  value={panelFileName || ''}
                   onChange={setPanelFileName}
                 /></Case>
               <Case else>

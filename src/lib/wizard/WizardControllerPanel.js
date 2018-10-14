@@ -1,6 +1,5 @@
 import cp from 'class-propper';
 import _ from 'lodash';
-import EventEmitter from 'eventemitter3';
 
 export default (bottle) => {
   bottle.factory('WizardControllerPanel', ({
@@ -9,9 +8,8 @@ export default (bottle) => {
     /**
      * A data model for a panel of a wizard.
      */
-    class WizardControllerPanel extends EventEmitter {
+    class WizardControllerPanel {
       constructor(config = {}) {
-        super();
         let fields;
         if (config.fields) {
           fields = config.fields;
@@ -95,15 +93,10 @@ export default (bottle) => {
         }
         this._initField(field);
         this.fields.push(field);
-        this.emit('changed', { addedField: field.toJSON() });
       }
 
       _initField(field) {
         field.panel = this;
-        field.removeAllListeners('changed');
-        field.on('changed', (...args) => {
-          this.emit('changed', { field: args });
-        });
       }
 
       move(dir) {
@@ -163,20 +156,16 @@ export default (bottle) => {
     propper
       .addString('title', {
         required: true,
-        onChange(...args) {
-          this.emit('changed', { change: args, panel: this });
-        },
         // eslint-disable-next-line object-shorthand
-        onBadData: function () {
+        onBadData: function (field, value, err) {
+          console.log('bad title', value, err);
           return true;
         },
       })
       .addString('fileName', {
         required: true,
-        onChange(...args) {
-          this.emit('changed', { change: args, panel: this });
-        },
-        onBadData() {
+        onBadData(field, value, err) {
+          console.log('bad fileName', value, err);
           return true;
         },
       })

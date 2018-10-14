@@ -115,7 +115,7 @@ export default injectState(({ state, effects }) => {
 
         {(wizardController && wizardController.errors && wizardController.errors.length) && (
           <div className={styles['wizard-form__errors']}>
-            {wizardController.errors.map(({ message }) => (<span>{message}</span>))}
+            {wizardController.errors.map(({ message }, i) => (<span key={`error_${i}_message`}>{message}</span>))}
           </div>
         )}
 

@@ -14,14 +14,10 @@ wizardState.addObjectAndSetEffect('wizardController', null, {
       if (!(state.wizardController instanceof lib.WizardController)) {
         console.log('bad wizardController', state.wizardController);
       }
-      state.wizardController.removeListener('panel changed');
-      effects.setWizardTitle(state.wizardController.title);
-      effects.setWizardFileName(state.wizardController.fileName);
+      effects.setWizardTitle(_.trim(state.wizardController.title));
+      effects.setWizardFileName(_.trim(state.wizardController.fileName));
+      effects.updateWizardErrors();
       effects.saveWizardToLS();
-      state.wizardController.on('panel changed', () => {
-        console.log('updating wizard panels from events');
-        effects.updateWizardPanels();
-      });
       effects.updateWizardPanels();
     }
   },
@@ -30,27 +26,38 @@ wizardState.addObjectAndSetEffect('wizardController', null, {
 wizardState.addArrayPropAndSetEffects('wizardPanels', []);
 wizardState.addArrayPropAndSetEffects('wizardErrors', []);
 
-wizardState.addStateSideEffect('saveWizardChanges', ({ isEditingWizardOff, saveWizardController }, {
-  wizardTitle, wizardFileName, wizardController,
+wizardState.addStateSideEffect('saveWizardChanges', ({ isEditingWizardOff, updateWizardErrors }, {
+  wizardTitle, wizardFileName, wizardController, saveWizardToLS,
 }) => {
-  wizardController.title = wizardTitle;
-  wizardController.fileName = wizardFileName;
-  return saveWizardController(wizardController)
-    .then(isEditingWizardOff);
+  if (wizardController) {
+    wizardController.title = wizardTitle;
+    wizardController.fileName = wizardFileName;
+    updateWizardErrors();
+    saveWizardToLS();
+  }
+  isEditingWizardOff();
 });
 
 wizardState.addStateSideEffect('cancelWizardChanges', ({ isEditingWizardOff, setWizardTitle, setWizardFileName }, {
   wizardController,
-}) => setWizardTitle(wizardController.title)
-  .then(() => setWizardFileName(wizardController.fileName))
-  .then(isEditingWizardOff));
+}) => {
+  setWizardTitle(wizardController.title);
+  setWizardFileName(wizardController.fileName);
+  isEditingWizardOff();
+});
 
 wizardState.addStateSideEffect('updateWizardPanels', (
-  { setWizardPanels, setWizardErrors, saveWizardToLS },
+  {
+    setWizardPanels, saveWizardToLS, updateWizardErrors,
+  },
   { wizardController },
-) => setWizardPanels(wizardController ? wizardController.panels.slice(0) : [])
-  .then(() => setWizardErrors(wizardController ? wizardController.errors : []))
-  .then(saveWizardToLS));
+) => {
+  if (wizardController) {
+    setWizardPanels(wizardController.panels.slice(0));
+    updateWizardErrors();
+    saveWizardToLS();
+  }
+});
 
 wizardState.addArrayPropAndSetEffects('wizardMessages', []);
 wizardState.addStringAndSetEffect('wizardTitle', 'New Wizard');
@@ -119,6 +126,7 @@ wizardState.addStateSideEffect('addPanel', (
     title: `New Panel ${order}`,
     fileName: `NewPanel${order}`,
   });
+  effects.updateWizardPanels();
 });
 
 wizardState.addStateSideEffect('saveWizard', (
@@ -131,6 +139,13 @@ wizardState.addStateSideEffect('saveWizard', (
   );
   wizardSavedOn();
   unshiftToWizardMessages({ text: 'Wizard Saved', action: '' });
+});
+
+wizardState.addStateSideEffect('updateWizardErrors', (effects, { wizardController }) => {
+  if (wizardController) {
+    console.log('updating errors');
+    effects.setWizardErrors(wizardController.errors);
+  }
 });
 
 export default provideState(wizardState.toHash());

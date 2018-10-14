@@ -1,9 +1,6 @@
 /* eslint-disable func-names,object-shorthand */
 import cp, { Validator } from 'class-propper';
-import EventEmitter from 'eventemitter3';
 import _ from 'lodash';
-import util from 'util';
-
 
 export default (bottle) => {
   bottle.factory('WizardController', ({
@@ -14,9 +11,8 @@ export default (bottle) => {
       new Validator(s => s < -1, 'order must be >= -1'),
     ]);
 
-    class WizardController extends EventEmitter {
+    class WizardController {
       constructor(config = {}) {
-        super();
         let panels;
         if (config.panels) {
           panels = config.panels;
@@ -24,13 +20,16 @@ export default (bottle) => {
         }
         Object.assign(this, config);
         if (panels) {
-          panels.forEach(panel => this.initPanel(panel));
+          panels.forEach(panel => this._initPanel(panel));
           this.panels = panels;
         }
       }
 
       addPanel(config) {
-        const panel = new WizardControllerPanel(config, this);
+        let panel = config;
+        if (!(panel instanceof WizardControllerPanel)) {
+          panel = new WizardControllerPanel(config, this);
+        }
         this._initPanel(panel);
         this.panels = this.panels.concat([panel]);
         return this;
@@ -51,18 +50,7 @@ export default (bottle) => {
       }
 
       _initPanel(panel) {
-        try {
-          panel.controller = this;
-          this.emit('panel added', panel);
-          panel.removeAllListeners('changed');
-          panel.on('changed', (...args) => {
-            this.emit('panel changed', args);
-          });
-        } catch (err) {
-          console.log('bad panel: ', util.inspect(panel));
-          console.log('error: ', err.message);
-          throw err;
-        }
+        panel.controller = this;
       }
 
       nextPage() {
@@ -123,7 +111,7 @@ export default (bottle) => {
 
       get errors() {
         const out = this.propErrors || [];
-        return out;
+        return _.compact(out.concat(this.panelErrors));
       }
 
       toJSON() {
@@ -150,7 +138,7 @@ export default (bottle) => {
       const controller = new WizardController(data);
       if (panels && Array.isArray(panels)) {
         panels.forEach((panel) => {
-          controller.panels.push(WizardControllerPanel.fromJSON(panel, controller));
+          controller.addPanel(WizardControllerPanel.fromJSON(panel, controller));
         });
       }
       return controller;
@@ -163,35 +151,30 @@ export default (bottle) => {
       type: 'array',
       defaultValue: () => [],
       onChange: function (panels) {
-        //  this._panels.forEach(panel => this.emit('panel removed', panel));
         if (panels && Array.isArray) {
           panels.forEach((panel) => {
             this._initPanel(panel);
           });
         }
-        this.emit('panel changed', { panels });
       },
     })
       .addString('fileName', {
         required: true,
         onBadData: function (field, value, err) {
-          this.emit('error', { field, value, error: err });
+          console.log('bad field:', value, err);
           return true;
         },
       })
       .addString('title', {
         required: true,
         onBadData: function (field, value, err) {
-          this.emit('error', { field, value, error: err });
+          console.log('bad title', value, err);
           return true;
         },
       })
       .addProp('index', {
         type: 'integer',
         defaultValue: 0,
-        onChange: function (index, old) {
-          this.emit('index changed', { index, old });
-        },
       })
       .addString('panelClass', {
         defaultValue: 'wizardPanel',

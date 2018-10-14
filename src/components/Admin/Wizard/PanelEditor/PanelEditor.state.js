@@ -1,5 +1,6 @@
 import { provideState, update } from 'freactal';
 import seedFactory from 'freactal-seed';
+import _ from 'lodash';
 
 const Seed = seedFactory();
 
@@ -16,17 +17,19 @@ panelEditorState.addStateSideEffect('refreshFields', ({ setPanelFields }, { pane
 
 panelEditorState.addStateSideEffect(
   'saveEditPanel',
-  ({ setPanel, editingPanelOff }, { panel, panelTitle, panelFileName }) => {
-    panel.title = panelTitle;
-    panel.fileName = panelFileName;
+  ({ updateWizardPanels, setPanel, editingPanelOff }, { panel, panelTitle, panelFileName }) => {
+    panel.title = _.trim(panelTitle);
+    panel.fileName = _.trim(panelFileName);
     setPanel(panel);
     editingPanelOff();
+    updateWizardPanels();
   },
 );
 panelEditorState.addStateSideEffect(
   'cancelEditPanel',
-  ({ setPanelTitle, editingPanelOff }, { panel }) => {
+  ({ setPanelTitle, setPanelFileName, editingPanelOff }, { panel }) => {
     setPanelTitle(panel.title);
+    setPanelFileName(panel.fileName);
     editingPanelOff();
   },
 );
@@ -34,12 +37,13 @@ panelEditorState.addSideEffect(
   'addPanelField',
   (
     {
-      setPanelFields,
+      setPanelFields, saveWizardToLS,
     },
     panel,
   ) => {
     panel.addField('untitled', 'text', '');
     setPanelFields(panel.fields.slice(0));
+    saveWizardToLS();
   },
 );
 panelEditorState.addSideEffect(
@@ -49,15 +53,17 @@ panelEditorState.addSideEffect(
     panel,
   ) => {
     panel.move('up');
+    effects.saveWizardToLS();
   },
 );
 panelEditorState.addSideEffect(
   'movePanelDown',
   (
-    { },
+    effects,
     panel,
   ) => {
     panel.move('down');
+    effects.saveWizardToLS();
   },
 ); panelEditorState.addSideEffect(
   'deletePanel',
@@ -66,6 +72,7 @@ panelEditorState.addSideEffect(
     panel,
   ) => {
     panel.delete();
+    effects.updateWizardPanels();
   },
 );
 
