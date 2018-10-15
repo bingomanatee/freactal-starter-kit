@@ -49,9 +49,19 @@ gulp.task('wizardPanel', () => {
   const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
   const panelData = JSON.parse(_.trim(panel, "'"));
 
-  const fields = (panelData.fields || [])
+  const stateFields = (panelData.fields || [])
     .map(field => `componentNameState.add${_.upperFirst(field.type.replace('text', 'string'))}AndSetEffect('${field.name}');`)
     .join('\n');
+
+  const wizardPanelFields = panel.fields.map((field) => {
+    const cFieldName = _.upperFirst(field.name);
+    const cName = field.name;
+    return `
+    <Cell size={12} tabletSize={8} mobileSize={6}>
+          <TextField id="${field.id}" value={state.${cName}} onChange={effects.onSet.${cFieldName}} />
+        </Cell>
+    `;
+  }).join('\n');
 
   containerNameValidator.try(name);
   const source = template('wizardPanel');
@@ -62,7 +72,8 @@ gulp.task('wizardPanel', () => {
     }))
     .pipe(modify(text => text
 
-      .replace(/componentFields/, fields)
+      .replace(/componentFields/, stateFields)
+      .replace(/wizardPanelFields/, wizardPanelFields)
       .replace(/ComponentName/g, cName)
       .replace(/componentName/g, lcName)
       .replace(
@@ -70,7 +81,7 @@ gulp.task('wizardPanel', () => {
         `${where.split('/').map(() => '..').join('/')}/css/shared`,
       )
       .replace(/SOURCE_ROOT/g, ROOT_BACK)))
-    .pipe(gulp.dest(`./src/${cWhere}${cName}`));
+    .pipe(gulp.dest(`${__dirname}/src/${cWhere}${cName}`));
 });
 
 gulp.task('wizard', () => {

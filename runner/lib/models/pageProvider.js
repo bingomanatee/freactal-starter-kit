@@ -1,12 +1,14 @@
 const fs = require('fs');
 const _ = require('lodash');
+// eslint-disable-next-line camelcase
+const child_process = require('child_process');
 
 const ROOT = __dirname.replace(/.runner.*/, '');
 const PAGES_FILE = `${ROOT}/src/pageList.json`;
 
 function remapComponents() {
   return (new Promise((resolve, reject) => {
-    const result = child_process.spawn('mapComp', {
+    const result = child_process.spawn('gulp', ['mapComp'], {
       cwd: ROOT,
     });
     console.log('remapComponents spawned');
@@ -20,7 +22,7 @@ function remapComponents() {
     });
 
     result.on('error', (error) => {
-      console.log('error: ', error.message);
+      console.log('error: ', error);
       reject();
     });
   }));
@@ -62,7 +64,7 @@ const pageProvider = {
         return data;
       })
       .catch((err) => {
-        console.log('pageProvider.addPage error: ', err.message);
+        console.log('pageProvider.addPage error: ', err);
       });
   },
 };

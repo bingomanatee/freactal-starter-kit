@@ -44,7 +44,7 @@ function makeWizard(title, name, where, panels) {
     });
 
     result.on('error', (error) => {
-      console.log('error: ', error.message);
+      console.log('error: ', error);
       reject();
     });
   }));
@@ -79,6 +79,6 @@ exports.make = async (ctx) => {
     ctx.body = { success: true };
     ctx.status = 200;
   } catch (err) {
-    console.log('error in make wizard panels: ', err.message);
+    console.log('error in make wizard panels: ', err);
   }
 };

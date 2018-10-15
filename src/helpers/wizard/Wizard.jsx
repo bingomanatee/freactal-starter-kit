@@ -17,12 +17,12 @@ export default class Wizard extends Component {
     };
   }
 
-  get mainClass() {
-    return _.get(this.state, 'wizard.mainClass', 'wizard');
-  }
-
   componentDidMount() {
     this.initChildren();
+  }
+
+  get mainClass() {
+    return _.get(this.state, 'wizard.mainClass', 'wizard');
   }
 
   initChildren() {
@@ -80,8 +80,7 @@ export default class Wizard extends Component {
 
     return (
       <div className={this.mainClass}>
-        <h2 className={`${this.mainClass}__title`}>{this.state.wizard.title},
-          subject: {(this.index)}
+        <h2 className={`${this.mainClass}__title`}>{this.state.wizard.title}
         </h2>
         <div className={`${this.mainClass}__panels`}>
           <Switch subject={parseInt(this.state.wizard.index)}>
