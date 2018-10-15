@@ -22,11 +22,11 @@ gulp.task('comp', () => {
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
   const cWhere = ensureEndingBackslash(where || 'components');
-  const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
+  const ROOT_BACK = `./${cWhere.split('/').slice(1).map(() => '..').join('/')}/`;
 
   containerNameValidator.try(name);
   const source = template('component');
-  gulp.src(source, { base: './' })
+  gulp.src(source)
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
       return file;
@@ -45,7 +45,8 @@ gulp.task('wizardPanel', () => {
   const { name, where, panel } = minimist(process.argv.slice(2));
   const cName = _.upperFirst(name);
   const lcName = _.lowerFirst(name);
-  const cWhere = ensureEndingBackslash(where || 'components');
+  const cWhere = ensureEndingBackslash(where);
+  if (!where) throw new Error('where missing');
   const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
   const panelData = JSON.parse(_.trim(panel, "'"));
 
@@ -53,19 +54,22 @@ gulp.task('wizardPanel', () => {
     .map(field => `componentNameState.add${_.upperFirst(field.type.replace('text', 'string'))}AndSetEffect('${field.name}');`)
     .join('\n');
 
-  const wizardPanelFields = panel.fields.map((field) => {
+  const destination = `src/${cWhere}/${cName}`;
+  console.log('panel: ', panelData, 'dest:', destination);
+
+  const wizardPanelFields = panelData.fields.map((field) => {
     const cFieldName = _.upperFirst(field.name);
     const cName = field.name;
     return `
     <Cell size={12} tabletSize={8} mobileSize={6}>
-          <TextField id="${field.id}" value={state.${cName}} onChange={effects.onSet.${cFieldName}} />
-        </Cell>
+       <TextField id="${field.id}" value={state.${cName}} onChange={effects.onSet${cFieldName}} />
+    </Cell>
     `;
   }).join('\n');
 
   containerNameValidator.try(name);
   const source = template('wizardPanel');
-  gulp.src(source, { base: './' })
+  gulp.src(source)
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/, `${cName}`);
       return file;
@@ -78,10 +82,10 @@ gulp.task('wizardPanel', () => {
       .replace(/componentName/g, lcName)
       .replace(
         '../../src/components/css/shared',
-        `${where.split('/').map(() => '..').join('/')}/css/shared`,
+        `${cWhere.split('/').map(() => '..').join('/')}/css/shared`,
       )
       .replace(/SOURCE_ROOT/g, ROOT_BACK)))
-    .pipe(gulp.dest(`${__dirname}/src/${cWhere}${cName}`));
+    .pipe(gulp.dest(destination));
 });
 
 gulp.task('wizard', () => {
@@ -109,7 +113,7 @@ gulp.task('wizard', () => {
   const source = template('wizard');
   const ROOT_BACK = `./${cWhere.split('/').map(() => '..').join('/')}/`;
 
-  gulp.src(source, { base: './' })
+  gulp.src(source)
     .pipe(rename((file) => {
       file.basename = file.basename.replace(/^ComponentName/g, `${cName}`);
       return file;
@@ -144,7 +148,7 @@ gulp.task('mapComp', async () => {
     return `componentMap.set('${component}', ${componentVarName});`;
   }).join('\n');
 
-  gulp.src(template('content'), { base: './' })
+  gulp.src(template('content'))
     .pipe(modify(text => text.replace('ComponentImports', imports)
       .replace('ComponentsMapping', maps)))
     .pipe(gulp.dest('./src/'));

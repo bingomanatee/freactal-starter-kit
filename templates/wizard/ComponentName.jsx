@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import ComponentNameView from './ComponentName.view.jsx';
 import componentNameState from './ComponentName.state';
-import lib from './../../src/lib';
-import newWizardState from "../../src/components/NewWizard/NewWizard.state";
-import NewWizardView from "../../src/components/NewWizard/NewWizard.view";
+import lib from 'SOURCE_ROOT../lib';
 
 export default withRouter(componentNameState(injectState(class NewWizard extends Component {
   constructor(props) {
@@ -19,7 +17,7 @@ export default withRouter(componentNameState(injectState(class NewWizard extends
 
   render() {
     return (
-      <NewWizardView controller={this.props.state.controller} index={this.props.state.index} />
+      <ComponentNameView controller={this.props.state.controller} index={this.props.state.index} />
     );
   }
 })));

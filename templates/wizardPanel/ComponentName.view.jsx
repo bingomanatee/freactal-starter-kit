@@ -1,7 +1,6 @@
 import { Button, Grid, Cell } from 'react-md';
 import { injectState } from 'freactal';
-import TextField from '../../src/helpers/input/TextField';
-
+import TextField from 'SOURCE_ROOThelpers/input/TextField';
 
 import styles from './ComponentName.module.css';
 

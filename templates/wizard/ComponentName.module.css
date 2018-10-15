@@ -1,92 +1,56 @@
-/**
-  * expose a set of global responsive brackets.
-  * If you don't want to use react-md, set these to your preferred cutoffs.
- */
-.buttons-bar {
-  max-width: 1025px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center; }
-  .buttons-bar.buttons-bar--small .buttons-bar__cell {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding-top: 0.25rem;
-    padding-right: 0.125rem;
-    padding-left: 0.125rem;
-    padding-bottom: 0.25rem; }
-    @media screen and (max-width: 320px) {
-      .buttons-bar.buttons-bar--small .buttons-bar__cell {
-        padding-top: 0.125rem;
-        padding-right: 0.125rem;
-        padding-left: 0.125rem;
-        padding-bottom: 0.125rem; } }
-    @media screen and (min-width: 320px) and (max-width: 1024px) {
-      .buttons-bar.buttons-bar--small .buttons-bar__cell {
-        padding-top: 0.125rem;
-        padding-right: 0.25rem;
-        padding-left: 0.25rem;
-        padding-bottom: 0.125rem; } }
+/*
+Error: File to import not found or unreadable: SOURCE_ROOT/css/shared.
+        on line 1 of ComponentName.module.scss
 
-.buttons-bar__cell {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding-top: 1rem;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
-  padding-bottom: 1rem; }
-  @media screen and (max-width: 320px) {
-    .buttons-bar__cell {
-      padding-top: 0.5px;
-      padding-right: 1px;
-      padding-left: 1px;
-      padding-bottom: 0.5px; } }
-  @media screen and (min-width: 320px) and (max-width: 1024px) {
-    .buttons-bar__cell {
-      padding: 0.75rem 0.5rem; } }
+1: @import 'SOURCE_ROOT/css/shared';
+2: 
+3: $ComponentNameSmall: $ResponsiveSizeSmall;
+4: $ComponentNameMedium: $ResponsiveSizeMedium;
+5: $ComponentNameBig: $ResponsiveSizeBig;
+6: 
 
-@media screen and (max-width: 320px) and (max-aspect-ratio: 13 / 9) {
-  .ComponentName {
-    padding: 0.5rem 1rem; } }
-@media screen and (max-width: 320px) and (min-aspect-ratio: 13 / 9) {
-  .ComponentName {
-    padding: 1rem 0.5rem; } }
-@media screen and (min-width: 320px) and (max-width: 1024px) and (max-aspect-ratio: 13 / 9) {
-  .ComponentName {
-    padding: 1rem 2rem; } }
-@media screen and (min-width: 320px) and (max-width: 1024px) and (min-aspect-ratio: 13 / 9) {
-  .ComponentName {
-    padding: 1.5rem 1.5rem; } }
-@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (max-aspect-ratio: 13 / 9) {
-  .ComponentName {
-    padding: 1.5rem 3rem; } }
-@media screen and (min-width: 1025px) and (max-width: 1331.5px) and (min-aspect-ratio: 13 / 9) {
-  .ComponentName {
-    padding: 2rem 2rem; } }
-@media screen and (min-width: 1332.5px) {
-  .ComponentName {
-    padding: 2rem 4rem; } }
-
-.ComponentName-dialog {
-  display: flex;
-  flex-direction: row;
-  max-width: 1025px;
-  height: 3rem; }
-
-.ComponentName-dialog__main {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 1; }
-
-.ComponentName-dialog__button {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: center;
-  flex-grow: 0;
-  flex-shrink: 0; }
-
-/*# sourceMappingURL=ComponentName.module.css.map */
+Backtrace:
+ComponentName.module.scss:1
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/import_node.rb:67:in `rescue in import'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/import_node.rb:45:in `import'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/import_node.rb:37:in `css_import?'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:310:in `visit_import'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/stack.rb:79:in `block in with_base'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/stack.rb:135:in `with_frame'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/stack.rb:79:in `with_base'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:209:in `each'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/plugin.rb:82:in `update_stylesheets'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/exec/sass_scss.rb:338:in `watch_or_update'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/exec/sass_scss.rb:51:in `process_result'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/exec/base.rb:50:in `parse'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/lib/sass/exec/base.rb:18:in `parse!'
+/Users/davidedelhart/.gem/gems/sass-3.6.0/bin/scss:13:in `<top (required)>'
+/Users/davidedelhart/.gem/bin/scss:22:in `load'
+/Users/davidedelhart/.gem/bin/scss:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: SOURCE_ROOT/css/shared.\A         on line 1 of ComponentName.module.scss\A \A 1: @import 'SOURCE_ROOT/css/shared';\A 2: \A 3: $ComponentNameSmall: $ResponsiveSizeSmall;\A 4: $ComponentNameMedium: $ResponsiveSizeMedium;\A 5: $ComponentNameBig: $ResponsiveSizeBig;\A 6: "; }

@@ -1,8 +1,8 @@
 import { Button } from 'react-md';
 import { injectState } from 'freactal';
 import styles from './NewWizard.module.css';
-import lib from './../..//lib';
-import Wizard from './../..//helpers/wizard/Wizard';
+import lib from './../../lib';
+import Wizard from './../../helpers/wizard/Wizard';
 
 import PanelOne from './PanelOne';
 import PanelTwo from './PanelTwo';
@@ -12,7 +12,7 @@ export default injectState(({ state, effects }) => {
   if (!state.newWizardWizardController) return '';
   return (
     <section className={styles.NewWizard}>
-      <Wizard controller={state.newWizardWizardController}>
+      <Wizard controller={state.newWizardWizardController} index={state.newWizardWizardIndex}>
         <div title="First Panel">
           <PanelOne panel={state.newWizardWizardController.panels[0]} />
         </div>
@@ -27,7 +27,6 @@ export default injectState(({ state, effects }) => {
         onClick={() => state.newWizardWizardController.nextPanel()}
       >Next Panel
       </Button>
-      <p>outer index value: {state.newWizardWizardController.index}</p>
     </section>
   );
 });
