@@ -50,7 +50,8 @@ export default (bottle) => {
       .addString('type', {
         required: true,
         default: 'text',
-      });
+      })
+      .addProp('value', {default: ''});
 
     WCPField.nextId = 0;
 

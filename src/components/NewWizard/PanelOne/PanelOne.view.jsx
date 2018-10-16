@@ -11,13 +11,15 @@ export default injectState(({ state, effects }) => (
     <section>
       <Grid>
         
-    <Cell size={12} tabletSize={8} mobileSize={6}>
-       <TextField id="3" value={state.alpha} onChange={effects.onSetAlpha} />
+    <Cell size={6} tabletSize={4} phoneSize={4}>
+       <TextField label="alpha" id="3" value={state.alpha} 
+       onChange={effects.setAlpha} />
     </Cell>
     
 
-    <Cell size={12} tabletSize={8} mobileSize={6}>
-       <TextField id="4" value={state.beta} onChange={effects.onSetBeta} />
+    <Cell size={6} tabletSize={4} phoneSize={4}>
+       <TextField label="beta" id="4" value={state.beta} 
+       onChange={effects.setBeta} />
     </Cell>
     
       </Grid>

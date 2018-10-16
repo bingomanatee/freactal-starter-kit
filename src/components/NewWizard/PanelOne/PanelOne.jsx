@@ -8,7 +8,7 @@ import panelOneState from './PanelOne.state';
 export default withRouter(panelOneState(injectState(class PanelOne extends Component {
   render() {
     return (
-      <PanelOneView />
+      <PanelOneView panel={this.props.panel} />
     );
   }
 })));

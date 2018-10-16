@@ -12,7 +12,8 @@ export default withRouter(appState(injectState(class App extends Component {
 
     // there are circumstances where the location lags - this is a failsafe.
     this._locInterval = setInterval(() => {
-      if (window.location.pathname !== this.props.state.routerLocation.pathname) {
+      if ((!this.props.state.routerLocation) ||
+        (window.location.pathname !== this.props.state.routerLocation.pathname)) {
         const locationData = Object.assign({}, window.location);
         this.props.effects.setRouterLocation(locationData);
       }

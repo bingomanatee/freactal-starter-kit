@@ -10,6 +10,7 @@ import PanelTwo from './PanelTwo';
 // eslint-disable-next-line no-unused-vars
 export default injectState(({ state, effects }) => {
   if (!state.newWizardWizardController) return '';
+  console.log('panel2 panel set to ', state.newWizardWizardController.panels[1]);
   return (
     <section className={styles.NewWizard}>
       <Wizard controller={state.newWizardWizardController} index={state.newWizardWizardIndex}>

@@ -87,7 +87,6 @@ export default class Wizard extends Component {
             {
               panels.map((panel, i) => (
                 <Case key={`case-${i}`} is={i}>
-                  <p> panel {i}</p>
                   <WizardPanel panel={panel}>{this.state.children[i]}</WizardPanel>
                 </Case>
               ))

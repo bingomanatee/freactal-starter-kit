@@ -39,7 +39,7 @@ export default injectState(({ state, effects }) => (
         <User />
       )}
       title={<span>
-        <Link className={styles['Header-link']} to="/">{lib.SITE_NAME}</Link>
+        <Link className={styles['Header-link']} to="/">{lib.SITE_NAME}</Link>:&nbsp;
         {statePath(state)}
         (env = {lib.NODE_ENV})
         {lib.ADMIN_MODE ? '(admin mode)' : ''}

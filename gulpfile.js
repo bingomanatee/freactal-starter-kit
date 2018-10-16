@@ -51,7 +51,13 @@ gulp.task('wizardPanel', () => {
   const panelData = JSON.parse(_.trim(panel, "'"));
 
   const stateFields = (panelData.fields || [])
-    .map(field => `componentNameState.add${_.upperFirst(field.type.replace('text', 'string'))}AndSetEffect('${field.name}');`)
+    .map((field, i) => `componentNameState.add${_.upperFirst(field.type.replace('text', 'string'))}AndSetEffect('${field.name}','', {
+      onSet: (effects, state) => {
+        const { setPanel } = effects;
+        const { panel, ${field.name} } = state;
+        panel.fields[${i}].value = ${field.name};
+      }
+    });`)
     .join('\n');
 
   const destination = `src/${cWhere}/${cName}`;
@@ -61,8 +67,9 @@ gulp.task('wizardPanel', () => {
     const cFieldName = _.upperFirst(field.name);
     const cName = field.name;
     return `
-    <Cell size={12} tabletSize={8} mobileSize={6}>
-       <TextField id="${field.id}" value={state.${cName}} onChange={effects.onSet${cFieldName}} />
+    <Cell size={6} tabletSize={4} phoneSize={4}>
+       <TextField label="${field.name}" id="${field.id}" value={state.${cName}} 
+       onChange={effects.set${cFieldName}} />
     </Cell>
     `;
   }).join('\n');

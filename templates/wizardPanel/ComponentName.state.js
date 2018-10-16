@@ -5,5 +5,6 @@ const Seed = seedFactory();
 
 const componentNameState = new Seed();
 componentFields
+componentNameState.addObjectAndSetEffect('panel', {});
 
 export default provideState(componentNameState.toHash());

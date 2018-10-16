@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { injectState } from 'freactal';
 
 export default injectState(class WizardPanel extends Component {
@@ -16,7 +16,8 @@ export default injectState(class WizardPanel extends Component {
     return (
       <div className={this.classes}>
         <h3>{this.state.panel.title}</h3>
-        {this.props.children};
+        { React.Children.toArray(this.props.children)
+          .map(child => React.cloneElement(child, { panel: this.state.panel })) }
       </div>
     );
   }

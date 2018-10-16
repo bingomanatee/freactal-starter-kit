@@ -4,14 +4,14 @@ import { withRouter } from 'react-router-dom';
 
 import NewWizardView from './NewWizard.view.jsx';
 import newWizardState from './NewWizard.state';
-import lib from './../../../lib';
+import lib from './../../lib';
 
 export default withRouter(newWizardState(injectState(class NewWizard extends Component {
   constructor(props) {
     super(props);
     const controller = new lib.WizardController({ title: 'New Wizard' });
     props.effects.setNewWizardWizardController(controller);
-    controller.on('index changed',this.props.setNewWizardIndex)
+    controller.on('index changed',this.props.effects.setNewWizardWizardIndex);
     this.state = { controller, index: controller.index };
   }
 
